@@ -11,6 +11,7 @@ pytest-cov = "*"
 africastalking = "*"
 flask-migrate = "*"
 redis = "*"
+flask-redis = "*"
 
 [dev-packages]
 
