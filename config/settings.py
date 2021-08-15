@@ -1,6 +1,7 @@
 from os import environ
 
-class Config:
+class BaseConfig():
+    DEBUG = False
     SECRET_KEY = environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
     API_KEY = environ.get('API_KEY')
@@ -18,3 +19,18 @@ class Config:
 
     STATIC_FOLDER = environ.get('STATIC_FOLDER')
     TESTING = environ.get('TESTING')
+
+
+class DevelopmentConfig(BaseConfig):
+    FLASK_ENV = 'development'
+    DEBUG = True
+
+
+class ProductionConfig(BaseConfig):
+    FLASK_ENV = 'production'
+    DEBUG = True
+    TESTING = False
+
+
+
+    
