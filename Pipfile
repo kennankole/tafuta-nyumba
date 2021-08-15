@@ -12,6 +12,7 @@ africastalking = "*"
 flask-migrate = "*"
 redis = "*"
 flask-redis = "*"
+mixer = "*"
 
 [dev-packages]
 

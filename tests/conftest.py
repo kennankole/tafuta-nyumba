@@ -1,10 +1,12 @@
 import pytest 
-from app import create_app 
+
 
 @pytest.fixture
 def client():
+    from mixer.backend.flask import mixer
+    from app import create_app
     app = create_app()
+    mixer.init_app(app)
     with app.test_client() as testing_client:
         with app.app_context():
-           pass 
-        yield testing_client
+            yield testing_client
