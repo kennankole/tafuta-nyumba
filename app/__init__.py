@@ -1,9 +1,8 @@
 import logging
-from re import L
 from flask import Flask
-import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_redis import FlaskRedis
+from flask_migrate import Migrate
 
 # logging
 if not logging.DEBUG:
@@ -16,6 +15,7 @@ logger = logging.getLogger()
 # Globally accessible variables
 db = SQLAlchemy()
 redis = FlaskRedis()
+migrate = Migrate()
 
 def create_app():
     ''' Initialize the core of the app'''
@@ -31,5 +31,7 @@ def create_app():
         from app.views import views
 
         app.register_blueprint(views) 
-
+        db.create_all()
+        migrate.init_app(app, db, render_as_batch=True)
+        
         return app
