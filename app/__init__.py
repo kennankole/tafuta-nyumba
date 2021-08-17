@@ -26,6 +26,7 @@ def create_app():
         app.config.from_object('config.settings.ProductionConfig')
 
     db.init_app(app)
+    redis.init_app(app)
 
     with app.app_context():
         from app.views import views
