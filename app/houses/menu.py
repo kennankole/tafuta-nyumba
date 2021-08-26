@@ -23,14 +23,14 @@ class HousesQueryMenu(HousesMainMenu):
             return self.ussd_continue(menu_text)
 
     def rental_houses_registration(self):
-            house = get_type_of_house(self.user_response, data.rental_houses)
-            if self.user_response in ("11", "12", "13", "14", "15", "16"):
-                menu_text = f"Register {house} for rent\n"
-                menu_text += "1. Yes\n"
-                menu_text += "2. No\n"
-                self.session['level'] = 30 
-                self.session['hse_type'] = self.user_response
-                return self.ussd_continue(menu_text)
+        house = get_type_of_house(self.user_response, data.rental_houses)
+        if self.user_response in ("11", "12", "13", "14", "15", "16"):
+            menu_text = f"Register {house} for rent\n"
+            menu_text += "1. Yes\n"
+            menu_text += "2. No\n"
+            self.session['level'] = 30 
+            self.session['hse_type'] = self.user_response
+            return self.ussd_continue(menu_text)
 
     def register_houses_for_sale(self):
         house = get_type_of_house(self.user_response, data.rental_houses)

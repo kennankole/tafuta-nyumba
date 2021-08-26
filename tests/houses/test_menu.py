@@ -38,6 +38,7 @@ def test_register_houses_for_sale(client):
             session=session,
             user_response="50"
         )
+        
         assert houses_for_sale_registraion_menu.user_response in ("50", "60", "70", "80")
         assert houses_for_sale_registraion_menu.register_houses_for_sale()
 
