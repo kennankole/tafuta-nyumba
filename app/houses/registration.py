@@ -95,5 +95,28 @@ class HousesRegistrationMenu(Menu):
         return self.ussd_end(menu_text)
 
 
+    def execute(self):
+        level = self.session.get('level')
+
+        if level == 30:
+            return self.get_registration_consent()
+        if level == 31:
+            return self.get_county()
+        if level == 32:
+            return self.get_constituency()
+        if level == 33:
+            return self.get_ward()
+        if level == 34:
+            return self.get_estate_village()
+        if level == 35:
+            return self.get_house_units()
+        if level == 36:
+            return self.get_price()
+        if level == 37:
+            return self.get_alternate_contacts()
+        if level == 38:
+            return self.save_data()
+
+
 
     
