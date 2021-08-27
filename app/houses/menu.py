@@ -2,7 +2,7 @@ from . houses_base_menu import HousesMainMenu
 from . import data
 from . utils import get_type_of_house
 
-class HousesQueryMenu(HousesMainMenu):
+class HousesQueryMainMenu(HousesMainMenu):
     
     def search_houses_to_rent_by_location(self):
         if self.user_response in ("1", "2", "3", "4", "5", "6"):

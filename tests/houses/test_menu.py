@@ -1,8 +1,8 @@
-from app.houses.menu import HousesQueryMenu
+from app.houses.menu import HousesQueryMainMenu
 
 def test_search_rental_houses(client):
     with client.session_transaction() as session:
-        rent_query_menu = HousesQueryMenu(
+        rent_query_menu = HousesQueryMainMenu(
             session=session,
             session_id="134083wrouow4",
             user_response="1"
@@ -13,7 +13,7 @@ def test_search_rental_houses(client):
 
 def test_rental_house_registration(client):
     with client.session_transaction() as session:
-        rental_house_registration_menu = HousesQueryMenu(
+        rental_house_registration_menu = HousesQueryMainMenu(
             session=session,
             session_id="qeqer0809r",
             user_response="11",
@@ -23,7 +23,7 @@ def test_rental_house_registration(client):
 
 def test_search_houses_for_sale(client):
     with client.session_transaction() as session:
-        houses_for_sale_menu = HousesQueryMenu(
+        houses_for_sale_menu = HousesQueryMainMenu(
             session_id="qerq4234qdfaf",
             session=session,
             user_response="10"
@@ -33,7 +33,7 @@ def test_search_houses_for_sale(client):
 
 def test_register_houses_for_sale(client):
     with client.session_transaction() as session:
-        houses_for_sale_registraion_menu = HousesQueryMenu(
+        houses_for_sale_registraion_menu = HousesQueryMainMenu(
             session_id="qerq4234qdfaf",
             session=session,
             user_response="50"
@@ -44,7 +44,7 @@ def test_register_houses_for_sale(client):
 
 def test_execute_menu(client):
     with client.session_transaction() as session:
-        execute_menu = HousesQueryMenu(
+        execute_menu = HousesQueryMainMenu(
             session_id="qerq4234qdfaf",
             session=session,
             user_response="50"
