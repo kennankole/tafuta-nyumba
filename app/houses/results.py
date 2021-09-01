@@ -33,7 +33,7 @@ class HousesQueryResults(HousesQueryMenu):
             service_type = "buying"
         # storing_user_records(self.phone_number, service_type,get_type_of_house(type_of_houses, hse_id)) 
         menu_text = f"{get_type_of_house(hse_id, type_of_houses)} in {ward}\n"
-        menu_text += f"{Houses.constituency_results(const=ward, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
+        menu_text += f"{Houses.ward_results(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
         return self.ussd_continue(menu_text)
 
     def houses_village_estate_query_results(self):
@@ -48,7 +48,7 @@ class HousesQueryResults(HousesQueryMenu):
             service_type = "buying"
         # storing_user_records(self.phone_number, service_type,get_type_of_house(type_of_houses, hse_id)) 
         menu_text = f"{get_type_of_house(hse_id, type_of_houses)} in {village_estate}\n"
-        menu_text += f"{Houses.constituency_results(const=village_estate, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
+        menu_text += f"{Houses.village_estate_results(village_estate=village_estate, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
         return self.ussd_continue(menu_text)
 
     def execute(self):
