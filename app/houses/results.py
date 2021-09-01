@@ -51,6 +51,16 @@ class HousesQueryResults(HousesQueryMenu):
         menu_text += f"{Houses.constituency_results(const=village_estate, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
         return self.ussd_continue(menu_text)
 
+    def execute(self):
+        level = self.session.get('level')
+        menu = {
+            31: self.houses_const_query_results,
+            32: self.houses_ward_query_results,
+            33: self.houses_village_estate_query_results
+        }
+        return menu.get(level, self.search_houses_by_location)()
+
+
         
        
     

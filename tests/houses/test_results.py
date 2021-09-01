@@ -31,7 +31,16 @@ def test_houses_for_sale_by_constituency(client):
         assert const_menu.houses_const_query_results()
         assert const_menu.houses_ward_query_results()
         assert const_menu.houses_village_estate_query_results()
+        
 
+def test_houses_query_results_execute(client):
+    with client.session_transaction() as session:
+        exec_menu = HousesQueryResults(
+            session=session,
+            session_id="qwerty123",
+            user_response="Ruaraka"
+        )
+        assert exec_menu.execute()
 
 
 
