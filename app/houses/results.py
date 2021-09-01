@@ -54,9 +54,9 @@ class HousesQueryResults(HousesQueryMenu):
     def execute(self):
         level = self.session.get('level')
         menu = {
-            31: self.houses_const_query_results,
-            32: self.houses_ward_query_results,
-            33: self.houses_village_estate_query_results
+            21: self.houses_const_query_results,
+            22: self.houses_ward_query_results,
+            23: self.houses_village_estate_query_results
         }
         return menu.get(level, self.search_houses_by_location)()
 
