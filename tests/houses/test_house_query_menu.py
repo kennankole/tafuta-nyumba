@@ -1,17 +1,5 @@
 from app.houses.houses_query_menu import HousesQueryMenu
 
-counties = [
-    "Nairobi", "Kisumu"
-]
-constituncies = [
-    "Ruaraka"
-]
-ward = [
-    "Korogocho"
-]
-
-regex = "[0-9]~!@#$%^&*()_-+={[}]|\?/><.,"
-
 def test_constituency_query(client):
     with client.session_transaction() as session:
         county_query = HousesQueryMenu(

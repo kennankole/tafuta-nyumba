@@ -11,9 +11,9 @@ def test_main_menu(client):
         )
         assert main_menu.session == session
         assert main_menu.session_id == "340990aareqo34"
-    assert main_menu.ussd_continue(main_menu.user_response)
-    assert main_menu.ussd_end(main_menu.user_response)
-    assert main_menu.home_menu()
+        assert main_menu.ussd_continue(main_menu.user_response)
+        assert main_menu.ussd_end(main_menu.user_response)
+        assert main_menu.home_menu()
 
 def test_lower_level_menu(client):
     with client.session_transaction() as session:
@@ -24,8 +24,8 @@ def test_lower_level_menu(client):
         )
         assert lower_level_menu.session == session
         assert lower_level_menu.session_id == "340990aareqo34"
-    assert lower_level_menu.house_menu()
-    assert lower_level_menu.land_menu()
-    assert lower_level_menu.business_premises_menu()
-    assert lower_level_menu.hostels_menu()
-    assert lower_level_menu.execute()
+        assert lower_level_menu.house_menu()
+        assert lower_level_menu.land_menu()
+        assert lower_level_menu.business_premises_menu()
+        assert lower_level_menu.hostels_menu()
+        assert lower_level_menu.execute()
