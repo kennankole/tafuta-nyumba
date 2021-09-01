@@ -5,5 +5,6 @@ pytest.ini
 htmlcov/
 app/__pycache__/
 app/houses/__pycache__/
+app/business/__pycache__/
 config/__pycache__/
 tests/__pycache__/
