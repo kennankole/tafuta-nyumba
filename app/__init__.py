@@ -20,9 +20,9 @@ migrate = Migrate()
 def create_app(test_config=None):
     ''' Initialize the core of the app'''
     app = Flask(__name__, instance_relative_config=False)
-    if logging.DEBUG and test_config:
+    if logging.DEBUG:
         app.config.from_object('config.settings.DevelopmentConfig')
-    if not logging.DEBUG and test_config:
+    if not logging.DEBUG:
         app.config.from_object('config.settings.ProductionConfig')
 
     db.init_app(app)

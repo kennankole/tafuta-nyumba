@@ -50,3 +50,13 @@ def test_business_premises_services_invalid_input(client):
             user_response=""
         )
         assert rent_biz_menu.business_premises_services_menu()
+
+
+def test_business_premises_execute_menu(client):
+    with client.session_transaction() as session:
+        exec_menu = BusinessPremisesMainMenu(
+            session=session,
+            session_id="qwerty123",
+            user_response=""
+        )
+        assert exec_menu.execute()

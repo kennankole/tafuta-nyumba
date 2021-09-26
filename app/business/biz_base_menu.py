@@ -10,7 +10,7 @@ class BusinessPremisesMainMenu(LowerLevelMenu):
             menu_text += "3. Office Space\n"
             menu_text += "4. Go-Downs\n"
             self.session['rent_business'] = self.user_response
-            self.session['level'] = 301 
+            self.session['level'] = 101 
             return self.ussd_continue(menu_text)
 
         if self.user_response == "2":
@@ -20,7 +20,7 @@ class BusinessPremisesMainMenu(LowerLevelMenu):
             menu_text += "7. Office Space\n"
             menu_text += "8. Go-Downs\n"
             self.session['rent_out_business'] = self.user_response
-            self.session['level'] = 303
+            self.session['level'] = 102
             return self.ussd_continue(menu_text)
 
         if self.user_response == "3":
@@ -29,7 +29,7 @@ class BusinessPremisesMainMenu(LowerLevelMenu):
             menu_text += "20. Shops\n"
             menu_text += "30. Office Space\n"
             menu_text += "40. Go-Downs\n"
-            self.session['level'] = 302
+            self.session['level'] = 103
             self.session['buy_business'] = self.user_response
             return self.ussd_continue(menu_text)
 
@@ -39,8 +39,16 @@ class BusinessPremisesMainMenu(LowerLevelMenu):
             menu_text += "60. Shops\n"
             menu_text += "70. Office Space\n"
             menu_text += "80 Go-Downs\n"
-            self.session['level'] = 304
+            self.session['level'] = 104
             self.session['sell_business'] = self.user_response
             return self.ussd_continue(menu_text)
         else:
            return self.business_premises_menu()
+
+
+    def execute(self):
+        level = self.session.get('level')
+        menu = {
+           300:self.business_premises_services_menu,
+        }
+        return menu.get(level, self.home_menu)()
