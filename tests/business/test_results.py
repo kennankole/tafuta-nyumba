@@ -1,9 +1,7 @@
-from app.models import BusinessPremises
 from app.business.results import BusinessPremisesQueryResults
 
-from mixer.backend.flask import mixer
 
-def test_rental_business_premises_by_constituency(client):
+def test_rental_business_premises(client):
     with client.session_transaction() as session:
         const_menu = BusinessPremisesQueryResults(
             session=session,
@@ -18,7 +16,7 @@ def test_rental_business_premises_by_constituency(client):
         assert const_menu.biz_premises_city_or_town_results()
         assert const_menu.biz_premises_ward_query_results()
 
-def test_business_premises_for_sale_by_constituency(client):
+def test_business_premises_for_sale(client):
     with client.session_transaction() as session:
         const_menu = BusinessPremisesQueryResults(
             session=session,
