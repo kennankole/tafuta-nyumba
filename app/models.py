@@ -75,6 +75,53 @@ class Hostels(db.Model):
     alternate_contact = db.Column(db.String(64), index=True)
 
 
+    @staticmethod
+    def constituency_results(const):
+        if Hostels.query.filter_by(
+            constituency=const
+        ).count() > 2:
+            return str(Hostels.query.filter_by(constituency=const).order_by(func.random()).limit(2).all())[1:-1]
+            
+        if 0 < Hostels.query.filter_by(
+            constituency=const
+        ).count() <= 2:
+            return str(Hostels.query.filter_by(constituency=const).all())[1:-1]
+        
+        if not Hostels.query.filter_by(constituency=const):
+            return "No records at the moment\nTry again later\n"
+
+    @staticmethod
+    def ward_results(ward):
+        if Hostels.query.filter_by(
+            ward=ward
+        ).count() > 2:
+            return str(Hostels.query.filter_by(ward=ward).order_by(func.random()).limit(2).all())[1:-1]
+            
+        if 0 < Hostels.query.filter_by(
+            ward=ward
+        ).count() <= 2:
+            return str(Hostels.query.filter_by(ward=ward).all())[1:-1]
+        
+        if not Hostels.query.filter_by(ward=ward):
+            return "No records at the moment\nTry again later\n"
+
+    
+    @staticmethod
+    def school_query_results(schl_name):
+        if Hostels.query.filter_by(
+            school_name=schl_name
+        ).count() > 2:
+            return str(Hostels.query.filter_by(school_name=schl_name).order_by(func.random()).limit(2).all())[1:-1]
+            
+        if 0 < Hostels.query.filter_by(
+            school_name=schl_name
+        ).count() <= 2:
+            return str(Hostels.query.filter_by(school_name=schl_name).all())[1:-1]
+        
+        if not Hostels.query.filter_by(school_name=schl_name):
+            return "No records at the moment\nTry again later\n"
+
+
 class BusinessPremises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     county = db.Column(db.String(64), index=True)
