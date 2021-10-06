@@ -2,9 +2,16 @@ from app.houses.houses_query_menu import HousesQueryMenu
 from app.models import Houses
 from app.houses.data import type_of_houses
 from app.houses.utils import get_type_of_house
+from app.utils import storing_user_records
+
+from app.decorators.payment_decorators import charge_users_decorator
+from app.decorators.location import location_decorator
+from app.decorators.names import names_decorator
 
 class HousesQueryResults(HousesQueryMenu):
 
+    @charge_users_decorator
+    @location_decorator(level=21, message="Enter Constituency")
     def houses_const_query_results(self):
         rent = True
         hse_id = self.session.get('hse_type')
@@ -20,7 +27,8 @@ class HousesQueryResults(HousesQueryMenu):
         menu_text += f"{Houses.constituency_results(const=const, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
         return self.ussd_continue(menu_text)
 
-
+    @charge_users_decorator
+    @location_decorator(level=22, message="Enter Ward")
     def houses_ward_query_results(self):
         # rent = True
         hse_id = self.session.get('hse_type')
@@ -36,6 +44,8 @@ class HousesQueryResults(HousesQueryMenu):
         menu_text += f"{Houses.ward_results(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
         return self.ussd_continue(menu_text)
 
+    @charge_users_decorator
+    @names_decorator(level=23, message="Enter Estate or village name")
     def houses_village_estate_query_results(self):
         # rent = True
         hse_id = self.session.get('hse_type')

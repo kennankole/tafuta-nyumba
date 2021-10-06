@@ -1,4 +1,4 @@
-from operator import index
+from datetime import datetime
 from app import db 
 from sqlalchemy.sql import func
 
@@ -195,3 +195,16 @@ class Land(db.Model):
     contacts = db.Column(db.String(64), index=True)
     alternate_contact = db.Column(db.String(64), index=True)
     for_rent = db.Column(db.Boolean, default=True)
+
+
+class CapturingUserData(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    contacts = db.Column(db.String(64), index=True)
+    service_type = db.Column(db.String(64), index=True)
+    property_type = db.Column(db.String(64), index=True)
+    accessed_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return f"{self.contacts, self.service_type, self.property_type, self.accessed_at}"
+
+    

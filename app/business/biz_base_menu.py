@@ -49,6 +49,6 @@ class BusinessPremisesMainMenu(LowerLevelMenu):
     def execute(self):
         level = self.session.get('level')
         menu = {
-           300:self.business_premises_services_menu,
+           100:self.business_premises_services_menu,
         }
         return menu.get(level, self.home_menu)()
