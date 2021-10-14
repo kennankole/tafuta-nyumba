@@ -9,6 +9,7 @@ def test_search_rental_houses(client):
         )
         assert rent_query_menu.user_response in ("1", "2", "3", "4", "5", "6")
         assert rent_query_menu.search_houses_to_rent_by_location()
+        assert rent_query_menu.execute()
 
 
 def test_rental_house_registration(client):
@@ -19,6 +20,7 @@ def test_rental_house_registration(client):
             user_response="11",
         )
         assert rental_house_registration_menu.user_response in ("11", "12", "13", "14", "15", "16")
+        # assert rental_house_registration_menu.execute()
         assert rental_house_registration_menu.rental_houses_registration()
 
 def test_search_houses_for_sale(client):
@@ -41,12 +43,3 @@ def test_register_houses_for_sale(client):
         
         assert houses_for_sale_registraion_menu.user_response in ("50", "60", "70", "80")
         assert houses_for_sale_registraion_menu.register_houses_for_sale()
-
-def test_execute_menu(client):
-    with client.session_transaction() as session:
-        execute_menu = HousesQueryMainMenu(
-            session_id="qerq4234qdfaf",
-            session=session,
-            user_response="50"
-        )
-        assert execute_menu.execute()

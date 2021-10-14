@@ -36,7 +36,7 @@ class HousesQueryMainMenu(HousesMainMenu):
             self.session['hse_type'] = self.user_response
             return self.ussd_continue(menu_text)
     
-    @validate_choices(level=10, message="2. Back\n", choices=("11", "12", "13", "14", "15", "16"))
+    @validate_choices(level=10, message="2. Back\n", choices=("50", "60", "70", "80"))
     def register_houses_for_sale(self):
         house = get_type_of_house(self.user_response, data.rental_houses)
         if self.user_response in ("50", "60", "70", "80"):

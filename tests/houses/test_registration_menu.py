@@ -109,10 +109,11 @@ def test_get_price(client):
         price_menu = HousesRegistrationMenu(
             session=session,
             session_id="qwerty12345",
-            user_response=""
+            user_response="2"
         )
         price_menu.session['level'] = 36
         assert price_menu.session.get('level') == 36
+        assert price_menu.user_response == "2"
         assert price_menu.execute()
 
 def test_get_alternate_contacts(client):
@@ -120,10 +121,11 @@ def test_get_alternate_contacts(client):
         contacts_menu = HousesRegistrationMenu(
             session=session,
             session_id="qwerty12345",
-            user_response=""
+            user_response="8000"
         )
         contacts_menu.session['level'] = 37
         assert contacts_menu.session.get('level') == 37
+        assert contacts_menu.user_response == "8000"
         assert contacts_menu.execute()
 
 def test_save_rental_houses(client):
@@ -131,11 +133,12 @@ def test_save_rental_houses(client):
         rental_houses = HousesRegistrationMenu(
             session=session,
             session_id="qwerty12345",
-            user_response=""
+            user_response="0789234567"
         )
         rental_houses.session['level'] = 38
         rental_houses.session['rent_out_house'] = "2"
         assert rental_houses.session.get('level') == 38
+        assert rental_houses.user_response == "0789234567"
         assert rental_houses.session.get("rent_out_house") == "2"
         assert rental_houses.execute()
 
@@ -144,10 +147,11 @@ def test_save_houses_for_sale(client):
         houses_for_sale = HousesRegistrationMenu(
             session=session,
             session_id="qwerty12345",
-            user_response=""
+            user_response="0789234567"
         )
         houses_for_sale.session['sell_house'] = "4"
         houses_for_sale.session['level'] = 38
+        assert houses_for_sale.user_response == "0789234567"
         assert houses_for_sale.session.get('level') == 38
         assert houses_for_sale.session.get("sell_house") == "4"
         assert houses_for_sale.execute()
