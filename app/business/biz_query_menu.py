@@ -1,7 +1,10 @@
 from . menu import BusinessPremisesQueryMainMenu
+from app.decorators.choices import validate_choices
 
 class BusinessPremisesQueryMenu(BusinessPremisesQueryMainMenu):  
-        
+    
+ 
+    @validate_choices(level=100, message="Invalid Entry\n 1. Back", choices=("1", "2", "3"))
     def search_business_premises_by_location(self):
         if self.user_response == "1":
             menu_text = f"Enter name of city\n"

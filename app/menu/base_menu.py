@@ -27,9 +27,8 @@ class Menu:
     def home_menu(self):
         menu_text = f"Welcome to {current_app.config['APP_NAME']}\n Choose a service\n"
         menu_text += "1. Houses\n"
-        menu_text += "2. Lands\n"
-        menu_text += "3. Hostels\n"
-        menu_text += "4. Business Premises \n"
+        menu_text += "2. Hostels\n"
+        menu_text += "3. Business Premises \n"
         self.session['level'] = 1
         self.session['contact'] = self.phone_number
         return self.ussd_continue(menu_text)

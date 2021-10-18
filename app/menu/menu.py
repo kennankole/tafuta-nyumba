@@ -8,12 +8,6 @@ class LowerLevelMenu(Menu):
         self.session['level'] = 10
         return self.ussd_continue(menu_text)
 
-    def land_menu(self):
-        menu_text = "Select Land/Plots to;\n"
-        menu_text += "1. Rent \n2. Rent out \n3. Buy  \n4. Sell\n"
-        self.session['level'] = 40 
-        return self.ussd_continue(menu_text)
-
     def hostels_menu(self):
         menu_text = "Select Hostels to;\n"
         menu_text += "1. Rent \n2. Rent out\n"
@@ -30,9 +24,8 @@ class LowerLevelMenu(Menu):
     def execute(self):
         menu = {
             "1": self.house_menu,
-            "2": self.land_menu,
-            "3": self.hostels_menu,
-            "4": self.business_premises_menu
+            "2": self.hostels_menu,
+            "3": self.business_premises_menu
         }
         return menu.get(self.user_response, self.home_menu)()
        

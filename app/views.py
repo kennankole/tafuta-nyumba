@@ -11,6 +11,14 @@ from app.houses.houses_query_menu import HousesQueryMainMenu
 from app.houses.registration import HousesRegistrationMenu
 from app.houses.results import HousesQueryResults
 
+from app.hostels.menu import HostelsQueryMenu
+from app.hostels.registration import HostelsRegistrationMenu
+from app.hostels.results import HostelsQueryResults
+
+from app.business.menu import BusinessPremisesQueryMainMenu
+from app.business.registration import BusinessPremisesRegistrationMenu
+from app.business.results import BusinessPremisesQueryResults
+
 
 
 views = Blueprint("views", __name__)
@@ -63,14 +71,65 @@ def ussd_callback():
         )
         return menu.execute()
 
-    if level >= 10:
-        menu = HousesQueryMainMenu(
+    if level >= 300:
+        menu = BusinessPremisesRegistrationMenu(
             session_id=session_id,
             session=g.session,
             phone_number=g.phone_number,
             user_response=g.user_response,
             level=level,
         )
+        return menu.execute()
+
+    if level >= 200:
+        menu = BusinessPremisesQueryResults(
+            session_id=session_id,
+            session=g.session,
+            phone_number=g.phone_number,
+            user_response=g.user_response,
+            level=level,
+        )
+        return menu.execute()
+
+    if level >= 100:
+        menu = BusinessPremisesQueryMainMenu(
+            session_id=session_id,
+            session=g.session,
+            phone_number=g.phone_number,
+            user_response=g.user_response,
+            level=level,
+        )
+        return menu.execute()
+
+    if level >= 90:
+        menu = HostelsRegistrationMenu(
+            session_id=session_id,
+            session=g.session,
+            phone_number=g.phone_number,
+            user_response=g.user_response,
+            level=level,
+        )
+        return menu.execute()
+
+    if level >= 80:
+        menu = HostelsQueryResults(
+            session_id=session_id,
+            session=g.session,
+            phone_number=g.phone_number,
+            user_response=g.user_response,
+            level=level,
+        )
+        return menu.execute()
+
+    if level >= 70:
+        menu = HostelsQueryMenu(
+            session_id=session_id,
+            session=g.session,
+            phone_number=g.phone_number,
+            user_response=g.user_response,
+            level=level,
+        )
+        return menu.execute()
 
     if level >= 30:
         menu = HousesRegistrationMenu(
@@ -80,6 +139,7 @@ def ussd_callback():
             user_response=g.user_response,
             level=level,
         )
+        return menu.execute()
 
     if level >= 20:
         menu = HousesQueryResults(
@@ -89,6 +149,18 @@ def ussd_callback():
             user_response=g.user_response,
             level=level,
         )
+        return menu.execute()
+
+    if level >= 10:
+        menu = HousesQueryMainMenu(
+            session_id=session_id,
+            session=g.session,
+            phone_number=g.phone_number,
+            user_response=g.user_response,
+            level=level,
+        )
+        return menu.execute()
+
     else:
         response = make_response("END Ujuzi real estate is out of service\nKind check later")
         response.headers['Content-Type'] = "text/plain"

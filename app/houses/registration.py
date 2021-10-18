@@ -4,7 +4,7 @@ from app.models  import Houses
 from app.houses.data import type_of_houses
 from app.houses.utils import get_type_of_house
 
-from app.decorators.registration_menu import registration_menu_decorator
+from app.decorators.choices import validate_choices
 from app.decorators.names import names_decorator
 from app.decorators.location import location_decorator
 from app.decorators.numeric import numeric_decorator
@@ -34,7 +34,7 @@ class HousesRegistrationMenu(Menu):
             return self.ussd_continue(menu_text)
 
 
-    @registration_menu_decorator(level=60, message="00. House Registration Menu")
+    @validate_choices(level=30, message="Invalid Input\n 1/2. Back\n", choices=("00"))
     def get_county(self):
         menu_text = "Enter the county\n"
         self.session['level'] = 32 
@@ -84,6 +84,7 @@ class HousesRegistrationMenu(Menu):
 
     @phone_number_decorator(level=38, message="Enter an alternative phone number")
     def save_data(self):
+        for_rent = True
         house = get_type_of_house(self.session.get('hse_type'), type_of_houses)
         menu_text = f"Your {house}(s) have been successfully registered\n"
         if self.session.get("rent_out_house"):

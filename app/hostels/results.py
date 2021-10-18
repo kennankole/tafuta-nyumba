@@ -13,7 +13,7 @@ class HostelsQueryResults(HostelsQueryMenu):
         storing_user_records(self.phone_number, "renting", "Hostels")
         schl_name = self.user_response
         menu_text = f"Hostels in {schl_name}\n"
-        menu_text = f"{Hostels.school_query_results(schl_name=schl_name)}\n"
+        menu_text += f"{Hostels.school_query_results(schl_name=schl_name)}\n"
         menu_text += f"{schl_name.title()} >> (next)\n"
         return self.ussd_continue(menu_text)
 
@@ -22,9 +22,9 @@ class HostelsQueryResults(HostelsQueryMenu):
     def hostels_query_results_by_constituency(self):
         storing_user_records(self.phone_number, "renting", "Hostels")
         const = self.user_response
-        menu_text = f"Hostels in {const}"
-        menu_text = f"{Hostels.constituency_results(const=const)}\n"
-        menu_text = f"{const.title()} >> (next)\n"
+        menu_text = f"Hostels in {const}\n"
+        menu_text += f"{Hostels.constituency_results(const=const)}\n"
+        menu_text += f"{const.title()} >> (next)\n"
         return self.ussd_continue(menu_text)
 
            
@@ -33,8 +33,9 @@ class HostelsQueryResults(HostelsQueryMenu):
     def hostels_query_results_by_ward(self):
         storing_user_records(self.phone_number, "renting", "Hostels")
         ward = self.user_response
+        menu_text = f"Hostels in {ward}\n"
         menu_text = f"{Hostels.ward_results(ward=ward)}\n"
-        menu_text = f"{ward.title()} >> (next)\n"
+        menu_text += f"{ward.title()} >> (next)\n"
         return self.ussd_continue(menu_text)
            
     

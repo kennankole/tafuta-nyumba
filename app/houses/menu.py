@@ -5,15 +5,15 @@ from app.houses.utils import get_type_of_house
 from app.decorators.choices import validate_choices
 
 class HousesQueryMainMenu(HousesMainMenu):
-    @validate_choices(level=10, message="1. Back", choices=("1", "2", "3", "4", "5", "6"))
+    @validate_choices(level=10, message="Invalid Entry\n1. Back", choices=("1", "2", "3", "4", "5", "6"))
     def search_houses_to_rent_by_location(self):
-        if self.user_response in ("1", "2", "3", "4", "5", "6"):
-            house = get_type_of_house(self.user_response, data.rental_houses)
-            menu_text = f"Search {house} to rent by:\n"
-            menu_text += "1. Constituency\n2. Ward\n3. Estate or Village\n"
-            self.session['level'] = 20
-            self.session['hse_type'] = self.user_response
-            return self.ussd_continue(menu_text)
+        # if self.user_response in ("1", "2", "3", "4", "5", "6"):
+        house = get_type_of_house(self.user_response, data.rental_houses)
+        menu_text = f"Search {house} to rent by no.{self.user_response}:\n"
+        menu_text += "1. Constituency\n2. Ward\n3. Estate or Village\n"
+        self.session['level'] = 20
+        self.session['hse_type'] = self.user_response
+        return self.ussd_continue(menu_text)
 
     @validate_choices(level=10, message="3. Back\n", choices=("10", "20", "30", "40"))
     def search_houses_to_buy_by_location(self):
@@ -25,7 +25,7 @@ class HousesQueryMainMenu(HousesMainMenu):
             self.session['hse_type'] = self.user_response
             return self.ussd_continue(menu_text)
 
-    @validate_choices(level=40, message="2. Back\n", choices=("11", "12", "13", "14", "15", "16"))
+    @validate_choices(level=10, message="2. Back\n", choices=("11", "12", "13", "14", "15", "16"))
     def rental_houses_registration(self):
         house = get_type_of_house(self.user_response, data.rental_houses)
         if self.user_response in ("11", "12", "13", "14", "15", "16"):

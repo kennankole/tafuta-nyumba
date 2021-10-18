@@ -11,7 +11,7 @@ from app.decorators.names import names_decorator
 class HousesQueryResults(HousesQueryMenu):
 
     @charge_users_decorator
-    @location_decorator(level=21, message="Enter Constituency")
+    @location_decorator(level=21, message="Enter Constituency Really")
     def houses_const_query_results(self):
         rent = True
         hse_id = self.session.get('hse_type')
@@ -29,8 +29,10 @@ class HousesQueryResults(HousesQueryMenu):
 
     @charge_users_decorator
     @location_decorator(level=22, message="Enter Ward")
+    # @names_decorator(level=22, message="Enter ward")
     def houses_ward_query_results(self):
-        # rent = True
+        rent = True
+        service_type = ""
         hse_id = self.session.get('hse_type')
         ward = self.user_response
         if self.session.get("rent_house"):

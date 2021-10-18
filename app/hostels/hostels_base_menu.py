@@ -15,7 +15,7 @@ class HostelsMainMenu(LowerLevelMenu):
             menu_text = "Register Hostels\n"
             menu_text += "1. Yes\n"
             menu_text += "2. No\n"
-            self.session['level'] = 72
+            self.session['level'] = 90
             return self.ussd_continue(menu_text)
         else:
             return self.hostels_menu()

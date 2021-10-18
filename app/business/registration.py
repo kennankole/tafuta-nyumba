@@ -14,7 +14,7 @@ class BusinessPremisesRegistrationMenu(Menu):
     def get_registration_consent(self):
         if self.user_response == "1":
             menu_text = "00. Business Registration Menu"
-            self.session['level'] = 31
+            self.session['level'] = 301
             return self.ussd_continue(menu_text)
 
         if self.user_response == "2":
@@ -24,78 +24,78 @@ class BusinessPremisesRegistrationMenu(Menu):
         if self.user_response not in ("1", "2") and self.session.get("sell_business") == "4":
             menu_text = f"{self.user_response} is an invalid choice\n"
             menu_text += "4. Back\n"
-            self.session['level'] = 20
+            self.session['level'] = 300
             return self.ussd_continue(menu_text)
 
         if self.user_response not in ("1", "2") and self.session.get("rent_out_biz_premises") == "2":
             menu_text = f"{self.user_response} is an invalid choice\n"
             menu_text += "2. Back\n"
-            self.session['level'] = 20
+            self.session['level'] = 300
             return self.ussd_continue(menu_text)
 
-    @registration_menu_decorator(level=100, message="1. Back city")
+    @registration_menu_decorator(level=302, message="1. Back city")
     def get_county(self):
         menu_text = "Enter the county\n"
-        self.session['level'] = 32 
+        self.session['level'] = 302 
         return self.ussd_continue(menu_text)
 
-    @location_decorator(level=102, message="Enter the county")
+    @location_decorator(level=302, message="Enter the county")
     def get_constituency(self):
         menu_text = "Enter Constituency \n"
-        self.session['level'] = 33
+        self.session['level'] = 303
         self.session['county'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @location_decorator(level=103, message="Enter Constituency")
+    @location_decorator(level=303, message="Enter Constituency")
     def get_ward(self):
         menu_text = "Enter Ward \n"
-        self.session['level'] = 34
+        self.session['level'] = 304
         self.session['constituency'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @location_decorator(level=104, message="Enter Ward \n")
+    @location_decorator(level=304, message="Enter Ward \n")
     def get_town_or_city_name(self):
         menu_text = "Enter name of the town or city\n"
-        self.session['level'] = 35
+        self.session['level'] = 305
         self.session['ward'] = self.user_response
         return self.ussd_continue(menu_text)
     
-    @names_decorator(level=110, message="00. Back")
+    @names_decorator(level=305, message="00. Back")
     def get_street_name(self):
         menu_text = "Enter the street name \n"
-        self.session['level'] = 36
+        self.session['level'] = 306
         self.session['name_of_city'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @names_decorator(level=110, message="00. Back")
+    @names_decorator(level=307, message="00. Back")
     def get_biz_premises_units(self):
         menu_text = "Enter units available \n"
-        self.session['level'] = 37
+        self.session['level'] = 307
         self.session['street_name'] = self.user_response
         return self.ussd_continue(menu_text)
     
-    @numeric_decorator(level=106, message="Enter units available")
+    @numeric_decorator(level=307, message="Enter units available")
     def get_biz_premises_floor_area(self):
         menu_text = "Enter the floor area\n"
-        self.session['level'] = 38
+        self.session['level'] = 308
         self.session['biz_premises_units'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @numeric_decorator(level=105, message="Enter floor area in square feet")
+    @numeric_decorator(level=308, message="Enter floor area in square feet")
     def get_price(self):
         menu_text = "Enter the price\n"
-        self.session['level'] = 39
+        self.session['level'] = 309
         self.session['biz_floor_area'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @numeric_decorator(level=107, message="Enter the price")
+    @numeric_decorator(level=309, message="Enter the price")
     def get_alternate_contacts(self):
         menu_text = "Enter an alternative phone number\n"
-        self.session['level'] = 40
+        self.session['level'] = 400
         self.session['price'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @phone_number_decorator(level=108, message="Enter alternate contact")
+    @phone_number_decorator(level=309, message="Enter alternate contact")
     def save_data(self):
         for_rent = False
         biz_premises = get_type_of_business_premises(self.session.get('biz_type'), types_of_business_premises)
@@ -125,27 +125,27 @@ class BusinessPremisesRegistrationMenu(Menu):
     def execute(self):
         level = self.session.get('level')
 
-        if level == 30:
+        if level == 300:
             return self.get_registration_consent()
-        if level == 31:
+        if level == 301:
             return self.get_county()
-        if level == 32:
+        if level == 302:
             return self.get_constituency()
-        if level == 33:
+        if level == 303:
             return self.get_ward()
-        if level == 34:
+        if level == 304:
             return self.get_town_or_city_name()
-        if level == 35:
+        if level == 305:
             return self.get_street_name()
-        if level == 36:
+        if level == 306:
             return self.get_biz_premises_units()
-        if level == 37:
+        if level == 307:
             return self.get_biz_premises_floor_area()
-        if level == 38:
+        if level == 308:
             return self.get_price()
-        if level == 39:
+        if level == 309:
             return self.get_alternate_contacts()
-        if level == 40:
+        if level == 400:
             return self.save_data()
 
 
