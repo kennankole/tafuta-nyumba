@@ -4,11 +4,12 @@ from app import db
 from app.business.data import types_of_business_premises
 from app.business.utils import get_type_of_business_premises
 
-from app.decorators.registration_menu import registration_menu_decorator
 from app.decorators.names import names_decorator
 from app.decorators.location import location_decorator
 from app.decorators.numeric import numeric_decorator
 from app.decorators.phone_numbers import phone_number_decorator
+from app.decorators.choices import validate_choices
+
 class BusinessPremisesRegistrationMenu(Menu):
 
     def get_registration_consent(self):
@@ -17,23 +18,27 @@ class BusinessPremisesRegistrationMenu(Menu):
             self.session['level'] = 301
             return self.ussd_continue(menu_text)
 
-        if self.user_response == "2":
+        elif self.user_response == "2":
             menu_text = "Thank you for stopping by\n"
             return self.ussd_end(menu_text)
 
-        if self.user_response not in ("1", "2") and self.session.get("sell_business") == "4":
+        elif self.user_response not in ("1", "2") and self.session.get("sell_business") == "4":
             menu_text = f"{self.user_response} is an invalid choice\n"
             menu_text += "4. Back\n"
-            self.session['level'] = 300
+            self.session['level'] = 100
             return self.ussd_continue(menu_text)
 
-        if self.user_response not in ("1", "2") and self.session.get("rent_out_biz_premises") == "2":
+        elif self.user_response not in ("1", "2") and self.session.get("rent_out_business") == "2":
             menu_text = f"{self.user_response} is an invalid choice\n"
             menu_text += "2. Back\n"
-            self.session['level'] = 300
+            self.session['level'] = 100
+            return self.ussd_continue(menu_text)
+        else:
+            menu_text = "is an invalid selection!!\n"
+            menu_text += f"{self.session.get('rent_out_business'), self.session.get('sell_business')}"
             return self.ussd_continue(menu_text)
 
-    @registration_menu_decorator(level=302, message="1. Back city")
+    @validate_choices(level=300, message="Invalid Input\n1. Back\n", choices=("00"))
     def get_county(self):
         menu_text = "Enter the county\n"
         self.session['level'] = 302 
@@ -60,14 +65,14 @@ class BusinessPremisesRegistrationMenu(Menu):
         self.session['ward'] = self.user_response
         return self.ussd_continue(menu_text)
     
-    @names_decorator(level=305, message="00. Back")
+    @names_decorator(level=305, message="Invalid input\nEnter name of the town or city\n")
     def get_street_name(self):
         menu_text = "Enter the street name \n"
         self.session['level'] = 306
         self.session['name_of_city'] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @names_decorator(level=307, message="00. Back")
+    @names_decorator(level=306, message="Invalid input\nEnter name of the town or city\n")
     def get_biz_premises_units(self):
         menu_text = "Enter units available \n"
         self.session['level'] = 307

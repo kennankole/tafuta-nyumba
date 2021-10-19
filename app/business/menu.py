@@ -13,7 +13,7 @@ class BusinessPremisesQueryMainMenu(BusinessPremisesMainMenu):
             self.session['biz_type'] = self.user_response
             return self.ussd_continue(menu_text)
 
-    @validate_choices(level=300, message="2. Back", choices=("5", "6", "7", "8"))
+    @validate_choices(level=100, message="2. Back", choices=("5", "6", "7", "8"))
     def register_rental_business_premises(self):
         if self.user_response in ("5", "6", "7", "8"):
             menu_text = f"Register business premises for rent\n"
@@ -23,7 +23,7 @@ class BusinessPremisesQueryMainMenu(BusinessPremisesMainMenu):
             self.session['biz_type'] = self.user_response
             return self.ussd_continue(menu_text)
 
-    @validate_choices(level=300, message="3. Back", choices=("10", "20", "30", "40"))
+    @validate_choices(level=100, message="3. Back", choices=("10", "20", "30", "40"))
     def search_business_premises_for_sale(self):
         if self.user_response in ("10", "20", "30", "40"):
             menu_text = f"Search business to buy by\n"
@@ -32,7 +32,7 @@ class BusinessPremisesQueryMainMenu(BusinessPremisesMainMenu):
             self.session['biz_type'] = self.user_response
             return self.ussd_continue(menu_text)
 
-    @validate_choices(level=300, message="2. Back", choices=("5", "6", "7", "8"))
+    @validate_choices(level=100, message="2. Back", choices=("5", "6", "7", "8"))
     def register_rental_business_premises(self):
         if self.user_response in ("5", "6", "7", "8"):
             menu_text = f"Register business premises for rent\n"
@@ -42,7 +42,7 @@ class BusinessPremisesQueryMainMenu(BusinessPremisesMainMenu):
             self.session['biz_type'] = self.user_response
             return self.ussd_continue(menu_text)
 
-    @validate_choices(level=300, message="4. Back", choices=("50", "60", "70", "80"))
+    @validate_choices(level=100, message="4. Back", choices=("50", "60", "70", "80"))
     def register_business_premises_for_sale(self):
         if self.user_response in ("50", "60", "70", "80"):
             menu_text = f"Register business premises for sale\n"

@@ -9,7 +9,8 @@ from app.business.utils import get_type_of_business_premises
 class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
 
     @charge_users_decorator
-    @names_decorator(level=201, message="Enter name of city or town")
+    @names_decorator(level=201, message="Enter name of city or town\n")
+    # @location_decorator(level=201, message="Enter name of city or town\n")
     def biz_premises_city_or_town_results(self):
         rent = True
         biz_id = self.session.get('biz_type')
