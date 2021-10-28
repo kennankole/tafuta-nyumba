@@ -8,7 +8,9 @@ def registration_menu_decorator(level, message):
             else:
                 menu_text = f"{self.user_response} is an invalid selection\n"
                 menu_text += f"{message}\n"
-                self.session['level'] = level
+                self.session["level"] = level
                 return self.ussd_continue(menu_text)
+
         return registration_menu_decorator_innermost
+
     return registration_menu_decorator_inner

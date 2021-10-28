@@ -1,5 +1,6 @@
 regex = "!@#$%^&*()_-+={[}]|\?/><.,"
 
+
 def numeric_decorator(level, message):
     def numeric_decorator_inner(func):
         def numeric_decorator_innermost(self, *args, **kwargs):
@@ -9,14 +10,14 @@ def numeric_decorator(level, message):
                 else:
                     menu_text = f"{self.user_response} is an invalid selection\n"
                     menu_text += f"{message}\n"
-                    self.session['level'] = level
+                    self.session["level"] = level
                     return self.ussd_continue(menu_text)
             else:
-                    menu_text = f"{self.user_response} is an invalid entry\n"
-                    menu_text += f"{message}\n"
-                    self.session['level'] = level
-                    return self.ussd_continue(menu_text)
+                menu_text = f"{self.user_response} is an invalid entry\n"
+                menu_text += f"{message}\n"
+                self.session["level"] = level
+                return self.ussd_continue(menu_text)
+
         return numeric_decorator_innermost
+
     return numeric_decorator_inner
-
-

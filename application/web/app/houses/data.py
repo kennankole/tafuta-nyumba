@@ -4,7 +4,7 @@ rental_houses = {
     "3": "Bedsitter",
     "4": "One Bedrooms",
     "5": "Two Bedrooms",
-    "6": "Three Bedrooms"
+    "6": "Three Bedrooms",
 }
 
 register_rental_houses = {
@@ -13,21 +13,21 @@ register_rental_houses = {
     "13": "Bedsitter",
     "14": "One Bedrooms",
     "15": "Two Bedrooms",
-    "16": "Three Bedrooms"
+    "16": "Three Bedrooms",
 }
 
 houses_for_sale = {
     "10": "Bedsitter",
     "20": "One Bedrooms",
     "30": "Two Bedrooms",
-    "40": "Three Bedrooms"
+    "40": "Three Bedrooms",
 }
 
 register_houses_for_sale = {
     "50": "Bedsitter",
     "60": "One Bedrooms",
     "70": "Two Bedrooms",
-    "80": "Three Bedrooms"
+    "80": "Three Bedrooms",
 }
 
 type_of_houses = {
@@ -50,5 +50,5 @@ type_of_houses = {
     "50": "Bedsitters",
     "60": "One Bedrooms",
     "70": "Two Bedrooms",
-    "80": "Three Bedrooms"
+    "80": "Three Bedrooms",
 }

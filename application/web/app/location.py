@@ -28,43 +28,30 @@ location = """
 """
 
 house_types_rent = {
-    1:'Single room', 
-    2:'Double room',
-    3:'Bed sitter',
-    4:'Hostel',
-    5:'One Bedroom',
-    6:'Two Bedroom',
-    7:'Three Bedroom',
-    8:'Massionate'
+    1: "Single room",
+    2: "Double room",
+    3: "Bed sitter",
+    4: "Hostel",
+    5: "One Bedroom",
+    6: "Two Bedroom",
+    7: "Three Bedroom",
+    8: "Massionate",
 }
 house_types_sell = {
-    10:'Bed sitter', 
-    20:'One Bedroom',
-    30:'Two Bedroom',
-    40:'Three Bedroom',
-    50:'Massionate',
+    10: "Bed sitter",
+    20: "One Bedroom",
+    30: "Two Bedroom",
+    40: "Three Bedroom",
+    50: "Massionate",
 }
 
-business_premises = {
-    1:'Kibanda/Kiosk',
-    2:'Shops',
-    3:'Office Space',
-    4:'Go-downs'
-}
+business_premises = {1: "Kibanda/Kiosk", 2: "Shops", 3: "Office Space", 4: "Go-downs"}
 
-CBD_premises = {
-    1:'Shops',
-    2:'Office Space'
-}
+CBD_premises = {1: "Shops", 2: "Office Space"}
 
 type_of_properties = {
-    1:'Land',
-    2:'Houses',
-    3:'Business Premises',
+    1: "Land",
+    2: "Houses",
+    3: "Business Premises",
 }
-business_premises_in_CBD = {
-    1:'Yes',
-    2:'No'
-}
-
-
+business_premises_in_CBD = {1: "Yes", 2: "No"}

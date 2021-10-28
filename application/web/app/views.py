@@ -20,12 +20,12 @@ from app.business.registration import BusinessPremisesRegistrationMenu
 from app.business.results import BusinessPremisesQueryResults
 
 
-
 views = Blueprint("views", __name__)
+
 
 @views.route("/")
 def home_page():
-    return 'Welcome to Tafuta Nyumba'
+    return "Welcome to Tafuta Nyumba"
 
 
 @views.route("/", methods=["POST", "GET"])
@@ -35,21 +35,19 @@ def ussd_callback():
     phone_number = request.values.get("phoneNumber")
     text = request.values.get("text", "default")
     response = ""
-    
+
     username = Config.USERNAME
     api_key = Config.API_KEY
 
-
     africastalking.initialize(username, api_key)
-    
+
     textArray = text.split("*")
     latestInput = textArray[len(textArray) - 2]
-
 
     # make this a decorator
     session = redis.get(session_id)
     if session is None:
-        session = {'level': 0, 'session_id': session_id}
+        session = {"level": 0, "session_id": session_id}
         redis.set(session_id, json.dumps(session))
     else:
         session = json.loads(session.decode())
@@ -162,6 +160,8 @@ def ussd_callback():
         return menu.execute()
 
     else:
-        response = make_response("END Ujuzi real estate is out of service\nKind check later")
-        response.headers['Content-Type'] = "text/plain"
+        response = make_response(
+            "END Ujuzi real estate is out of service\nKind check later"
+        )
+        response.headers["Content-Type"] = "text/plain"
         return response

@@ -14,6 +14,5 @@ types_of_business_premises = {
     "50": "Kiosk/Kibanda",
     "60": "Shops",
     "70": "Office Space",
-    "80": "Go-Downs"
-}  
-  
+    "80": "Go-Downs",
+}

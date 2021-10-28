@@ -9,5 +9,7 @@ def results_decorator(message, model):
                 menu_text += f"{model}"
                 menu_text += f"{self.user_response.title()} >> (next)"
                 return self.ussd_continue(menu_text)
+
         return results_decorator_innermost
+
     return results_decorator_inner
