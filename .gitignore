@@ -3,8 +3,7 @@ pytest.ini
 .env*
 .coverage*
 htmlcov/
-app/__pycache__/
-app/houses/__pycache__/
-app/business/__pycache__/
-config/__pycache__/
-tests/__pycache__/
+web/app/__pycache__/
+web/app/houses/__pycache__/
+web/app/business/__pycache__/
+web/tests/__pycache__/
