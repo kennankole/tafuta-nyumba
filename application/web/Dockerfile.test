@@ -1,0 +1,52 @@
+###############################
+##  pull official base image ##
+###############################
+FROM python:3.8.1-slim-buster as base
+WORKDIR /app
+RUN pip install --upgrade pip && pip install pipenv
+COPY ./Pipfile* /app/
+RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
+
+
+#####################
+## New build stage ##
+#####################
+FROM python:3.8.1-slim-buster
+########################################
+## Setting up environmental variables ##
+########################################
+ENV LANG C.UTF-8 
+ENV LC_ALL C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONFAULTHANDLER 1
+################################################
+##  Install pipenv & compilation dependencies ##
+################################################
+RUN pip install --upgrade pip && pip install pipenv
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc --no-install-recommends \
+    && apt-get -y install postgresql --no-install-recommends \
+    && pipenv install psycopg2-binary \
+    && pipenv install redis \
+    && rm -fr /var/lib/apt/lists/*
+
+WORKDIR /home/app
+COPY --from=base /app /home/app/
+COPY --from=base /app/Pipfile* /home/app/
+# COPY ./services/web/Pipfile* /build/
+
+RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
+COPY . /home/app
+COPY ./starting_gunicorn.sh /home/app/
+RUN useradd --create-home appuser 
+RUN chown -R appuser:appuser /home/app && chmod -R 755 /home/app
+USER appuser
+
+########################################
+## Entrypoint of our application      ##
+########################################
+ENTRYPOINT ["/home/app/starting_gunicorn.sh"]
+
+
+

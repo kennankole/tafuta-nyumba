@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Flask = "*"
+Flask-SQLAlchemy = "*"
+pytest = "*"
+pytest-cov = "*"
+africastalking = "*"
+Flask-Migrate = "*"
+redis = "*"
+flask-redis = "*"
+mixer = "*"
+psycopg2-binary = "==2.8.6"
+[dev-packages]
+
+[requires]
+python_version = "3.8"
