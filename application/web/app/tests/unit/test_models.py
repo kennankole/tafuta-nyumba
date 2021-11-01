@@ -1,13 +1,14 @@
 from mixer.backend.flask import mixer
-
+import pytest
+from app.models import Houses
 from app import models
+
 
 
 def test_houses_models(client):
     with client.session_transaction() as session:
         houses = mixer.blend(models.Houses, type_of_house="Bedsitter")
         assert houses.type_of_house == "Bedsitter"
-
 
 def test_hostels_models(client):
     with client.session_transaction() as session:

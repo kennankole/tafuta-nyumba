@@ -21,9 +21,9 @@ class HousesQueryMenu(HousesQueryMainMenu):
             menu_text = "Enter Estate or village name\n "
             self.session["level"] = 23
             return self.ussd_continue(menu_text)
-        else:
-            menu_text = "Hey\n"
-            return self.ussd_end(menu_text)
+        # else:
+        #     menu_text = "Hey\n"
+        #     return self.ussd_end(menu_text)
 
     def execute(self):
         level = self.session.get("level")

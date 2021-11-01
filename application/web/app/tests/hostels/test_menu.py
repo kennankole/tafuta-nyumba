@@ -1,4 +1,5 @@
 from app.hostels.menu import HostelsQueryMenu
+from app.hostels.registration import HostelsRegistrationMenu
 
 
 def test_search_hostels_by_school_name(client):
@@ -39,7 +40,7 @@ def test_invalid_input_hostels_search(client):
 
 def test_register_hostels(client):
     with client.session_transaction() as session:
-        hostels_query_menu = HostelsQueryMenu(
+        hostels_query_menu = HostelsRegistrationMenu(
             session=session, session_id="qwerty124", user_response="1"
         )
         assert hostels_query_menu.user_response == "1"
@@ -48,7 +49,7 @@ def test_register_hostels(client):
 
 def test_decline_hostel_registeration(client):
     with client.session_transaction() as session:
-        hostels_query_menu = HostelsQueryMenu(
+        hostels_query_menu = HostelsRegistrationMenu(
             session=session, session_id="qwerty124", user_response="2"
         )
         assert hostels_query_menu.user_response == "2"
@@ -57,7 +58,7 @@ def test_decline_hostel_registeration(client):
 
 def test_invalid_input_decline_hostel_registeration(client):
     with client.session_transaction() as session:
-        hostels_query_menu = HostelsQueryMenu(
+        hostels_query_menu = HostelsRegistrationMenu(
             session=session, session_id="qwerty124", user_response=""
         )
         assert hostels_query_menu.user_response == ""

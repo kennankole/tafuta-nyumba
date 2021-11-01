@@ -1,6 +1,6 @@
 from app.houses.houses_query_menu import HousesQueryMenu
 from app.models import Houses
-from app.houses.data import type_of_houses
+from app.houses.data import houses
 from app.houses.utils import get_type_of_house
 from app.utils import storing_user_records
 
@@ -22,9 +22,9 @@ class HousesQueryResults(HousesQueryMenu):
         if self.session.get("buy_house"):
             rent = False
             service_type = "buying"
-        # storing_user_records(self.phone_number, service_type,get_type_of_house(type_of_houses, hse_id))
-        menu_text = f"{get_type_of_house(hse_id, type_of_houses)} in {const}\n"
-        menu_text += f"{Houses.constituency_results(const=const, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
+        # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
+        menu_text = f"{get_type_of_house(hse_id, houses)} in {const}\n"
+        menu_text += f"{Houses.constituency_results(const=const, rent=rent, hse_type=get_type_of_house(hse_id, houses))}\n"
         return self.ussd_continue(menu_text)
 
     @charge_users_decorator
@@ -41,9 +41,9 @@ class HousesQueryResults(HousesQueryMenu):
         if self.session.get("buy_house"):
             rent = False
             service_type = "buying"
-        # storing_user_records(self.phone_number, service_type,get_type_of_house(type_of_houses, hse_id))
-        menu_text = f"{get_type_of_house(hse_id, type_of_houses)} in {ward}\n"
-        menu_text += f"{Houses.ward_results(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
+        # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
+        menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
+        menu_text += f"{Houses.ward_results(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, houses))}\n"
         return self.ussd_continue(menu_text)
 
     @charge_users_decorator
@@ -58,9 +58,9 @@ class HousesQueryResults(HousesQueryMenu):
         if self.session.get("buy_house"):
             rent = False
             service_type = "buying"
-        # storing_user_records(self.phone_number, service_type,get_type_of_house(type_of_houses, hse_id))
-        menu_text = f"{get_type_of_house(hse_id, type_of_houses)} in {village_estate}\n"
-        menu_text += f"{Houses.village_estate_results(village_estate=village_estate, rent=rent, hse_type=get_type_of_house(hse_id, type_of_houses))}\n"
+        # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
+        menu_text = f"{get_type_of_house(hse_id, houses)} in {village_estate}\n"
+        menu_text += f"{Houses.village_estate_results(village_estate=village_estate, rent=rent, hse_type=get_type_of_house(hse_id, houses))}\n"
         return self.ussd_continue(menu_text)
 
     def execute(self):

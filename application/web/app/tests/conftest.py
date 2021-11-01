@@ -15,7 +15,11 @@ def client():
         with app.app_context():
             db.init_app(app)
             mixer.init_app(app)
+            db.create_all()
         yield testing_client
 
     os.close(db_fd)
     os.unlink(db_path)
+
+
+

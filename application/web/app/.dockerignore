@@ -1,0 +1,6 @@
+**
+
+!/web/Pipfile
+!/web/Pipfile.lock
+!/web/application/
+!/web/entrypoint.sh

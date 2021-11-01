@@ -13,7 +13,7 @@ class HousesQueryMainMenu(HousesMainMenu):
     )
     def search_houses_to_rent_by_location(self):
         # if self.user_response in ("1", "2", "3", "4", "5", "6"):
-        house = get_type_of_house(self.user_response, self.session.get("hse_type"))
+        house = get_type_of_house(self.user_response, data.houses)
         menu_text = f"Search {house} to rent by no.{self.user_response}:\n"
         menu_text += "1. Constituency\n2. Ward\n3. Estate or Village\n"
         self.session["level"] = 20
@@ -23,7 +23,7 @@ class HousesQueryMainMenu(HousesMainMenu):
     @validate_choices(level=10, message="3. Back\n", choices=("10", "20", "30", "40"))
     def search_houses_to_buy_by_location(self):
         # if self.user_response in ("10", "20", "30", "40"):
-        house = get_type_of_house(self.user_response, self.session.get("hse_type"))
+        house = get_type_of_house(self.user_response, data.houses)
         menu_text = f"Search {house} to buy by:\n"
         menu_text += "1. Constituency\n2. Ward\n3. Estate or Village\n"
         self.session["level"] = 20
@@ -34,7 +34,7 @@ class HousesQueryMainMenu(HousesMainMenu):
         level=10, message="2. Back\n", choices=("11", "12", "13", "14", "15", "16")
     )
     def rental_houses_registration(self):
-        house = get_type_of_house(self.user_response, self.session.get("hse_type"))
+        house = get_type_of_house(self.user_response, data.houses)
         # if self.user_response in ("11", "12", "13", "14", "15", "16"):
         menu_text = f"Register {house} for rent\n"
         menu_text += "1. Yes\n"
@@ -45,7 +45,7 @@ class HousesQueryMainMenu(HousesMainMenu):
 
     @validate_choices(level=10, message="2. Back\n", choices=("50", "60", "70", "80"))
     def register_houses_for_sale(self):
-        house = get_type_of_house(self.user_response, self.session.get("hse_type"))
+        house = get_type_of_house(self.user_response, data.houses)
         # if self.user_response in ("50", "60", "70", "80"):
         menu_text = f"Register {house} for sale\n"
         menu_text += "1. Yes\n"

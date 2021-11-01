@@ -1,7 +1,7 @@
 from app.menu.base_menu import Menu
 from app import db
 from app.models import Houses
-from app.houses.data import type_of_houses
+from app.houses.data import houses
 from app.houses.utils import get_type_of_house
 
 from app.decorators.choices import validate_choices
@@ -91,7 +91,7 @@ class HousesRegistrationMenu(Menu):
     @phone_number_decorator(level=38, message="Enter an alternative phone number")
     def save_data(self):
         for_rent = True
-        house = get_type_of_house(self.session.get("hse_type"), type_of_houses)
+        house = get_type_of_house(self.session.get("hse_type"), houses)
         menu_text = f"Your {house}(s) have been successfully registered\n"
         if self.session.get("rent_out_house"):
             for_rent = True
@@ -105,7 +105,7 @@ class HousesRegistrationMenu(Menu):
             units=self.session.get("units"),
             price=self.session.get("price"),
             type_of_house=get_type_of_house(
-                self.session.get("hse_type"), type_of_houses
+                self.session.get("hse_type"), houses
             ),
             for_rent=for_rent,
             alternate_contact=self.user_response,

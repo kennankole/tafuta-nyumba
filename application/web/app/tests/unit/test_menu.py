@@ -27,7 +27,6 @@ def test_lower_level_menu(client):
         assert lower_level_menu.session == session
         assert lower_level_menu.session_id == "340990aareqo34"
         assert lower_level_menu.house_menu()
-        assert lower_level_menu.land_menu()
         assert lower_level_menu.business_premises_menu()
         assert lower_level_menu.hostels_menu()
         assert lower_level_menu.execute()
