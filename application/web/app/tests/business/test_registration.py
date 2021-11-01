@@ -31,7 +31,7 @@ def test_biz_premises_rental_registration_consent_invalid_input(client):
         assert reg_menu.user_response not in ("1", "2")
         assert reg_menu.session.get("rent_out_business") == "2"
         assert reg_menu.get_registration_consent()
-    
+
 
 def test_biz_premises_for_sale_registration_consent_invalid_input(client):
     with client.session_transaction() as session:
@@ -42,16 +42,15 @@ def test_biz_premises_for_sale_registration_consent_invalid_input(client):
         assert reg_menu.user_response not in ("1", "2")
         assert reg_menu.session.get("sell_business") == "4"
         assert reg_menu.get_registration_consent()
-        
+
 
 def test_invalid_business_registration_input(client):
     with client.session_transaction() as session:
         menu = BusinessPremisesRegistrationMenu(
-            session=session,
-            session_id="qwerty123",
-            user_response=""
+            session=session, session_id="qwerty123", user_response=""
         )
         assert menu.get_registration_consent()
+
 
 def test_get_county(client):
     with client.session_transaction() as session:
@@ -85,7 +84,6 @@ def test_get_ward(client):
         assert ward_menu.user_response == "Ruaraka"
         # assert ward_menu.get_ward()
         assert ward_menu.execute()
-
 
 
 def test_town_or_city_name(client):
@@ -166,7 +164,7 @@ def test_save_rental_biz_premises(client):
             session=session, session_id="qwerty12345", user_response="078945780"
         )
         rental_biz_premises.session["rent_out_biz_premises"] = "2"
-        rental_biz_premises.session['level'] = 400
+        rental_biz_premises.session["level"] = 400
         for_rent = True
         assert rental_biz_premises.session.get("rent_out_biz_premises") == "2"
         assert for_rent
@@ -183,7 +181,7 @@ def test_save_biz_premises_for_sale(client):
         )
         for_rent = False
         biz_premises_for_sale.session["sell_business"] = "4"
-        biz_premises_for_sale.session['level'] = 400
+        biz_premises_for_sale.session["level"] = 400
         assert not for_rent
         assert biz_premises_for_sale.user_response == "078945780"
         assert biz_premises_for_sale.session.get("level") == 400

@@ -1,13 +1,12 @@
 from app.hostels.registration import HostelsRegistrationMenu
 
+
 def test_hostel_registration_consent_agree(client):
     with client.session_transaction() as session:
         menu = HostelsRegistrationMenu(
-            session=session,
-            session_id="qwerty1234",
-            user_response="1"
+            session=session, session_id="qwerty1234", user_response="1"
         )
-        menu.session['level'] = 90
+        menu.session["level"] = 90
         assert menu.session.get("level") == 90
         assert menu.execute()
 
@@ -15,24 +14,22 @@ def test_hostel_registration_consent_agree(client):
 def test_hostel_registration_consent_decline(client):
     with client.session_transaction() as session:
         menu = HostelsRegistrationMenu(
-            session=session,
-            session_id="qwerty1234",
-            user_response=""
+            session=session, session_id="qwerty1234", user_response=""
         )
-        menu.session['level'] = 90
+        menu.session["level"] = 90
         assert menu.session.get("level") == 90
         assert menu.execute()
+
 
 def test_hostel_registration_invalid_input(client):
     with client.session_transaction() as session:
         menu = HostelsRegistrationMenu(
-            session=session,
-            session_id="qwerty1234",
-            user_response="2"
+            session=session, session_id="qwerty1234", user_response="2"
         )
-        menu.session['level'] = 90
+        menu.session["level"] = 90
         assert menu.session.get("level") == 90
         assert menu.execute()
+
 
 def test_get_county(client):
     with client.session_transaction() as session:
@@ -77,7 +74,9 @@ def test_get_name_of_college_or_university(client):
 def test_get_units(client):
     with client.session_transaction() as session:
         units_menu = HostelsRegistrationMenu(
-            session=session, session_id="qwerty12945", user_response="Dedan Kimathi Univeristy"
+            session=session,
+            session_id="qwerty12945",
+            user_response="Dedan Kimathi Univeristy",
         )
         units_menu.session["level"] = 95
         assert units_menu.session.get("level") == 95

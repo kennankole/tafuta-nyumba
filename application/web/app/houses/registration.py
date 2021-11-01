@@ -104,9 +104,7 @@ class HousesRegistrationMenu(Menu):
             name_of_estate_or_village=self.session.get("estate_name"),
             units=self.session.get("units"),
             price=self.session.get("price"),
-            type_of_house=get_type_of_house(
-                self.session.get("hse_type"), houses
-            ),
+            type_of_house=get_type_of_house(self.session.get("hse_type"), houses),
             for_rent=for_rent,
             alternate_contact=self.user_response,
             contacts=self.phone_number,

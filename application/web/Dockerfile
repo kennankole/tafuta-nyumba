@@ -5,7 +5,7 @@ WORKDIR /usr/src/ussd_app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHNOUNBUFFERED 1
 
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat --no-install-recommends
 
 RUN pip install --upgrade pip && pip install pipenv
 COPY ./Pipfile* /usr/src/ussd_app/
