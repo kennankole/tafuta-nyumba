@@ -19,6 +19,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        redis-version: [4, 5, 6]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,7 +38,12 @@ jobs:
       - name: Install pipenv
         run: |
            python -m pip install --upgrade pipenv wheel 
-           pipenv install mixer pytest flask flask_migrate sqlalchemy flask_redis africastalking redis-server
+           pipenv install mixer pytest flask flask_migrate sqlalchemy flask_redis africastalking
+      
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.2.0
+        with: 
+          redis-version: ${{ matrix.redis-version }}
        
       - id: cache-pipenv
         uses: actions/cache@v1
