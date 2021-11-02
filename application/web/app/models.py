@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.sql import func
 
-from . import db
+from app import db
 
 
 class Houses(db.Model):
