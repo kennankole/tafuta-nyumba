@@ -1,6 +1,4 @@
-from app.menu.base_menu import Menu
 from app.business.biz_base_menu import BusinessPremisesMainMenu
-from app.business.utils import get_type_of_business_premises
 from app.decorators.choices import validate_choices
 
 

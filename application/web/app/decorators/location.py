@@ -1,6 +1,6 @@
 import json
-from app.location import location
 
+from app.location import location
 
 regex = "[0-9]~!@#$%^&*()_-+={[}]|\?/><.,"
 counties = json.loads(location)

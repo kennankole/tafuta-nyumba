@@ -1,8 +1,9 @@
 import logging
+
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_redis import FlaskRedis
 from flask_migrate import Migrate
+from flask_redis import FlaskRedis
+from flask_sqlalchemy import SQLAlchemy
 
 # logging
 if not logging.DEBUG:

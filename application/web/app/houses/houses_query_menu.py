@@ -1,5 +1,6 @@
-from .menu import HousesQueryMainMenu
 from app.decorators.choices import validate_choices
+
+from .menu import HousesQueryMainMenu
 
 
 class HousesQueryMenu(HousesQueryMainMenu):

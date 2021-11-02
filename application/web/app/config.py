@@ -10,3 +10,5 @@ class Config:
     APP_NAME = os.getenv("APP_NAME")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
+    USERNAME = os.getenv("USERNAME")
+    API_KEY = os.getenv("API_KEY")

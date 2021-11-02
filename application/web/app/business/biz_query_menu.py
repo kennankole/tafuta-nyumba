@@ -1,5 +1,6 @@
-from .menu import BusinessPremisesQueryMainMenu
 from app.decorators.choices import validate_choices
+
+from .menu import BusinessPremisesQueryMainMenu
 
 
 class BusinessPremisesQueryMenu(BusinessPremisesQueryMainMenu):

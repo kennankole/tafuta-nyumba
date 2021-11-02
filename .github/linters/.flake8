@@ -1,0 +1,5 @@
+[flake8]
+per-file-ignores = 
+    # line to long 
+    ./application/web/app/*: E501,E711, E712, F841,W605
+    .application/web/app/tests/*: E501,E711, E712, F841,W605

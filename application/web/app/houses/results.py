@@ -1,12 +1,13 @@
-from app.houses.houses_query_menu import HousesQueryMenu
-from app.models import Houses
-from app.houses.data import houses
-from app.houses.utils import get_type_of_house
-from app.utils import storing_user_records
-
-from app.decorators.payment_decorators import charge_users_decorator
 from app.decorators.location import location_decorator
 from app.decorators.names import names_decorator
+from app.decorators.payment_decorators import charge_users_decorator
+from app.houses.data import houses
+from app.houses.houses_query_menu import HousesQueryMenu
+from app.houses.utils import get_type_of_house
+from app.models import Houses
+
+# from app.utils import storing_user_records
+
 
 
 class HousesQueryResults(HousesQueryMenu):
@@ -32,7 +33,7 @@ class HousesQueryResults(HousesQueryMenu):
     # @names_decorator(level=22, message="Enter ward")
     def houses_ward_query_results(self):
         rent = True
-        service_type = ""
+        # service_type = ""
         hse_id = self.session.get("hse_type")
         ward = self.user_response
         if self.session.get("rent_house"):
@@ -40,7 +41,7 @@ class HousesQueryResults(HousesQueryMenu):
             service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
-            service_type = "buying"
+            # service_type = "buying"
         # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
         menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
         menu_text += f"{Houses.ward_results(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, houses))}\n"
@@ -54,10 +55,10 @@ class HousesQueryResults(HousesQueryMenu):
         village_estate = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            service_type = "renting"
+            # service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
-            service_type = "buying"
+            # service_type = "buying"
         # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
         menu_text = f"{get_type_of_house(hse_id, houses)} in {village_estate}\n"
         menu_text += f"{Houses.village_estate_results(village_estate=village_estate, rent=rent, hse_type=get_type_of_house(hse_id, houses))}\n"

@@ -1,14 +1,13 @@
-from app.menu.base_menu import Menu
-from app.models import BusinessPremises
 from app import db
 from app.business.data import types_of_business_premises
 from app.business.utils import get_type_of_business_premises
-
-from app.decorators.names import names_decorator
+from app.decorators.choices import validate_choices
 from app.decorators.location import location_decorator
+from app.decorators.names import names_decorator
 from app.decorators.numeric import numeric_decorator
 from app.decorators.phone_numbers import phone_number_decorator
-from app.decorators.choices import validate_choices
+from app.menu.base_menu import Menu
+from app.models import BusinessPremises
 
 
 class BusinessPremisesRegistrationMenu(Menu):

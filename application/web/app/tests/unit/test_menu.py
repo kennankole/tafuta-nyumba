@@ -1,4 +1,5 @@
 from logging import Manager
+
 from app.menu.base_menu import Menu
 from app.menu.menu import LowerLevelMenu
 

@@ -1,5 +1,3 @@
-from os import register_at_fork
-import re
 from app.business.registration import BusinessPremisesRegistrationMenu
 
 

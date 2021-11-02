@@ -1,24 +1,21 @@
 import json
 import uuid
-from flask import Blueprint, g, make_response, request
+
 import africastalking
-from app.config import Config
+from flask import Blueprint, g, make_response, request
+
 from app import redis
-
-from app.menu.menu import LowerLevelMenu
-
-from app.houses.houses_query_menu import HousesQueryMainMenu
-from app.houses.registration import HousesRegistrationMenu
-from app.houses.results import HousesQueryResults
-
-from app.hostels.menu import HostelsQueryMenu
-from app.hostels.registration import HostelsRegistrationMenu
-from app.hostels.results import HostelsQueryResults
-
 from app.business.menu import BusinessPremisesQueryMainMenu
 from app.business.registration import BusinessPremisesRegistrationMenu
 from app.business.results import BusinessPremisesQueryResults
-
+from app.config import Config
+from app.hostels.menu import HostelsQueryMenu
+from app.hostels.registration import HostelsRegistrationMenu
+from app.hostels.results import HostelsQueryResults
+from app.houses.houses_query_menu import HousesQueryMainMenu
+from app.houses.registration import HousesRegistrationMenu
+from app.houses.results import HousesQueryResults
+from app.menu.menu import LowerLevelMenu
 
 views = Blueprint("views", __name__)
 
@@ -31,7 +28,7 @@ def home_page():
 @views.route("/", methods=["POST", "GET"])
 def ussd_callback():
     session_id = request.values.get("sessionId") or str(uuid.uuid4())
-    service_code = request.values.get("serviceCode")
+    # service_code = request.values.get("serviceCode")
     phone_number = request.values.get("phoneNumber")
     text = request.values.get("text", "default")
     response = ""
@@ -42,7 +39,7 @@ def ussd_callback():
     africastalking.initialize(username, api_key)
 
     textArray = text.split("*")
-    latestInput = textArray[len(textArray) - 2]
+    # latestInput = textArray[len(textArray) - 2]
 
     # make this a decorator
     session = redis.get(session_id)

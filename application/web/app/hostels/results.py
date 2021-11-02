@@ -1,8 +1,8 @@
+from app.decorators.location import location_decorator
+from app.decorators.names import names_decorator
+from app.decorators.payment_decorators import charge_users_decorator
 from app.hostels.menu import HostelsQueryMenu
 from app.models import Hostels
-from app.decorators.payment_decorators import charge_users_decorator
-from app.decorators.names import names_decorator
-from app.decorators.location import location_decorator
 from app.utils import storing_user_records
 
 

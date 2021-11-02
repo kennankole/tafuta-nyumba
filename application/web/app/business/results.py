@@ -1,11 +1,11 @@
 from app.business.biz_query_menu import BusinessPremisesQueryMenu
-from app.models import BusinessPremises
 from app.business.data import types_of_business_premises
-from app.utils import storing_user_records
-from app.decorators.payment_decorators import charge_users_decorator
-from app.decorators.names import names_decorator
-from app.decorators.location import location_decorator
 from app.business.utils import get_type_of_business_premises
+from app.decorators.location import location_decorator
+from app.decorators.names import names_decorator
+from app.decorators.payment_decorators import charge_users_decorator
+from app.models import BusinessPremises
+from app.utils import storing_user_records
 
 
 class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):

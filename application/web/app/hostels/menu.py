@@ -1,5 +1,6 @@
-from .hostels_base_menu import HostelsMainMenu
 from app.decorators.choices import validate_choices
+
+from .hostels_base_menu import HostelsMainMenu
 
 
 class HostelsQueryMenu(HostelsMainMenu):

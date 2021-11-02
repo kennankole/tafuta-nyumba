@@ -1,8 +1,7 @@
-from app.houses.houses_base_menu import HousesMainMenu
-from app.houses import data
-from app.houses.utils import get_type_of_house
-
 from app.decorators.choices import validate_choices
+from app.houses import data
+from app.houses.houses_base_menu import HousesMainMenu
+from app.houses.utils import get_type_of_house
 
 
 class HousesQueryMainMenu(HousesMainMenu):

@@ -1,5 +1,7 @@
 import json
-from flask import make_response, current_app
+
+from flask import current_app, make_response
+
 from app import redis
 
 

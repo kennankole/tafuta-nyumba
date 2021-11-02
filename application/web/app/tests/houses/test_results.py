@@ -1,6 +1,6 @@
-from app.models import Houses
-from app.houses.results import HousesQueryResults
 from mixer.backend.flask import mixer
+
+from app.houses.results import HousesQueryResults
 
 
 def test_rental_houses_by_constituency(client):

@@ -1,13 +1,13 @@
 from operator import le
-from app import db
-from app.models import Hostels
-from app.menu.base_menu import Menu
 
+from app import db
+from app.decorators.choices import validate_choices
 from app.decorators.location import location_decorator
 from app.decorators.names import names_decorator
 from app.decorators.numeric import numeric_decorator
 from app.decorators.phone_numbers import phone_number_decorator
-from app.decorators.choices import validate_choices
+from app.menu.base_menu import Menu
+from app.models import Hostels
 
 
 class HostelsRegistrationMenu(Menu):
