@@ -1,5 +1,3 @@
-from operator import le
-
 from app import db
 from app.decorators.choices import validate_choices
 from app.decorators.location import location_decorator

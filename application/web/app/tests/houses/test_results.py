@@ -1,5 +1,3 @@
-from mixer.backend.flask import mixer
-
 from app.houses.results import HousesQueryResults
 
 

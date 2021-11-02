@@ -1,8 +1,6 @@
-import pytest
 from mixer.backend.flask import mixer
 
 from app import models
-from app.models import Houses
 
 
 def test_houses_models(client):

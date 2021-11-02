@@ -9,7 +9,6 @@ from app.models import Houses
 # from app.utils import storing_user_records
 
 
-
 class HousesQueryResults(HousesQueryMenu):
     @charge_users_decorator
     @location_decorator(level=21, message="Enter Constituency Really")
@@ -19,10 +18,10 @@ class HousesQueryResults(HousesQueryMenu):
         const = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            service_type = "renting"
+            # service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
-            service_type = "buying"
+            # service_type = "buying"
         # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
         menu_text = f"{get_type_of_house(hse_id, houses)} in {const}\n"
         menu_text += f"{Houses.constituency_results(const=const, rent=rent, hse_type=get_type_of_house(hse_id, houses))}\n"
@@ -38,7 +37,7 @@ class HousesQueryResults(HousesQueryMenu):
         ward = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            service_type = "renting"
+            # service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
             # service_type = "buying"
