@@ -59,10 +59,10 @@ jobs:
       - name: GitHub Action for pytest
         run: pipenv run pytest 
         
-      - name: Super-Linter
-        uses: github/super-linter@v3.17.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Super-Linter
+      #   uses: github/super-linter@v3.17.1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Deploy Docker Image to Heroku App
         uses: akhileshns/heroku-deploy@v3.12.12
