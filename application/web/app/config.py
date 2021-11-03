@@ -1,5 +1,7 @@
 import os
+
 from decouple import config
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -12,4 +14,3 @@ class Config:
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
     USERNAME = config("USERNAME")
     API_KEY = config("API_KEY")
-   
