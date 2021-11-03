@@ -20,7 +20,7 @@ from app.menu.menu import LowerLevelMenu
 views = Blueprint("views", __name__)
 
 
-@views.route("/")
+@views.route("/", methods=["POST", "GET"])
 def home_page():
     return "Welcome to Tafuta Nyumba"
 
