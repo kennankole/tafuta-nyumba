@@ -12,5 +12,8 @@ class Config:
     APP_NAME = os.getenv("APP_NAME")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
-    USERNAME = config("USERNAME")
-    API_KEY = config('API_KEY')
+    API_KEY = "33995baaac4793c49a4dc158e4feb8d58976bd95b16dd911702aa4172335e484"
+    USERNAME = "sandobx"
+    # API_KEY = os.getenv("API_KEY")
+    # USERNAME = os.getenv("USERNAME")
+    # API_KEY = os.getenv("API_KEY")

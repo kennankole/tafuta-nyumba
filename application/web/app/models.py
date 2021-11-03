@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from app import db
 from sqlalchemy.sql import func
+
+from app import db
 
 
 class Houses(db.Model):
