@@ -38,7 +38,7 @@ jobs:
       - name: Install pipenv
         run: |
            python -m pip install --upgrade pipenv wheel
-           pipenv install mixer pytest flask flask_migrate sqlalchemy flask_redis africastalking
+           pipenv install mixer pytest flask flask_migrate sqlalchemy python-decouple africastalking
       
       - name: Start Redis
         uses: supercharge/redis-github-action@1.2.0
