@@ -23,4 +23,4 @@
 # gunicorn --bind 0.0.0.0:5000 application.web.app.manage:app
 # gunicorn app.manage:app -w 2 --threads 2 -b 0.0.0.0:"$PORT"
 
-gunicorn --bind 0.0.0.0:"$PORT" manage:app
+gunicorn --bind 0.0.0.0:"$PORT" manage:app # Deployed to heroku
