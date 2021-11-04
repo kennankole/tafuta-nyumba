@@ -72,7 +72,6 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           procfile: "web: gunicorn application.web.app:app"
           dontautocreate: true
-          dontuseforce: 1
           usedocker: true
           appdir: "/application/web"
 
