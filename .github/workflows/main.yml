@@ -73,6 +73,5 @@ jobs:
           procfile: "web: gunicorn application.web.app:app"
           dontautocreate: true
           usedocker: true
-          appdir: "/application/web"
 
          
