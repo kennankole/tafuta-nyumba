@@ -1,55 +1,20 @@
-FROM python:3.9.5-slim-buster as builder
+FROM python:3.9.5-slim-buster 
 
 WORKDIR /usr/src/ussd_app
 
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUBUFFERED 1
+ENV PYTHNOUNBUFFERED 1
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc \
-    && apt-get -y install postgresql --no-install-recommends \
-    && pipenv install psycopg2-binary \
-    && pipenv install redis \
-    && rm -fr /var/lib/apt/lists/*
-
-RUN pip install --upgrade pip && pip install pipenv
-RUN pipenv install flake8==3.9.1
-COPY . /usr/src/ussd_app/
-RUN pipenv run flake8 --ignore=E501,F401,W503,F841,W605  .
-
-COPY ./Pipfile* ./
-RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
-
-FROM python:3.9.5-slim-buster
-RUN mkdir -p /home/ussd_app
-
-RUN addgroup --system app && adduser --system --group app
-
-ENV HOME=/home/ussd_app
-ENV APP_HOME=/home/ussd_app/web
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
-
-# install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends netcat\
+RUN apt-get update && apt-get install -y netcat --no-install-recommends \
     && rm -rf  /var/lib/apt/lists/* 
-    
-COPY --from=builder /usr/src/ussd_app/Pipfile* ./
+
 RUN pip install --upgrade pip && pip install pipenv
+COPY ./Pipfile* /usr/src/ussd_app/
+
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
 
+COPY . /usr/src/ussd_app/
 
-# copy entrypoint-prod.sh
-COPY ./entrypoint.sh $APP_HOME
+ENTRYPOINT [ "/usr/src/ussd_app/entrypoint.sh" ]
 
-# copy project
-COPY . $APP_HOME
 
-# chown all the files to the app user
-RUN chown -R app:app $APP_HOME
-
-# change to the app user
-USER app
-
-# run entrypoint.prod.sh
-ENTRYPOINT ["/home/ussd_app/web/entrypoint.sh"]
