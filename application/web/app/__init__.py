@@ -3,7 +3,6 @@ import logging
 import redis
 from flask import Flask
 from flask_migrate import Migrate
-from flask_redis import Redis
 from flask_sqlalchemy import SQLAlchemy
 
 # logging
