@@ -2,9 +2,8 @@ import os
 import tempfile
 
 import pytest
-from mixer.backend.flask import mixer
-
 from app import create_app, db
+from mixer.backend.flask import mixer
 
 
 @pytest.fixture
