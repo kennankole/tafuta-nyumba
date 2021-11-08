@@ -4,7 +4,7 @@ import uuid
 import africastalking
 from flask import Blueprint, g, make_response, request
 
-from app import redis
+from app import cache
 from app.business.menu import BusinessPremisesQueryMainMenu
 from app.business.registration import BusinessPremisesRegistrationMenu
 from app.business.results import BusinessPremisesQueryResults
@@ -33,26 +33,26 @@ def ussd_callback():
     text = request.values.get("text", "default")
     response = ""
 
-    username = Config.USERNAME
+    user_name = Config.USERNAME
     api_key = Config.API_KEY
 
-    africastalking.initialize(username, api_key)
+    africastalking.initialize(user_name, api_key)
 
     textArray = text.split("*")
     # latestInput = textArray[len(textArray) - 2]
 
     # make this a decorator
-    session = redis.get(session_id)
+    session = cache.get(session_id)
     if session is None:
         session = {"level": 0, "session_id": session_id}
-        redis.set(session_id, json.dumps(session))
+        cache.set(session_id, json.dumps(session))
     else:
         session = json.loads(session.decode())
     g.user_response = textArray[len(textArray) - 1]
     g.session = session
     g.phone_number = phone_number
     g.session_id = session_id
-    # return func(*args, **kwargs)
+  
 
     level = session.get("level")
 

@@ -2,7 +2,7 @@ import json
 
 from flask import current_app, make_response
 
-from app import redis
+from app import cache
 
 
 class Menu:
@@ -16,14 +16,14 @@ class Menu:
         self.level = level
 
     def ussd_continue(self, menu_text):
-        redis.set(self.session_id, json.dumps(self.session))
+        cache.set(self.session_id, json.dumps(self.session))
         menu_text = f"CON {menu_text}"
         response = make_response(menu_text, 200)
         response.headers["Content-Type"] = "text/plain"
         return response
 
     def ussd_end(self, menu_text):
-        redis.delete(self.session_id)
+        cache.delete(self.session_id)
         menu_text = f"END {menu_text}"
         response = make_response(menu_text, 200)
         response.headers["Content-Type"] = "text/plain"

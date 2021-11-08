@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHNOUNBUFFERED 1
 
 RUN apt-get update && apt-get install -y netcat --no-install-recommends \
-    && apt-get install -y redis-server --no-install-recommends \
+    # && apt-get install -y redis-server --no-install-recommends \
     && rm -rf  /var/lib/apt/lists/* 
 
 RUN pip install --upgrade pip && pip install pipenv

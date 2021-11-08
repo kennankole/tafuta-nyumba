@@ -1,8 +1,8 @@
 import logging
-
+import redis
 from flask import Flask
 from flask_migrate import Migrate
-from flask_redis import FlaskRedis
+from flask_redis import Redis
 from flask_sqlalchemy import SQLAlchemy
 
 # logging
@@ -15,8 +15,10 @@ if not logging.DEBUG:
 logger = logging.getLogger()
 # Globally accessible variables
 db = SQLAlchemy()
-redis = FlaskRedis()
+# redis = Redis()
 migrate = Migrate()
+
+cache = redis.Redis(host='redis', port=6379)
 
 
 def create_app(test_config=None):
@@ -25,7 +27,7 @@ def create_app(test_config=None):
     app.config.from_object("app.config.Config")
 
     db.init_app(app)
-    redis.init_app(app)
+    # redis.init_app(app)
 
     with app.app_context():
         from app.views import views

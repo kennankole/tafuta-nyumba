@@ -12,6 +12,8 @@ services:
       - ./.env.dev
     depends_on:
       - db
+  redis:
+    image: redis:alpine
   db:
     image: postgres:13-alpine
     volumes:

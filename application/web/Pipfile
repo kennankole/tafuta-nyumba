@@ -11,7 +11,6 @@ pytest-cov = "*"
 africastalking = "*"
 Flask-Migrate = "*"
 redis = "*"
-flask-redis = "*"
 mixer = "*"
 psycopg2-binary = "==2.8.6"
 gunicorn = "==20.1.0"
@@ -19,6 +18,7 @@ flake8 = "*"
 black = "==21.9b0"
 isort = "*"
 python-decouple = "*"
+Flask-And-Redis = "*"
 
 [dev-packages]
 
