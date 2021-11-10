@@ -11,7 +11,6 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY") or "AS SECRET KEY"
     DATABASE = os.getenv("DATABASE")
     TESTING = os.getenv("TESTING")
-    APP_NAME = config("APP_NAME")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
     USERNAME = config("USERNAME")
