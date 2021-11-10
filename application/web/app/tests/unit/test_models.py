@@ -1,5 +1,6 @@
-from app import models
 from mixer.backend.flask import mixer
+
+from app import models
 
 
 def test_houses_models(client):

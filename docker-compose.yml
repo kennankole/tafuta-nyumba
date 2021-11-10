@@ -14,8 +14,6 @@ services:
       - db
   redis:
     image: redis:alpine
-    ports:
-     - 6378:6378
   db:
     image: postgres:13-alpine
     volumes:

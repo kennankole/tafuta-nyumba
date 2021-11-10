@@ -2,6 +2,9 @@ import json
 import uuid
 
 import africastalking
+import redis
+from flask import Blueprint, g, make_response, request
+
 from app import cache
 from app.business.menu import BusinessPremisesQueryMainMenu
 from app.business.registration import BusinessPremisesRegistrationMenu
@@ -14,7 +17,6 @@ from app.houses.houses_query_menu import HousesQueryMainMenu
 from app.houses.registration import HousesRegistrationMenu
 from app.houses.results import HousesQueryResults
 from app.menu.menu import LowerLevelMenu
-from flask import Blueprint, g, make_response, request
 
 views = Blueprint("views", __name__)
 

@@ -1,9 +1,13 @@
 import logging
+import os
 
 import redis
+from decouple import config as conf
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+
+from app import config
 
 # logging
 if not logging.DEBUG:
@@ -17,14 +21,14 @@ logger = logging.getLogger()
 db = SQLAlchemy()
 migrate = Migrate()
 
-cache = redis.StrictRedis()
+
+cache = redis.Redis(host=os.environ.get("REDIS_HOST", "localhost"), port=6379)
 
 
 def create_app(test_config=None):
     """Initialize the core of the app"""
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object("app.config.Config")
-
     db.init_app(app)
 
     with app.app_context():

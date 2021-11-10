@@ -19,6 +19,7 @@ black = "==21.9b0"
 isort = "*"
 python-decouple = "*"
 Flask-And-Redis = "*"
+flask-redis = "*"
 
 [dev-packages]
 
