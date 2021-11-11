@@ -20,4 +20,4 @@ class Config:
     REDIS_PORT = os.environ.get("REDIS_PORT")
     REDIS_URL = os.environ.get("REDIS_URL")
     REDIS_DB = os.environ.get("REDIS_DB")
-    REDISTOGO_URL = os.environ.get("REDISTOGO_URL")
+    REDISTOGO_URL = config("REDISTOGO_URL", default="localhost")
