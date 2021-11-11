@@ -1,4 +1,3 @@
-from app import config
 from app.houses.menu import HousesQueryMainMenu
 
 

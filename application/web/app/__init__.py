@@ -2,12 +2,9 @@ import logging
 import os
 
 import redis
-from decouple import config as conf
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-
-from app import config
 
 # logging
 if not logging.DEBUG:

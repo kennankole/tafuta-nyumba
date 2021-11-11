@@ -2,7 +2,6 @@ import os
 import tempfile
 
 import pytest
-import redis
 from mixer.backend.flask import mixer
 
 from app import create_app, db

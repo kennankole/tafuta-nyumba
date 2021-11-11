@@ -8,6 +8,7 @@ ENV PYTHONUBUFFERED 1
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc \
     && apt-get -y install postgresql --no-install-recommends \
+    && apt-get -y install redis-server --no-install-recommends \
     && rm -fr /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip && pip install pipenv

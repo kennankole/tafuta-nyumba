@@ -13,9 +13,9 @@ class Config:
     TESTING = os.getenv("TESTING")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
-    USERNAME = os.environ.get("USERNAME")
+    USER = "sandbox"
     APP_NAME = os.environ.get("APP_NAME")
-    API_KEY = os.environ.get("API_KEY")
+    API_KEY = config("API_KEY")
     REDIS_HOST = os.environ.get("REDIS_HOST")
     REDIS_PORT = os.environ.get("REDIS_PORT")
     REDIS_URL = os.environ.get("REDIS_URL")

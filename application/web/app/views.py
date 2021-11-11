@@ -2,8 +2,7 @@ import json
 import uuid
 
 import africastalking
-import redis
-from flask import Blueprint, g, make_response, request, current_app
+from flask import Blueprint, g, make_response, request
 
 from app import cache
 from app.business.menu import BusinessPremisesQueryMainMenu
@@ -34,10 +33,8 @@ def ussd_callback():
     text = request.values.get("text", "default")
     response = ""
 
-    # user_name = Config.USERNAME
     user_name = "sandbox"
-    # api_key = Config.API_KEY
-    api_key = "33995baaac4793c49a4dc158e4feb8d58976bd95b16dd911702aa4172335e484"
+    api_key = Config.API_KEY
 
     africastalking.initialize(user_name, api_key)
 
