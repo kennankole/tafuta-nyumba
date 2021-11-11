@@ -15,7 +15,7 @@ class Config:
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
     USER = "sandbox"
     APP_NAME = os.environ.get("APP_NAME")
-    API_KEY = config("API_KEY")
+    API_KEY = config("API_KEY", default="qwerty")
     REDIS_HOST = os.environ.get("REDIS_HOST")
     REDIS_PORT = os.environ.get("REDIS_PORT")
     REDIS_URL = os.environ.get("REDIS_URL")
