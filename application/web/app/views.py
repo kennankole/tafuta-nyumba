@@ -35,9 +35,9 @@ def ussd_callback():
     response = ""
 
     # user_name = Config.USERNAME
-    user_name = current_app.config['USERNAME']
+    user_name = "sandbox"
     # api_key = Config.API_KEY
-    api_key = current_app.config['API_KEY']
+    api_key = "33995baaac4793c49a4dc158e4feb8d58976bd95b16dd911702aa4172335e484"
 
     africastalking.initialize(user_name, api_key)
 
