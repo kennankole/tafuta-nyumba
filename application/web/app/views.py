@@ -20,6 +20,10 @@ from app.menu.menu import LowerLevelMenu
 views = Blueprint("views", __name__)
 
 
+# @views.route("/", methods=["POST", "GET"])
+# def home_page():
+#     return "Welcome to Tafuta Nyumba"
+
 
 @views.route("/", methods=["POST", "GET"])
 def ussd_callback():
@@ -29,7 +33,7 @@ def ussd_callback():
     text = request.values.get("text", "default")
     response = ""
 
-    user_name = Config.USER
+    user_name = "sandbox"
     api_key = Config.API_KEY
 
     africastalking.initialize(user_name, api_key)
