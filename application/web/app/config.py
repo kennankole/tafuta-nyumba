@@ -18,7 +18,7 @@ class Config:
     API_KEY = config("API_KEY", default="qwerty")
     REDIS_HOST = os.environ.get("REDIS_HOST")
     REDIS_PORT = os.environ.get("REDIS_PORT")
-    REDIS_URL = os.environ.get("REDIS_URL")
+    REDIS_URL = os.environ.get("REDIS_URL", default="localhost")
     REDIS_DB = os.environ.get("REDIS_DB")
     # REDISTOGO_URL = config("REDISTOGO_URL", default="localhost")
     REDISTOGO_URL = os.getenv("REDISTOGO_URL", default="localhost")
