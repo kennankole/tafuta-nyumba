@@ -13,7 +13,7 @@ class Config:
     TESTING = os.getenv("TESTING")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
-    USER = config("USER")
+    USER = os.getenv("USER")
     APP_NAME = os.environ.get("APP_NAME")
     API_KEY = config("API_KEY", default="qwerty")
     REDIS_HOST = os.environ.get("REDIS_HOST")
