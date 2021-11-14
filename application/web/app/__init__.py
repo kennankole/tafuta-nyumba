@@ -26,7 +26,7 @@ migrate = Migrate()
 url = urlparse(os.environ.get("REDIS_URL"))
 
 # cache = redis.Redis(host=config("REDIS_URL", "localhost"), port=6379)
-cache = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None, default="localhost")
+cache = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
 
 def create_app(test_config=None):
     """Initialize the core of the app"""
