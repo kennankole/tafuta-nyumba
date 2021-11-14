@@ -56,8 +56,8 @@ jobs:
         run: |
           pipenv install --deploy --dev
           
-      - name: GitHub Action for pytest
-        run: pipenv run pytest 
+      # - name: GitHub Action for pytest
+      #   run: pipenv run pytest 
         
       # - name: Super-Linter
       #   uses: github/super-linter@v3.17.1
