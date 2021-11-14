@@ -20,7 +20,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-cache = redis.Redis(host=os.getenv("REDIS_URL", "localhost"), port=6379)
+cache = redis.Redis(host=os.getenv("REDIS_HOST", "localhost"), port=6379)
 
 
 def create_app(test_config=None):
