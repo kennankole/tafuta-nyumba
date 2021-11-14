@@ -1,11 +1,15 @@
+from collections import defaultdict
 import logging
 import os
+from urllib.parse import urlparse
 
 import redis
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
+from werkzeug.datastructures import T
+
 
 
 # logging
@@ -20,9 +24,10 @@ logger = logging.getLogger()
 db = SQLAlchemy()
 migrate = Migrate()
 
+url = urlparse(os.environ.get("REDIS_URL"))
 
-cache = redis.Redis(host=config("REDIS_URL", "localhost"), port=6379)
-
+# cache = redis.Redis(host=config("REDIS_URL", "localhost"), port=6379)
+cache = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None, default="localhost")
 
 def create_app(test_config=None):
     """Initialize the core of the app"""
