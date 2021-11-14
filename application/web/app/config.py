@@ -14,7 +14,7 @@ class Config:
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
     USER = os.getenv("USER")
-    APP_NAME = config("APP_NAME")
+    APP_NAME = os.environ.get("APP_NAME")
     API_KEY = config("API_KEY", default="qwerty")
     REDIS_HOST = os.environ.get("REDIS_HOST")
     REDIS_PORT = os.environ.get("REDIS_PORT")
