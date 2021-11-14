@@ -23,11 +23,8 @@ logger = logging.getLogger()
 db = SQLAlchemy()
 migrate = Migrate()
 
-url = urlparse(config("REDIS_URL", "localhost"))
 
-# cache = redis.Redis(host=config("REDIS_URL", "localhost"), port=6379)
-cache = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
-
+cache = redis.from_url(os.environ.get("REDIS_URL", "redis://localhost"))
 def create_app(test_config=None):
     """Initialize the core of the app"""
     app = Flask(__name__, instance_relative_config=False)
