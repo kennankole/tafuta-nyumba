@@ -32,7 +32,7 @@ class Menu:
         return response
 
     def home_menu(self):
-        menu_text = f"Welcome to {os.environ.get('APP_NAME')}\n Choose a service\n"
+        menu_text = f"Welcome to {config('APP_NAME')}\n Choose a service\n"
         menu_text += "1. Houses\n"
         menu_text += "2. Hostels\n"
         menu_text += "3. Business Premises \n"
