@@ -1,4 +1,3 @@
-from collections import defaultdict
 import logging
 import os
 from urllib.parse import urlparse
@@ -8,7 +7,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
-from werkzeug.datastructures import T
+
 
 
 
