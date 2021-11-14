@@ -5,6 +5,7 @@ import redis
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from decouple import config
 
 
 # logging
@@ -20,7 +21,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-cache = redis.Redis(host=os.getenv("REDIS_URL", "localhost"), port=6379)
+cache = redis.Redis(host=config("REDIS_URL", "localhost"), port=6379)
 
 
 def create_app(test_config=None):
