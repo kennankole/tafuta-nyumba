@@ -74,7 +74,6 @@ class HostelsRegistrationMenu(Menu):
 
     @phone_number_decorator(level=99, message="Enter alternate contact")
     def save_data(self):
-        menu_text = "Your hostel has been successfully registered\n"
         hostel = Hostels(
             county=self.session.get("county"),
             constituency=self.session.get("constituency"),
@@ -87,6 +86,7 @@ class HostelsRegistrationMenu(Menu):
         )
         db.session.add(hostel)
         db.session.commit()
+        menu_text = "Your hostel has been successfully registered\n"
         return self.ussd_end(menu_text)
 
     def execute(self):

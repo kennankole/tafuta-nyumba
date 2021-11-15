@@ -11,7 +11,7 @@ from app.models import Houses
 
 class HousesQueryResults(HousesQueryMenu):
     @charge_users_decorator
-    @location_decorator(level=21, message="Enter Constituency Really")
+    @location_decorator(level=21, message="Enter Constituency")
     def houses_const_query_results(self):
         rent = True
         hse_id = self.session.get("hse_type")
