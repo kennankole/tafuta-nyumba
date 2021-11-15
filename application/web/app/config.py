@@ -6,11 +6,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = config("DATABASE_URL", "sqlite://")
+    DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///real_estate.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY") or "AS SECRET KEY"
     DATABASE = os.getenv("DATABASE")
-    TESTING = os.getenv("TESTING")
+    TESTING = os.environ.get("TESTING")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"
     USER = os.getenv("USER")
@@ -22,3 +22,6 @@ class Config:
     REDIS_DB = os.environ.get("REDIS_DB")
     # REDISTOGO_URL = config("REDISTOGO_URL", default="localhost")
     REDISTOGO_URL = os.getenv("REDISTOGO_URL", default="localhost")
+    
+    
+    
