@@ -19,7 +19,7 @@ class Houses(db.Model):
     for_rent = db.Column(db.Boolean, default=False)
     
     def __repr__(self) -> str:
-        return super().__repr__()
+        return f"{self.units} unit(s) available @{self.price}each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
 
     @staticmethod
     def constituency_results(const, rent, hse_type):
@@ -142,6 +142,9 @@ class Hostels(db.Model):
     contacts = db.Column(db.String(64), index=True)
     alternate_contact = db.Column(db.String(64), index=True)
 
+    def __repr__(self) -> str:
+        return f"{self.units} unit(s) available @{self.price}each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
+    
     @staticmethod
     def constituency_results(const):
         if Hostels.query.filter_by(constituency=const).count() > 2:
@@ -206,6 +209,8 @@ class BusinessPremises(db.Model):
     alternate_contact = db.Column(db.String(64), index=True)
     for_rent = db.Column(db.Boolean, default=False)
 
+    def __repr__(self) -> str:
+        return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n1: {self.contacts} 2: {self.alternate_contact}"
     @staticmethod
     def constituency_results(const, rent, biz_type):
         if (

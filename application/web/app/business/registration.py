@@ -128,6 +128,7 @@ class BusinessPremisesRegistrationMenu(Menu):
             street_name=self.session.get("street_name"),
             units=self.session.get("biz_premises_units"),
             price=self.session.get("price"),
+            area=self.session.get("biz_floor_area"),
             type_of_business_premise=get_type_of_business_premises(
                 self.session.get("biz_type"), types_of_business_premises
             ),
