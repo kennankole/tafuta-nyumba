@@ -17,6 +17,9 @@ class Houses(db.Model):
     contacts = db.Column(db.String(64), index=True)
     alternate_contact = db.Column(db.String(64), index=True)
     for_rent = db.Column(db.Boolean, default=False)
+    
+    def __repr__(self) -> str:
+        return super().__repr__()
 
     @staticmethod
     def constituency_results(const, rent, hse_type):
