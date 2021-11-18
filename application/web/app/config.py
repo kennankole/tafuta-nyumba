@@ -4,9 +4,11 @@ from decouple import config
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
+uri = os.environ.get("DATABASE_URL")
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 class Config:
-    SQLALCHEMY_DATABASE_URI = config("DATABASE_URL", "sqlite://")
+    SQLALCHEMY_DATABASE_URI = uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY") or "AS SECRET KEY"
     DATABASE = os.getenv("DATABASE")
