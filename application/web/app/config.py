@@ -6,7 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = config("DATABASE_URL")
     if SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
         SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1) 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
