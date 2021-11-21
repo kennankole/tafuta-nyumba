@@ -31,10 +31,8 @@ class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     TESTING = True
 
-
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = uri
-
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = uri

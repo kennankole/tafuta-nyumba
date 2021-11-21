@@ -3,7 +3,7 @@ import os
 from urllib.parse import urlparse
 
 import redis
-from app import config
+from app import config as conf
 from decouple import config
 from flask import Flask
 from flask_migrate import Migrate
@@ -30,9 +30,9 @@ def create_app(testing=False):
     app = Flask(__name__, instance_relative_config=False)
 
     if app.testing:
-        app.config.from_object(config.TestingConfig)
+        app.config.from_object(conf.TestingConfig)
     else:
-        app.config.from_object(config.Config)
+        app.config.from_object(conf.Config)
 
     db.init_app(app)
     with app.app_context():
