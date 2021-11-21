@@ -59,9 +59,9 @@ jobs:
       - name: Create env file 
         run: |
           touch .env
-          echo DATABASE_URL=${{ secrets.DATABASE_URL }}
+          echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
           cat .env
-          
+
       - name: GitHub Action for pytest
         run: pipenv run pytest 
         

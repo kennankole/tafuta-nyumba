@@ -4,7 +4,7 @@ from decouple import config
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-uri = os.environ.get("DATABASE_URL", "postgres:///")
+uri = os.environ.get("DATABASE_URL")
 if uri.startswith("postgres://"):
     uri.replace("postgres://", "postgresql://", 1)
 
