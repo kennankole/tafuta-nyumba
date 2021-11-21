@@ -3,13 +3,11 @@ import os
 from urllib.parse import urlparse
 
 import redis
+from app import config
+from decouple import config
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from decouple import config
-
-
-
 
 # logging
 if not logging.DEBUG:
@@ -25,12 +23,18 @@ migrate = Migrate()
 
 
 cache = redis.from_url(os.environ.get("REDIS_URL", "redis://localhost"))
-def create_app(test_config=None):
+
+
+def create_app(testing=False):
     """Initialize the core of the app"""
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object("app.config.Config")
-    db.init_app(app)
 
+    if app.testing:
+        app.config.from_object(config.TestingConfig)
+    else:
+        app.config.from_object(config.Config)
+
+    db.init_app(app)
     with app.app_context():
         from app.views import views
 

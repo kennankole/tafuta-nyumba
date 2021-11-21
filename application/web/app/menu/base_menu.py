@@ -1,10 +1,9 @@
 import json
 import os
 
-from flask import current_app, make_response
-from decouple import config
-
 from app import cache
+from decouple import config
+from flask import current_app, make_response
 
 
 class Menu:

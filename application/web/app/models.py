@@ -1,8 +1,7 @@
 from datetime import datetime
 
-from sqlalchemy.sql import func
-
 from app import db
+from sqlalchemy.sql import func
 
 
 class Houses(db.Model):
@@ -17,7 +16,7 @@ class Houses(db.Model):
     contacts = db.Column(db.String(64), index=True)
     alternate_contact = db.Column(db.String(64), index=True)
     for_rent = db.Column(db.Boolean, default=False)
-    
+
     def __repr__(self) -> str:
         return f"{self.units} unit(s) available @{self.price}each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
 
@@ -144,7 +143,7 @@ class Hostels(db.Model):
 
     def __repr__(self) -> str:
         return f"{self.units} unit(s) available @{self.price}each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
-    
+
     @staticmethod
     def constituency_results(const):
         if Hostels.query.filter_by(constituency=const).count() > 2:
@@ -211,6 +210,7 @@ class BusinessPremises(db.Model):
 
     def __repr__(self) -> str:
         return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n1: {self.contacts} 2: {self.alternate_contact}"
+
     @staticmethod
     def constituency_results(const, rent, biz_type):
         if (

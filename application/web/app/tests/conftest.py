@@ -1,18 +1,12 @@
-import os
-import tempfile
-
 import pytest
+from app import create_app, db
 from mixer.backend.flask import mixer
 
-from app import create_app, db
+app = create_app(testing=True)
 
 
 @pytest.fixture
 def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
-    
     with app.test_client() as testing_client:
         with app.app_context():
             db.init_app(app)
