@@ -13,6 +13,18 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+jobs:
+  build:
+    services:
+      postgres:
+        image: postgres
+        env:
+            POSTGRES_USER: mary
+            POSTGRES_PASSWORD: mary
+            POSTGRES_DB: mary_db
+        ports:
+          - 5432:5432
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -55,7 +67,7 @@ jobs:
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
           pipenv install --deploy --dev
-
+        
       - name: Create env file 
         run: |
           touch .env
