@@ -23,16 +23,10 @@ jobs:
     strategy:
       matrix:
         redis-version: [4, 5, 6]
-    
-    services:
-      postgres:
-        image: postgres
-          env:
-            POSTGRES_USER: mary
-            POSTGRES_PASSWORD: mary
-            POSTGRES_DB: mary_db
-        ports:
-          - 5432:5432
+    steps:
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '11'
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
