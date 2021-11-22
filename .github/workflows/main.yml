@@ -23,10 +23,6 @@ jobs:
     strategy:
       matrix:
         redis-version: [4, 5, 6]
-    steps:
-      - uses: harmon758/postgresql-action@v1
-        with:
-          postgresql version: '11'
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -60,6 +56,11 @@ jobs:
         run: |
           pipenv install --deploy --dev
         
+      - name: Installing postgresql
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '11'
+
       - name: Create env file 
         run: |
           touch .env
