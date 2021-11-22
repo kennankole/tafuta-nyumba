@@ -69,8 +69,7 @@ jobs:
 
       - name: GitHub Action for pytest
         run: pipenv run pytest 
-        with:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+       
         
       # - name: Super-Linter
       #   uses: github/super-linter@v3.17.1
