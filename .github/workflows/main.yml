@@ -56,11 +56,6 @@ jobs:
         run: |
           pipenv install --deploy --dev
         
-      - name: Installing postgresql
-        uses: harmon758/postgresql-action@v1
-        with:
-          postgresql version: '11'
-
       - name: Create env file 
         run: |
           touch .env
