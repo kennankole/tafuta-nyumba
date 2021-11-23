@@ -62,8 +62,8 @@ jobs:
           echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
           cat .env
 
-      - name: GitHub Action for pytest
-        run: pipenv run pytest 
+      # - name: GitHub Action for pytest
+      #   run: pipenv run pytest 
        
         
       # - name: Super-Linter
