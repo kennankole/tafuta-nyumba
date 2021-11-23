@@ -1,4 +1,5 @@
 import os
+import psycopg2
 
 from decouple import config
 
@@ -26,6 +27,7 @@ class Config:
     REDIS_DB = os.environ.get("REDIS_DB")
     REDISTOGO_URL = os.getenv("REDISTOGO_URL", default="localhost")
 
+    conn = psycopg2.connect(SQLALCHEMY_DATABASE_URI, sslmode='require')
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
