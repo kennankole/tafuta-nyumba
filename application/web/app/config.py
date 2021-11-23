@@ -5,13 +5,11 @@ from decouple import config
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-uri = os.getenv("DATABASE_URL")
-if uri.startswith("postgres://"):
-    uri.replace("postgres://", "postgresql://", 1)
+
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = uri
+    SQLALCHEMY_DATABASE_URI = os.environ.g("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY") or "AS SECRET KEY"
     DATABASE = os.getenv("DATABASE")
@@ -27,8 +25,7 @@ class Config:
     REDIS_DB = os.environ.get("REDIS_DB")
     REDISTOGO_URL = os.getenv("REDISTOGO_URL", default="localhost")
 
-    conn = psycopg2.connect(SQLALCHEMY_DATABASE_URI, sslmode='require')
-
+   
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     TESTING = True
