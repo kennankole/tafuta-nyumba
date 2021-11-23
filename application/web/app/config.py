@@ -24,9 +24,9 @@ class Config:
     REDIS_URL = config("REDIS_URL", default="localhost")
     REDIS_DB = os.environ.get("REDIS_DB")
     REDISTOGO_URL = os.getenv("REDISTOGO_URL", default="localhost")
-    
-    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-      uri =  SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+    uri = SQLALCHEMY_DATABASE_URI
+    if uri and uri.startswith("postgres://"):
+        uri.replace("postgres://", "postgresql://", 1)
     SQLALCHEMY_DATABASE_URI = uri
 
    
