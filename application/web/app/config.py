@@ -9,7 +9,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL?sslmode=require")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", sslmode='require')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY") or "AS SECRET KEY"
     DATABASE = os.getenv("DATABASE")
