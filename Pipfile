@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask-sqlalchemy = "==1.0"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 
