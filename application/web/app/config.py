@@ -9,7 +9,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = "postgresql:///nyumba_db"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:nyumba@localhost/nyumba_db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY") or "AS SECRET KEY"
     DATABASE = os.getenv("DATABASE")
