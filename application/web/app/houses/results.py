@@ -26,12 +26,12 @@ class HousesQueryResults(HousesQueryMenu):
         # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
         if (
             Houses.query.filter_by(
-                constituency=const, for_rent=rent, get_type_of_house=hse_id
+                constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
             ).count()
             > 2
         ):
             menu_text = f"{get_type_of_house(hse_id, houses)} in {const}\n"
-            menu_text += f"{str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=hse_id).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).order_by(func.random()).limit(2).all())[1:-1]}"
             menu_text += "Re-enter constituency name to see more results\n"
             menu_text += f"{const.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
@@ -39,11 +39,11 @@ class HousesQueryResults(HousesQueryMenu):
         if (
             0
             < Houses.query.filter_by(
-                constituency=const, for_rent=rent, get_type_of_house=hse_id
+                constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
             ).count()
             <= 2
         ):
-            menu_text = f"{str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=hse_id).all())[1:-1]}"
+            menu_text = f"{str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).all())[1:-1]}"
             return self.ussd_end(menu_text)
 
         else:
@@ -65,12 +65,12 @@ class HousesQueryResults(HousesQueryMenu):
         # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
         if (
             Houses.query.filter_by(
-                ward=ward, for_rent=rent, get_type_of_house=hse_id
+                ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
             ).count()
             > 2
         ):
             menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
-            menu_text += f"{str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_id).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).order_by(func.random()).limit(2).all())[1:-1]}"
             menu_text += "Re-enter ward  to see more results\n"
             menu_text += f"{ward.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
@@ -78,12 +78,12 @@ class HousesQueryResults(HousesQueryMenu):
         if (
             0
             < Houses.query.filter_by(
-                ward=ward, for_rent=rent, get_type_of_house=hse_id
+                ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
             ).count()
             <= 2
         ):
             menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
-            menu_text += f"{str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_id).all())[1:-1]}"
+            menu_text += f"{str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).all())[1:-1]}"
             return self.ussd_end(menu_text)
 
         else:
@@ -107,12 +107,12 @@ class HousesQueryResults(HousesQueryMenu):
             Houses.query.filter_by(
                 name_of_estate_or_village=estate,
                 for_rent=rent,
-                get_type_of_house=hse_id,
+                type_of_house=get_type_of_house(hse_id, houses)
             ).count()
             > 2
         ):
             menu_text = f"{get_type_of_house(hse_id, houses)} in {estate}\n"
-            menu_text += f"{str(Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=hse_id).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{str(Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).order_by(func.random()).limit(2).all())[1:-1]}"
             menu_text += "Re-enter estate  to see more results\n"
             menu_text += f"{estate.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
@@ -122,12 +122,12 @@ class HousesQueryResults(HousesQueryMenu):
             < Houses.query.filter_by(
                 name_of_estate_or_village=estate,
                 for_rent=rent,
-                get_type_of_house=hse_id,
+                type_of_house=get_type_of_house(hse_id, houses)
             ).count()
             <= 2
         ):
             menu_text = f"{get_type_of_house(hse_id, houses)} in {estate}\n"
-            menu_text += f"{str(Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=hse_id).all())[1:-1]}"
+            menu_text += f"{str(Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).all())[1:-1]}"
             return self.ussd_end(menu_text)
 
         else:
