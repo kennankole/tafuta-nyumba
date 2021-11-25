@@ -56,6 +56,6 @@ class EstateResults(HousesQueryMenu):
     def execute(self):
         level = self.session.get("level")
         menu = {
-            22: self.houses_village_estate_query_results(),
+            22: self.houses_village_estate_query_results,
         }
         return menu.get(level, self.house_services_menu)()

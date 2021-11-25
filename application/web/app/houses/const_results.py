@@ -51,6 +51,6 @@ class ConstituencyResults(HousesQueryMenu):
     def execute(self):
         level = self.session.get("level")
         menu = {
-            20: self.houses_const_query_results(),
+            20: self.houses_const_query_results,
         }
         return menu.get(level, self.house_services_menu)()

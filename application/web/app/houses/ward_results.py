@@ -52,6 +52,6 @@ class WardResults(HousesQueryMenu):
     def execute(self):
         level = self.session.get("level")
         menu = {
-            21: self.houses_ward_query_results(),
+            21: self.houses_ward_query_results,
         }
         return menu.get(level, self.house_services_menu)()
