@@ -1,8 +1,7 @@
 import json
 
-from flask import make_response
-
 from app import cache
+from flask import make_response
 
 
 class Menu:

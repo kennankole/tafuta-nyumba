@@ -2,8 +2,6 @@ import json
 import uuid
 
 import africastalking
-from flask import Blueprint, g, make_response, request
-
 from app import cache
 from app.business.menu import BusinessPremisesQueryMainMenu
 from app.business.registration import BusinessPremisesRegistrationMenu
@@ -12,12 +10,11 @@ from app.config import Config
 from app.hostels.menu import HostelsQueryMenu
 from app.hostels.registration import HostelsRegistrationMenu
 from app.hostels.results import HostelsQueryResults
-from app.houses.const_results import ConstituencyResults
-from app.houses.estate_results import EstateResults
 from app.houses.houses_query_menu import HousesQueryMainMenu
 from app.houses.registration import HousesRegistrationMenu
-from app.houses.ward_results import WardResults
+from app.houses.results import HousesQueryResults
 from app.menu.menu import LowerLevelMenu
+from flask import Blueprint, g, make_response, request
 
 views = Blueprint("views", __name__)
 
@@ -137,28 +134,8 @@ def ussd_callback():
         )
         return menu.execute()
 
-    if level == 22:
-        menu = EstateResults(
-            session_id=session_id,
-            session=g.session,
-            phone_number=g.phone_number,
-            user_response=g.user_response,
-            level=level,
-        )
-        return menu.execute()
-
-    if level == 21:
-        menu = WardResults(
-            session_id=session_id,
-            session=g.session,
-            phone_number=g.phone_number,
-            user_response=g.user_response,
-            level=level,
-        )
-        return menu.execute()
-
-    if level == 20:
-        menu = ConstituencyResults(
+    if level >= 20:
+        menu = HousesQueryResults(
             session_id=session_id,
             session=g.session,
             phone_number=g.phone_number,

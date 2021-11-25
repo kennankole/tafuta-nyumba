@@ -1,6 +1,5 @@
 import os
 
-import psycopg2
 from decouple import config
 
 basedir = os.path.abspath(os.path.dirname(__file__))

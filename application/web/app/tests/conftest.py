@@ -1,7 +1,6 @@
 import pytest
-from mixer.backend.flask import mixer
-
 from app import create_app, db
+from mixer.backend.flask import mixer
 
 app = create_app(testing=True)
 

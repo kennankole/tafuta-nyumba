@@ -2,11 +2,10 @@ import logging
 import os
 
 import redis
+from app import config as conf
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-
-from app import config as conf
 
 # logging
 if not logging.DEBUG:

@@ -1,11 +1,10 @@
-from sqlalchemy.sql import func
-
 from app.decorators.names import names_decorator
 from app.decorators.payment_decorators import charge_users_decorator
 from app.houses.data import houses
 from app.houses.houses_query_menu import HousesQueryMenu
 from app.houses.utils import get_type_of_house
 from app.models import Houses
+from sqlalchemy.sql import func
 
 
 class EstateResults(HousesQueryMenu):
