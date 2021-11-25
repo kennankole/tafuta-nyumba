@@ -12,7 +12,7 @@ class HousesQueryMainMenu(HousesMainMenu):
     )
     def search_houses_to_rent_by_location(self):
         house = get_type_of_house(self.user_response, data.houses)
-        menu_text = f"Search {house} to rent by {self.user_response}:\n"
+        menu_text = f"Search {house} to rent by:\n"
         menu_text += "1. Constituency\n2. Ward\n3. Estate or Village\n"
         self.session["level"] = 20
         self.session["hse_type"] = self.user_response
