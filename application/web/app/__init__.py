@@ -1,13 +1,12 @@
 import logging
 import os
-from urllib.parse import urlparse
 
 import redis
-from app import config as conf
-from decouple import config
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+
+from app import config as conf
 
 # logging
 if not logging.DEBUG:

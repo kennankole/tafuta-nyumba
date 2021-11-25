@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from app import db
 from sqlalchemy.sql import func
+
+from app import db
 
 
 class Houses(db.Model):
@@ -16,9 +17,6 @@ class Houses(db.Model):
     contacts = db.Column(db.String(64), index=True)
     alternate_contact = db.Column(db.String(64), index=True)
     for_rent = db.Column(db.Boolean, default=False)
-
-    def __repr__(self) -> str:
-        return f"{self.units} unit(s) available @{self.price}each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
 
     @staticmethod
     def constituency_results(const, rent, hse_type):
@@ -56,7 +54,7 @@ class Houses(db.Model):
             return "No records at the moment\nTry again later\n"
 
     @staticmethod
-    def ward_results(ward, rent, hse_type):
+    def ward_results(ward, rent, hse_type, home):
         if (
             Houses.query.filter_by(
                 ward=ward, for_rent=rent, type_of_house=hse_type
@@ -83,8 +81,8 @@ class Houses(db.Model):
                 ).all()
             )[1:-1]
 
-        if not Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_type):
-            return "No records at the moment\nTry again later\n"
+        else:
+            return f"No records at the moment\nTry again later\n{home} Home"
 
     @staticmethod
     def village_estate_results(village_estate, rent, hse_type):
@@ -128,6 +126,12 @@ class Houses(db.Model):
             type_of_house=hse_type,
         ):
             return "No records at the moment\nTry again later\n"
+
+        else:
+            return "No records at the moment\nTry again later\n"
+
+    def __repr__(self) -> str:
+        return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
 
 
 class Hostels(db.Model):

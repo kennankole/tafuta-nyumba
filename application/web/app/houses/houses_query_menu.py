@@ -5,7 +5,7 @@ from .menu import HousesQueryMainMenu
 
 class HousesQueryMenu(HousesQueryMainMenu):
     @validate_choices(
-        level=10, message="Invalid Entryy\n 1. Back", choices=("1", "2", "3")
+        level=10, message="Invalid Entry\n 1. Back", choices=("1", "2", "3")
     )
     def search_houses_by_location(self):
         if self.user_response == "1":

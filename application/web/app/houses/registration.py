@@ -89,7 +89,7 @@ class HousesRegistrationMenu(Menu):
 
     @phone_number_decorator(level=38, message="Enter an alternative phone number")
     def save_data(self):
-        for_rent = True
+        for_rent = bool
         house = get_type_of_house(self.session.get("hse_type"), houses)
         if self.session.get("rent_out_house"):
             for_rent = True
@@ -107,9 +107,9 @@ class HousesRegistrationMenu(Menu):
             alternate_contact=self.user_response,
             contacts=self.phone_number,
         )
-        menu_text = f"Your {house}(s) have been successfully registered\n"
         db.session.add(house)
         db.session.commit()
+        menu_text = f"Your {house}(s) have been successfully registered\n"
         return self.ussd_end(menu_text)
 
     def execute(self):

@@ -13,7 +13,7 @@ class HousesQueryResults(HousesQueryMenu):
     @charge_users_decorator
     @location_decorator(level=21, message="Enter Constituency")
     def houses_const_query_results(self):
-        rent = True
+        rent = bool
         hse_id = self.session.get("hse_type")
         const = self.user_response
         if self.session.get("rent_house"):
@@ -32,12 +32,13 @@ class HousesQueryResults(HousesQueryMenu):
     # @names_decorator(level=22, message="Enter ward")
     def houses_ward_query_results(self):
         rent = True
-        # service_type = ""
+        service_type = ""
+        home = ""
         hse_id = self.session.get("hse_type")
         ward = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            # service_type = "renting"
+            service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
             # service_type = "buying"
