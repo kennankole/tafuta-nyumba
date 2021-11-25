@@ -109,7 +109,7 @@ class HousesRegistrationMenu(Menu):
         )
         db.session.add(house)
         db.session.commit()
-        menu_text = f"Your {house}(s) have been successfully registered\n"
+        menu_text = f"Your {get_type_of_house(self.session.get('hse_type'), houses)} have been successfully registered\n"
         return self.ussd_end(menu_text)
 
     def execute(self):
