@@ -15,27 +15,60 @@ class HostelsQueryResults(HostelsQueryMenu):
         menu_text = f"Hostels in {schl_name}\n"
         menu_text += f"{Hostels.school_query_results(schl_name=schl_name)}\n"
         menu_text += f"{schl_name.title()} >> (next)\n"
-        return self.ussd_continue(menu_text)
+        if Hostels.query.filter_by(school_name=schl_name).count() > 2:
+            menu_text = f"Hostels in {schl_name}\n"
+            menu_text += "Re-enter school name to see more results\n"
+            menu_text += f"{schl_name.title()} >> (next)\n"
+            return self.ussd_continue(menu_text)
+        
+        if 0 < Hostels.query.filter_by(school_name=schl_name).count().count() <= 2:
+            menu_text = f"{str(Hostels.query.filter_by(school_name=schl_name).all())[1:-1]}"
+            return self.ussd_end(menu_text)
+
+        else:
+            menu_text = "No records\nKindly try again later\n"
+            return self.ussd_end(menu_text)
+        
 
     @charge_users_decorator
     @location_decorator(level=81, message="Enter constituency\n")
     def hostels_query_results_by_constituency(self):
-        storing_user_records(self.phone_number, "renting", "Hostels")
         const = self.user_response
-        menu_text = f"Hostels in {const}\n"
-        menu_text += f"{Hostels.constituency_results(const=const)}\n"
-        menu_text += f"{const.title()} >> (next)\n"
-        return self.ussd_continue(menu_text)
+        storing_user_records(self.phone_number, "renting", "Hostels")
+        if Hostels.query.filter_by(constituency=const).count() > 2:
+            menu_text = f"Hostels in {const}\n"
+            menu_text += "Re-enter constituency name to see more results\n"
+            menu_text += f"{const.title()} >> (next)\n"
+            return self.ussd_continue(menu_text)
 
+        if 0 < Hostels.query.filter_by(constituency=const).count().count() <= 2:
+            menu_text = f"{str(Hostels.query.filter_by(constituency=const).all())[1:-1]}"
+            return self.ussd_end(menu_text)
+        
+        else:
+            menu_text = "No records\nKindly try again later\n"
+            return self.ussd_end(menu_text)
+        
+        
     @charge_users_decorator
     @location_decorator(level=82, message="Enter ward")
     def hostels_query_results_by_ward(self):
-        storing_user_records(self.phone_number, "renting", "Hostels")
         ward = self.user_response
-        menu_text = f"Hostels in {ward}\n"
-        menu_text = f"{Hostels.ward_results(ward=ward)}\n"
-        menu_text += f"{ward.title()} >> (next)\n"
-        return self.ussd_continue(menu_text)
+        storing_user_records(self.phone_number, "renting", "Hostels")
+        if Hostels.query.filter_by(ward=ward).count() > 2:
+            menu_text = f"Hostels in {ward}\n"
+            menu_text += "Re-enter ward name to see more results\n"
+            menu_text += f"{ward.title()} >> (next)\n"
+            return self.ussd_continue(menu_text)
+        
+        if 0 < Hostels.query.filter_by(ward=ward).count().count() <= 2:
+            menu_text = f"{str(Hostels.query.filter_by(ward=ward).all())[1:-1]}"
+            return self.ussd_end(menu_text)
+        
+        else:
+            menu_text = "No records\nKindly try again later\n"
+            return self.ussd_end(menu_text)
+
 
     def execute(self):
         level = self.session.get("level")

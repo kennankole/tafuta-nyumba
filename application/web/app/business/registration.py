@@ -3,6 +3,7 @@ from app.business.data import types_of_business_premises
 from app.business.utils import get_type_of_business_premises
 from app.decorators.choices import validate_choices
 from app.decorators.location import location_decorator
+from app.decorators.payment_decorators import charge_users_decorator
 from app.decorators.names import names_decorator
 from app.decorators.numeric import numeric_decorator
 from app.decorators.phone_numbers import phone_number_decorator
@@ -109,6 +110,7 @@ class BusinessPremisesRegistrationMenu(Menu):
         self.session["price"] = self.user_response
         return self.ussd_continue(menu_text)
 
+    @charge_users_decorator
     @phone_number_decorator(level=309, message="Enter alternate contact")
     def save_data(self):
         for_rent = False
