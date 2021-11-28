@@ -21,7 +21,7 @@ class HostelsQueryResults(HostelsQueryMenu):
             menu_text += f"{schl_name.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < Hostels.query.filter_by(school_name=schl_name).count().count() <= 2:
+        if 0 < Hostels.query.filter_by(school_name=schl_name).count() <= 2:
             menu_text = f"{str(Hostels.query.filter_by(school_name=schl_name).all())[1:-1]}"
             return self.ussd_end(menu_text)
 
@@ -41,7 +41,7 @@ class HostelsQueryResults(HostelsQueryMenu):
             menu_text += f"{const.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
 
-        if 0 < Hostels.query.filter_by(constituency=const).count().count() <= 2:
+        if 0 < Hostels.query.filter_by(constituency=const).count() <= 2:
             menu_text = f"{str(Hostels.query.filter_by(constituency=const).all())[1:-1]}"
             return self.ussd_end(menu_text)
         
@@ -61,7 +61,7 @@ class HostelsQueryResults(HostelsQueryMenu):
             menu_text += f"{ward.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < Hostels.query.filter_by(ward=ward).count().count() <= 2:
+        if 0 < Hostels.query.filter_by(ward=ward).count() <= 2:
             menu_text = f"{str(Hostels.query.filter_by(ward=ward).all())[1:-1]}"
             return self.ussd_end(menu_text)
         
