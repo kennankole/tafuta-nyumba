@@ -28,15 +28,15 @@ class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
             service_type,
             get_type_of_business_premises(biz_id, types_of_business_premises),
         )
-        if BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)) > 2:
+        if BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)) > 2:
             menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {city_or_town}\n"
-            menu_text += f"{str(BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{str(BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
             menu_text += "Re-enter name of the city to see more results\n"
             menu_text += f"{city_or_town.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
-            menu_text = f"{str(BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
+        if 0 < BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
+            menu_text = f"{str(BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
             return self.ussd_end(menu_text)
         
         else:
@@ -60,15 +60,15 @@ class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
             service_type,
             get_type_of_business_premises(biz_id, types_of_business_premises),
         )
-        if BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)) > 2:
+        if BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)) > 2:
             menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {const}\n"
-            menu_text += f"{str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
             menu_text += "Re-enter constituency name to see more results\n"
             menu_text += f"{const.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
-            menu_text = f"{str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
+        if 0 < BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
+            menu_text = f"{str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
             return self.ussd_end(menu_text)
         
         else:
@@ -94,15 +94,15 @@ class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
             get_type_of_business_premises(biz_id, types_of_business_premises),
         )
     
-        if BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)) > 2:
+        if BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)) > 2:
             menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {ward}\n"
-            menu_text += f"{str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
             menu_text += "Re-enter ward name to see more results\n"
             menu_text += f"{ward.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
-            menu_text = f"{str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
+        if 0 < BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
+            menu_text = f"{str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
             return self.ussd_end(menu_text)
         
         else:
