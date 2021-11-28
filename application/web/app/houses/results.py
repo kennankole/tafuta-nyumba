@@ -7,7 +7,7 @@ from app.houses.utils import get_type_of_house
 from app.models import Houses
 from sqlalchemy.sql import func
 
-# from app.utils import storing_user_records
+from app.utils import storing_user_records
 
 
 class HousesQueryResults(HousesQueryMenu):
@@ -19,11 +19,11 @@ class HousesQueryResults(HousesQueryMenu):
         const = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            # service_type = "renting"
+            service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
-            # service_type = "buying"
-        # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
+            service_type = "buying"
+        storing_user_records(self.phone_number, service_type,get_type_of_house(hse_id, houses))
         if (
             Houses.query.filter_by(
                 constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
@@ -58,11 +58,11 @@ class HousesQueryResults(HousesQueryMenu):
         ward = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            # service_type = "renting"
+            service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
-            # service_type = "buying"
-        # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
+            service_type = "buying"
+        storing_user_records(self.phone_number, service_type,get_type_of_house(hse_id, houses))
         if (
             Houses.query.filter_by(
                 ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
@@ -98,11 +98,11 @@ class HousesQueryResults(HousesQueryMenu):
         estate = self.user_response
         if self.session.get("rent_house"):
             rent = True
-            # service_type = "renting"
+            service_type = "renting"
         if self.session.get("buy_house"):
             rent = False
-            # service_type = "buying"
-        # storing_user_records(self.phone_number, service_type,get_type_of_house(houses, hse_id))
+            service_type = "buying"
+        storing_user_records(self.phone_number, service_type,get_type_of_house(hse_id, houses))
         if (
             Houses.query.filter_by(
                 name_of_estate_or_village=estate,

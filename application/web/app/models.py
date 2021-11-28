@@ -18,7 +18,7 @@ class Houses(db.Model):
     for_rent = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
+        return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n{self.contacts}/{self.alternate_contact}\n"
 
 
 class Hostels(db.Model):
