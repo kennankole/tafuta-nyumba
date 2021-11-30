@@ -8,9 +8,6 @@ def charge_users_decorator(func):
         
         charge_users_innermost_decorator.calls += 1
         if charge_users_innermost_decorator.calls >= 3:
-            user_name = "sandbox"
-            api_key = Config.API_KEY
-            africastalking.initialize(user_name, api_key)
             payment = africastalking.Payment
             menu_text = "Kindly pay up to continue enjoying our services\n"
             payment.mobile_checkout("Tafuta-Nyumba", self.phone_number, "KES", 20)
