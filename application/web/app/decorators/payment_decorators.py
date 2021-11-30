@@ -1,6 +1,5 @@
 import africastalking
 from africastalking import Payment
-from sqlalchemy.ext.declarative import api
 from app.config import Config
 from app.models import CapturingUserData
 
