@@ -1,5 +1,6 @@
 import africastalking
 from app.config import Config
+from app.payment import Mobile
 from app.models import CapturingUserData
 
 def charge_users_decorator(func):
@@ -7,14 +8,8 @@ def charge_users_decorator(func):
         
         charge_users_innermost_decorator.calls += 1
         if charge_users_innermost_decorator.calls >= 3:
-            user_name = "sandbox"
-            api_key = Config.API_KEY
-            africastalking.initialize(user_name, api_key)
-            payment = africastalking.Payment
-            
-            metadata = {"agentId" : "654", "productId" : "321"}
             menu_text = "Kindly pay up to continue enjoying our services\n"
-            payment.mobile_checkout(product_name="Tafuta-Nyumba", phone_number=self.phone_number, currency_code="KES", amount=20, metadata=metadata)
+            Mobile.checkout(product_name="Tafuta-Nyumba", phone_number=self.phone_number, currency_code="KES", amount=20)
             menu_text += "We are sending you an M-Pesa checkout of KES: 20\n"
             return self.ussd_end(menu_text)
         else:
