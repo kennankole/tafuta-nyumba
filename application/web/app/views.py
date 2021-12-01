@@ -18,11 +18,9 @@ from flask import Blueprint, g, make_response, request
 
 views = Blueprint("views", __name__)
 
-
-# @views.route("/", methods=["POST", "GET"])
-# def home_page():
-#     return "Welcome to Tafuta Nyumba"
-
+@views.route("/payment", methods=["POST", "GET"])
+def payment_service():
+    pass
 
 @views.route("/", methods=["POST", "GET"])
 def ussd_callback():
@@ -38,7 +36,7 @@ def ussd_callback():
     africastalking.initialize(user_name, api_key)
 
     textArray = text.split("*")
-    # latestInput = textArray[len(textArray) - 2]
+    
 
     # make this a decorator
     session = cache.get(session_id)
@@ -160,3 +158,4 @@ def ussd_callback():
         )
         response.headers["Content-Type"] = "text/plain"
         return response
+
