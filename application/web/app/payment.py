@@ -9,7 +9,7 @@ class Mobile:
 
         africastalking.initialize(self.username, self.api_key)
         
-    @classmethod
+    @staticmethod
     def checkout(product_name, phone_number, currency_code, amount):
         metadata = {"agentId" : "654", "productId" : "321"}
         payment = africastalking.Payment
