@@ -74,6 +74,8 @@ class HostelsRegistrationMenu(Menu):
 
     @phone_number_decorator(level=99, message="Enter alternate contact")
     def save_data(self):
+        units = self.session.get("units")
+        price = self.session.get("price")
         hostel = Hostels(
             county=self.session.get("county"),
             constituency=self.session.get("constituency"),
@@ -86,7 +88,9 @@ class HostelsRegistrationMenu(Menu):
         )
         db.session.add(hostel)
         db.session.commit()
-        menu_text = "Your hostel has been successfully registered\n"
+        chargeable_amount = (0.05 * int(price)) * int(units)
+        menu_text = f"To complete your registration, we are sending you an M-Pesa checkout of {chargeable_amount}\nPriced at 5% of each unit"
+        menu_text += "Your hostel has been successfully registered\n"
         return self.ussd_end(menu_text)
 
     def execute(self):

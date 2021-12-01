@@ -20,7 +20,8 @@ views = Blueprint("views", __name__)
 
 @views.route("/payment", methods=["POST", "GET"])
 def payment_service():
-    pass
+    status = request.values.get("status")
+    
 
 @views.route("/", methods=["POST", "GET"])
 def ussd_callback():

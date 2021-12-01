@@ -110,14 +110,19 @@ class BusinessPremisesRegistrationMenu(Menu):
         self.session["price"] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @charge_users_decorator
+    # @charge_users_decorator
     @phone_number_decorator(level=309, message="Enter alternate contact")
     def save_data(self):
+        units = self.session.get("biz_premises_units")
+        price = self.session.get("price")
         for_rent = False
         biz_premises = get_type_of_business_premises(
             self.session.get("biz_type"), types_of_business_premises
         )
-        menu_text = f"Your {biz_premises} have been successfully registered\n"
+        chargeable_amount = (0.05 * int(price)) * int(units)
+        menu_text = f"To complete registration, we are sending you an M-Pesa checkout of {chargeable_amount}\nPriced at 5% per unit price\n"
+        menu_text += f"Your {biz_premises} have been successfully registered\n"
+        
         if self.session.get("rent_out_biz_premises"):
             for_rent = True
         if self.session.get("sell_business"):
