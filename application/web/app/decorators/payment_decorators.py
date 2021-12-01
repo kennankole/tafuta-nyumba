@@ -9,7 +9,7 @@ def charge_users_decorator(func):
         charge_users_innermost_decorator.calls += 1
         if charge_users_innermost_decorator.calls >= 3:
             menu_text = "Kindly pay up to continue enjoying our services\n"
-            Mobile.checkout(product_name="Tafuta-Nyumba", phone_number=self.phone_number, currency_code="KES", amount=20)
+            Mobile.checkout("Tafuta-Nyumba", self.phone_number, "KES", 20)
             menu_text += "We are sending you an M-Pesa checkout of KES: 20\n"
             return self.ussd_end(menu_text)
         else:
