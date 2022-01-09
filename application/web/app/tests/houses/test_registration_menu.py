@@ -122,6 +122,8 @@ def test_save_rental_houses(client):
         )
         rental_houses.session["level"] = 38
         rental_houses.session["rent_out_house"] = "2"
+        rental_houses.session['price'] = 4000
+        rental_houses.session['units'] = 4
         assert rental_houses.session.get("level") == 38
         assert rental_houses.user_response == "0789234567"
         assert rental_houses.session.get("rent_out_house") == "2"
@@ -135,6 +137,8 @@ def test_save_houses_for_sale(client):
         )
         houses_for_sale.session["sell_house"] = "4"
         houses_for_sale.session["level"] = 38
+        houses_for_sale.session['price'] = 4000
+        houses_for_sale.session['units'] = 4
         assert houses_for_sale.user_response == "0789234567"
         assert houses_for_sale.session.get("level") == 38
         assert houses_for_sale.session.get("sell_house") == "4"

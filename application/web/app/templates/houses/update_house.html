@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p> {{ form.units.label }}
+            {{ form.units(size=20, placeholder="4") }} <br>
+        </p>
+        
+        <p>
+            {{ form.price.label }}
+            {{ form.price(size=20, placeholder="100 Ksh.") }}</br>
+        </p>
+        <p>
+            {{ form.alternate_contact.label }}
+            {{ form.alternate_contact(size=20,  placeholder="07....")}} <br>
+        </p>
+        <p>
+            {{ form.for_rent.label}}<br>
+            {{ form.for_rent(size=1)}}
+        </p>
+        <p>
+            {{ form.submit(size=5)}} <br>
+        </p>
+    </form>
+</body>
+</html>

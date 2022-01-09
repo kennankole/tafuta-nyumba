@@ -28,13 +28,13 @@ class Config:
     SQLALCHEMY_DATABASE_URI = uri
 
 
-class TestConfig(Config):
+class TestConfigs(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     TESTING = True
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/real_estate.db"
 
 
 class ProductionConfig(Config):

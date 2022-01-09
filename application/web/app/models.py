@@ -20,7 +20,40 @@ class Houses(db.Model):
     def __repr__(self):
         return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n{self.contacts}/{self.alternate_contact}\n"
 
-
+    @staticmethod
+    def get_const_houses(const, rent, hse_type):
+        if Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=hse_type).count() > 2:
+            return str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=hse_type).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=hse_type).count() <= 2:
+            return str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=hse_type).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+        
+    @staticmethod
+    def get_village_houses(name, rent, hse_type):
+        if Houses.query.filter_by(name_of_estate_or_village=name, for_rent=rent, type_of_house=hse_type).count() > 2:
+            return str(Houses.query.filter_by(name_of_estate_or_village=name, for_rent=rent, type_of_house=hse_type).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < Houses.query.filter_by(name_of_estate_or_village=name, for_rent=rent, type_of_house=hse_type).count() <= 2:
+            return str(Houses.query.filter_by(name_of_estate_or_village=name, for_rent=rent, type_of_house=hse_type).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+       
+       
+    @staticmethod
+    def get_ward_houses(ward, rent, hse_type):
+        if Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_type).count() > 2:
+            return str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_type).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_type).count() <= 2:
+            return str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=hse_type).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+    
 class Hostels(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     county = db.Column(db.String(64), index=True)
@@ -33,57 +66,10 @@ class Hostels(db.Model):
     alternate_contact = db.Column(db.String(64), index=True)
 
     def __repr__(self) -> str:
-        return f"{self.units} unit(s) available @{self.price}each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
+        return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
 
-    @staticmethod
-    def constituency_results(const):
-        if Hostels.query.filter_by(constituency=const).count() > 2:
-            return str(
-                Hostels.query.filter_by(constituency=const)
-                .order_by(func.random())
-                .limit(2)
-                .all()
-            )[1:-1]
-
-        if 0 < Hostels.query.filter_by(constituency=const).count() <= 2:
-            return str(Hostels.query.filter_by(constituency=const).all())[1:-1]
-
-        if not Hostels.query.filter_by(constituency=const):
-            return "No records at the moment\nTry again later\n"
-
-    @staticmethod
-    def ward_results(ward):
-        if Hostels.query.filter_by(ward=ward).count() > 2:
-            return str(
-                Hostels.query.filter_by(ward=ward)
-                .order_by(func.random())
-                .limit(2)
-                .all()
-            )[1:-1]
-
-        if 0 < Hostels.query.filter_by(ward=ward).count() <= 2:
-            return str(Hostels.query.filter_by(ward=ward).all())[1:-1]
-
-        if not Hostels.query.filter_by(ward=ward):
-            return "No records at the moment\nTry again later\n"
-
-    @staticmethod
-    def school_query_results(schl_name):
-        if Hostels.query.filter_by(school_name=schl_name).count() > 2:
-            return str(
-                Hostels.query.filter_by(school_name=schl_name)
-                .order_by(func.random())
-                .limit(2)
-                .all()
-            )[1:-1]
-
-        if 0 < Hostels.query.filter_by(school_name=schl_name).count() <= 2:
-            return str(Hostels.query.filter_by(school_name=schl_name).all())[1:-1]
-
-        if not Hostels.query.filter_by(school_name=schl_name):
-            return "No records at the moment\nTry again later\n"
-
-
+    
+    
 class BusinessPremises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     county = db.Column(db.String(64), index=True)
@@ -101,121 +87,6 @@ class BusinessPremises(db.Model):
 
     def __repr__(self) -> str:
         return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n1: {self.contacts} 2: {self.alternate_contact}"
-
-    @staticmethod
-    def constituency_results(const, rent, biz_type):
-        if (
-            BusinessPremises.query.filter_by(
-                constituency=const, for_rent=rent, type_of_business_premise=biz_type
-            ).count()
-            > 2
-        ):
-            return str(
-                BusinessPremises.query.filter_by(
-                    constituency=const, for_rent=rent, type_of_business_premise=biz_type
-                )
-                .order_by(func.random())
-                .limit(2)
-                .all()
-            )[1:-1]
-
-        if (
-            0
-            < BusinessPremises.query.filter_by(
-                constituency=const, for_rent=rent, type_of_business_premise=biz_type
-            ).count()
-            <= 2
-        ):
-            return str(
-                BusinessPremises.query.filter_by(
-                    constituency=const, for_rent=rent, type_of_business_premise=biz_type
-                ).all()
-            )[1:-1]
-
-        if not BusinessPremises.query.filter_by(
-            constituency=const, for_rent=rent, type_of_business_premise=biz_type
-        ):
-            return "No records at the moment\nTry again later\n"
-
-    @staticmethod
-    def ward_results(ward, rent, biz_type):
-        if (
-            BusinessPremises.query.filter_by(
-                ward=ward, for_rent=rent, type_of_business_premise=biz_type
-            ).count()
-            > 2
-        ):
-            return str(
-                BusinessPremises.query.filter_by(
-                    ward=ward, for_rent=rent, type_of_business_premise=biz_type
-                )
-                .order_by(func.random())
-                .limit(2)
-                .all()
-            )[1:-1]
-
-        if (
-            0
-            < BusinessPremises.query.filter_by(
-                ward=ward, for_rent=rent, type_of_business_premise=biz_type
-            ).count()
-            <= 2
-        ):
-            return str(
-                BusinessPremises.query.filter_by(
-                    ward=ward, for_rent=rent, type_of_business_premise=biz_type
-                ).all()
-            )[1:-1]
-
-        if not BusinessPremises.query.filter_by(
-            ward=ward, for_rent=rent, type_of_business_premise=biz_type
-        ):
-            return "No records at the moment\nTry again later\n"
-
-    @staticmethod
-    def city_or_town_results(city_or_town, rent, biz_type):
-        if (
-            BusinessPremises.query.filter_by(
-                name_of_city_or_town=city_or_town,
-                for_rent=rent,
-                type_of_business_premise=biz_type,
-            ).count()
-            > 2
-        ):
-            return str(
-                BusinessPremises.query.filter_by(
-                    name_of_city_or_town=city_or_town,
-                    for_rent=rent,
-                    type_of_business_premise=biz_type,
-                )
-                .order_by(func.random())
-                .limit(2)
-                .all()
-            )[1:-1]
-
-        if (
-            0
-            < BusinessPremises.query.filter_by(
-                name_of_city_or_town=city_or_town,
-                for_rent=rent,
-                type_of_business_premise=biz_type,
-            ).count()
-            <= 2
-        ):
-            return str(
-                BusinessPremises.query.filter_by(
-                    name_of_city_or_town=city_or_town,
-                    for_rent=rent,
-                    type_of_business_premise=biz_type,
-                ).all()
-            )[1:-1]
-
-        if not BusinessPremises.query.filter_by(
-            name_of_city_or_town=city_or_town,
-            for_rent=rent,
-            type_of_business_premise=biz_type,
-        ):
-            return "No records at the moment\nTry again later\n"
 
 
 class Land(db.Model):

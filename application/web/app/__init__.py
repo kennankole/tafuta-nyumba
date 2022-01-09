@@ -23,21 +23,27 @@ migrate = Migrate()
 cache = redis.from_url(os.environ.get("REDIS_URL", "redis://localhost"))
 
 
-def create_app(testing=False):
+def create_app(test_config=None):
     """Initialize the core of the app"""
     app = Flask(__name__, instance_relative_config=False)
 
-    if app.testing:
-        app.config.from_object(conf.TestingConfig)
-    else:
-        app.config.from_object(conf.Config)
+    if test_config is None:
+        if app.config["ENV"] == 'development':
+            app.config.from_object(conf.DevelopmentConfig)
+        if app.config['ENV'] == 'production':
+            app.config.from_object(conf.Config)
+    if test_config:
+        app.config.from_object(conf.TestConfigs)
 
     db.init_app(app)
     with app.app_context():
         from app.views import views
-
+        from app.houses import routes
+        
         app.register_blueprint(views)
+        app.register_blueprint(routes.bp)
+        
         db.create_all()
         migrate.init_app(app, db, render_as_batch=True)
 
-        return app
+    return app

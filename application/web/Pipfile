@@ -20,6 +20,7 @@ isort = "*"
 python-decouple = "*"
 Flask-And-Redis = "*"
 flask-redis = "*"
+flask-wtf = "*"
 
 [dev-packages]
 

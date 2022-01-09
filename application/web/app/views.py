@@ -2,7 +2,16 @@ import json
 import uuid
 
 import africastalking
-from app import cache
+from flask import Blueprint, g, make_response, request, render_template, flash
+from flask.helpers import url_for
+from sqlalchemy.sql.functions import mode
+from werkzeug.utils import redirect
+
+from app.houses.forms import HouseRegistrationForm, UpdateHousesForm
+from app.hostels.forms import HostelRegistrationForm
+
+from app import cache, db
+from app import models
 from app.business.menu import BusinessPremisesQueryMainMenu
 from app.business.registration import BusinessPremisesRegistrationMenu
 from app.business.results import BusinessPremisesQueryResults
@@ -14,14 +23,15 @@ from app.houses.houses_query_menu import HousesQueryMainMenu
 from app.houses.registration import HousesRegistrationMenu
 from app.houses.results import HousesQueryResults
 from app.menu.menu import LowerLevelMenu
-from flask import Blueprint, g, make_response, request
+
+
 
 views = Blueprint("views", __name__)
 
 @views.route("/payment", methods=["POST", "GET"])
 def payment_service():
     status = request.values.get("status")
-    
+    return status
 
 @views.route("/", methods=["POST", "GET"])
 def ussd_callback():
@@ -160,3 +170,31 @@ def ussd_callback():
         response.headers["Content-Type"] = "text/plain"
         return response
 
+
+@views.route("/home", methods=["POST", "GET"])
+def home_page():
+    return render_template("home.html")
+
+
+
+@views.route("/hostels", methods=["POST", "GET"])
+def hostels_page():
+    hostels = models.Hostels.query.all()
+    return render_template("hostels.html", hostels=hostels)
+
+
+@views.route("/business", methods=["POST", "GET"])
+def business_premises_page():
+    business = models.BusinessPremises.query.all()
+    return render_template("business.html", business=business)
+
+
+     
+@views.route("/hostels/data", methods=["GET", "POST"])
+def hostels_create_view():
+    form = HostelRegistrationForm()
+    return render_template("create_hostels.html", form=form)
+
+    
+
+    

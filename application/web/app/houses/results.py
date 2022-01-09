@@ -23,33 +23,21 @@ class HousesQueryResults(HousesQueryMenu):
         if self.session.get("buy_house"):
             rent = False
             service_type = "buying"
-        storing_user_records(self.phone_number, service_type,get_type_of_house(hse_id, houses))
-        if (
-            Houses.query.filter_by(
-                constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
-            ).count()
-            > 2
-        ):
-            menu_text = f"{get_type_of_house(hse_id, houses)} in {const}\n"
-            menu_text += f"{str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).order_by(func.random()).limit(2).all())[1:-1]}"
+            
+        storing_user_records(self.phone_number, service_type, get_type_of_house(hse_id, houses))
+        house = Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).count()
+        if house > 2:
+            menu_text = f"{Houses.get_const_houses(const=const, rent=rent, hse_type=get_type_of_house(hse_id, houses))}"
+            menu_text += f"{get_type_of_house(hse_id, houses)} in {const}\n"
             menu_text += "Re-enter constituency name to see more results\n"
             menu_text += f"{const.title()} >> (next)\n"
-            return self.ussd_continue(menu_text)
-
-        if (
-            0
-            < Houses.query.filter_by(
-                constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
-            ).count()
-            <= 2
-        ):
-            menu_text = f"{str(Houses.query.filter_by(constituency=const, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-
+            return self.ussd_continue(menu_text) 
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"{get_type_of_house(hse_id, houses)} in {const}\n"
+            menu_text = f"{Houses.get_const_houses(const=const, rent=rent, hse_type=get_type_of_house(hse_id, houses))}"
             return self.ussd_end(menu_text)
 
+        
     @charge_users_decorator
     @location_decorator(level=22, message="Enter Ward")
     def houses_ward_query_results(self):
@@ -63,32 +51,19 @@ class HousesQueryResults(HousesQueryMenu):
             rent = False
             service_type = "buying"
         storing_user_records(self.phone_number, service_type,get_type_of_house(hse_id, houses))
-        if (
-            Houses.query.filter_by(
-                ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
-            ).count()
-            > 2
-        ):
-            menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
-            menu_text += f"{str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).order_by(func.random()).limit(2).all())[1:-1]}"
-            menu_text += "Re-enter ward  to see more results\n"
+        
+        if Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).count() > 2:
+            menu_text = f"{Houses.get_const_houses(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, houses))}"
+            menu_text += f"{get_type_of_house(hse_id, houses)} in {ward}\n"
+            menu_text += "Re-enter constituency name to see more results\n"
             menu_text += f"{ward.title()} >> (next)\n"
-            return self.ussd_continue(menu_text)
-
-        if (
-            0
-            < Houses.query.filter_by(
-                ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)
-            ).count()
-            <= 2
-        ):
-            menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
-            menu_text += f"{str(Houses.query.filter_by(ward=ward, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-
+            return self.ussd_continue(menu_text) 
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"{get_type_of_house(hse_id, houses)} in {ward}\n"
+            menu_text = f"{Houses.get_ward_houses(ward=ward, rent=rent, hse_type=get_type_of_house(hse_id, houses))}"
             return self.ussd_end(menu_text)
+    
+        
 
     @charge_users_decorator
     @names_decorator(level=23, message="Enter Estate or village name")
@@ -103,35 +78,16 @@ class HousesQueryResults(HousesQueryMenu):
             rent = False
             service_type = "buying"
         storing_user_records(self.phone_number, service_type,get_type_of_house(hse_id, houses))
-        if (
-            Houses.query.filter_by(
-                name_of_estate_or_village=estate,
-                for_rent=rent,
-                type_of_house=get_type_of_house(hse_id, houses)
-            ).count()
-            > 2
-        ):
+        
+        if Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).count() > 2:
             menu_text = f"{get_type_of_house(hse_id, houses)} in {estate}\n"
-            menu_text += f"{str(Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{Houses.get_village_houses(name=estate, rent=rent, hse_type=get_type_of_house(hse_id, houses))}"
             menu_text += "Re-enter estate  to see more results\n"
             menu_text += f"{estate.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
-
-        if (
-            0
-            < Houses.query.filter_by(
-                name_of_estate_or_village=estate,
-                for_rent=rent,
-                type_of_house=get_type_of_house(hse_id, houses)
-            ).count()
-            <= 2
-        ):
-            menu_text = f"{get_type_of_house(hse_id, houses)} in {estate}\n"
-            menu_text += f"{str(Houses.query.filter_by(name_of_estate_or_village=estate, for_rent=rent, type_of_house=get_type_of_house(hse_id, houses)).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"{get_type_of_house(hse_id, houses)} in {estate}\n"
+            menu_text = f"{Houses.get_village_houses(name=estate, rent=rent, hse_type=get_type_of_house(hse_id, houses))}"
             return self.ussd_end(menu_text)
 
     def execute(self):
