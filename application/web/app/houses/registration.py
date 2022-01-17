@@ -93,7 +93,7 @@ class HousesRegistrationMenu(Menu):
     def save_data(self):
         units = self.session.get("units")
         price = self.session.get("price")
-        chargeable_amount = (0.05 * int(price)) * int(units)
+        chargeable_amount = (0.05 * int(price) * int(units))
         for_rent = bool
         house = get_type_of_house(self.session.get("hse_type"), houses)
         if self.session.get("rent_out_house"):

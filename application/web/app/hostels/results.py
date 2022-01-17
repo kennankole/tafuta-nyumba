@@ -13,13 +13,14 @@ class HostelsQueryResults(HostelsQueryMenu):
         schl_name = self.user_response
         
         if Hostels.query.filter_by(school_name=schl_name).count() > 2:
-            menu_text = f"Hostels in {Hostels.get_hostels_school_name(name=schl_name)}\n"
+            menu_text = f"Hostels in {schl_name}\n"
             menu_text += f"{Hostels.get_hostels_school_name(name=schl_name)}"
             menu_text += "Re-enter school name to see more results\n"
             menu_text += f"{schl_name.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         else:
-            menu_text = f"Hostels in {Hostels.get_hostels_school_name(name=schl_name)}\n"
+            menu_text = f"Hostels in {schl_name}\n"
+            menu_text += f"{Hostels.get_hostels_school_name(name=schl_name)}\n"
             return self.ussd_end(menu_text)
         
 

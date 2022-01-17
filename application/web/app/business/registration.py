@@ -113,11 +113,13 @@ class BusinessPremisesRegistrationMenu(Menu):
     @charge_users_decorator
     @phone_number_decorator(level=309, message="Enter alternate contact")
     def save_data(self):
+        price = self.session.get("price")
+        units = self.session.get("units")
         for_rent = False
+        chargeable_amount = (0.05 * int(price) * int(units))
         biz_premises = get_type_of_business_premises(
             self.session.get("biz_type"), types_of_business_premises
         )
-        chargeable_amount = (0.05 * int(self.session.get("price"))) * int(self.session.get("units"))
         menu_text = f"To complete registration, we are sending you an M-Pesa checkout of {chargeable_amount}\nPriced at 5% per unit price\n"
         menu_text += f"Your {biz_premises} have been successfully registered\n"
         
