@@ -76,7 +76,7 @@ class HostelsRegistrationMenu(Menu):
     def save_data(self):
         units = self.session.get("units")
         price = self.session.get("price")
-        chargeable_amount = (0.05 * int(price) * int(units))
+        chargeable_amount = (0.05 * int(price)) * int(units)
         hostel = Hostels(
             county=self.session.get("county"),
             constituency=self.session.get("constituency"),
