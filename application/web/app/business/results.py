@@ -12,7 +12,6 @@ from app.utils import storing_user_records
 class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
     @charge_users_decorator
     @names_decorator(level=201, message="Enter name of city or town\n")
-    # @location_decorator(level=201, message="Enter name of city or town\n")
     def biz_premises_city_or_town_results(self):
         rent = bool
         biz_id = self.session.get("biz_type")
@@ -30,17 +29,14 @@ class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
         )
         if BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() > 2:
             menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {city_or_town}\n"
-            menu_text += f"{str(BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
+            menu_text += f"{BusinessPremises.get_name_of_city_business(name=city_or_town, rent=rent, hse_type=get_type_of_business_premises(biz_id, types_of_business_premises))}"
             menu_text += "Re-enter name of the city to see more results\n"
             menu_text += f"{city_or_town.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
-            menu_text = f"{str(BusinessPremises.query.filter_by(name_of_city_or_town=city_or_town, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-        
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {city_or_town}\n"
+            menu_text += f"{BusinessPremises.get_name_of_city_business(name=city_or_town, rent=rent, hse_type=get_type_of_business_premises(biz_id, types_of_business_premises))}"
             return self.ussd_end(menu_text)
 
     @charge_users_decorator
@@ -60,21 +56,19 @@ class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
             service_type,
             get_type_of_business_premises(biz_id, types_of_business_premises),
         )
-        if BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() > 2:
+        
+        if BusinessPremises.query.filter_by(constituency=const, for_rent=rent,  type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() > 2:
             menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {const}\n"
-            menu_text += f"{str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
-            menu_text += "Re-enter constituency name to see more results\n"
+            menu_text += f"{BusinessPremises.get_const_business(const=const, rent=rent, hse_type=get_type_of_business_premises(biz_id, types_of_business_premises))}"
+            menu_text += "Re-enter name of the city to see more results\n"
             menu_text += f"{const.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
-            menu_text = f"{str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
+        else:
+            menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {const}\n"
+            menu_text += f"{BusinessPremises.get_const_business(const=const, rent=rent, hse_type=get_type_of_business_premises(biz_id, types_of_business_premises))}"
             return self.ussd_end(menu_text)
         
-        else:
-            menu_text = "No records\nKindly try again later\n"
-            return self.ussd_end(menu_text)
-
 
     @charge_users_decorator
     @location_decorator(level=203, message="Enter Ward")
@@ -93,20 +87,16 @@ class BusinessPremisesQueryResults(BusinessPremisesQueryMenu):
             service_type,
             get_type_of_business_premises(biz_id, types_of_business_premises),
         )
-    
         if BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() > 2:
             menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {ward}\n"
-            menu_text += f"{str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).order_by(func.random()).limit(2).all())[1:-1]}"
-            menu_text += "Re-enter ward name to see more results\n"
+            menu_text += f"{BusinessPremises.get_ward_business(ward=ward, rent=rent, hse_type=get_type_of_business_premises(biz_id, types_of_business_premises))}"
+            menu_text += "Re-enter name of the city to see more results\n"
             menu_text += f"{ward.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
         
-        if 0 < BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).count() <= 2:
-            menu_text = f"{str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent, type_of_business_premise=get_type_of_business_premises(biz_id, types_of_business_premises)).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-        
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"{get_type_of_business_premises(biz_id, types_of_business_premises)} in {ward}\n"
+            menu_text += f"{BusinessPremises.get_ward_business(ward=ward, rent=rent, hse_type=get_type_of_business_premises(biz_id, types_of_business_premises))}"
             return self.ussd_end(menu_text)
     
     def execute(self):

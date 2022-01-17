@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujuzi.io</title>
+</head>
+<body>
+    <h3>Available Hostels</h3>
+    <div class="di">
+    {% for hostel in hostels %}     
+    <tr>
+        <p>
+         <a href="{{ url_for('hostel.hostel_detail_view', id=hostel.id) }}">   {{hostel.units}} units of {{hostel.type_of_hostel}} 
+            @{{hostel.price}} Shillings located in
+        </a>
+        </p>
+    </tr>
+    {% endfor %}
+    </div>
+</body>
+</html>

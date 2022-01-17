@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujuzi.io</title>
+</head>
+<body>
+    <h3>Available business premises</h3>
+    <div class="di">
+    {% for business in biz %}     
+    <tr>
+        <p>
+         <a href="{{ url_for('business.business_detail_view', id=business.id) }}">   {{business.units}} units of {{business.type_of_business}} 
+            @{{business.price}} Shillings located in
+        </a>
+        </p>
+    </tr>
+    {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Business Premises</title>
+</head>
+<body>
+    <h1>Register business premises</h1>
+    <div class="container">
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p>
+            {{ form.county.label }}
+            {{ form.county(size=20, placeholder="Nairobi") }} <br>
+        </p>
+        <p>
+            {{ form.constituency.label }}
+            {{ form.constituency(size=20, placeholder="Ruaraka") }} <br>
+        </p>
+        <p>
+            {{ form.ward.label }} 
+            {{ form.ward(size=20, placeholder="Korogocho") }} <br>
+        </p>
+        <p>
+            {{ form.school_name.label }} 
+            {{ form.school_name(size=20, placeholder="Nairobi") }} <br>
+        </p>
+        <p> {{ form.units.label }}
+            {{ form.units(size=20, placeholder="4") }} <br>
+        </p>
+        
+        <p>
+            {{ form.price.label }}
+            {{ form.price(size=20, placeholder="100 Ksh.") }}</br>
+        </p>
+        <p>
+            {{ form.alternate_contact.label }}
+            {{ form.alternate_contact(size=20,  placeholder="07....")}} <br>
+        </p>
+        <p>
+            {{ form.submit(size=5)}} <br>
+        </p>
+    </form>
+</div>
+</body>
+</html>

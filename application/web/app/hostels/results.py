@@ -5,28 +5,21 @@ from app.hostels.menu import HostelsQueryMenu
 from app.models import Hostels
 from app.utils import storing_user_records
 
-
 class HostelsQueryResults(HostelsQueryMenu):
     @charge_users_decorator
     @names_decorator(level=80, message="Enter name of college or university")
     def hostels_query_results_by_school_name(self):
         storing_user_records(self.phone_number, "renting", "Hostels")
         schl_name = self.user_response
-        menu_text = f"Hostels in {schl_name}\n"
-        menu_text += f"{Hostels.school_query_results(schl_name=schl_name)}\n"
-        menu_text += f"{schl_name.title()} >> (next)\n"
+        
         if Hostels.query.filter_by(school_name=schl_name).count() > 2:
-            menu_text = f"Hostels in {schl_name}\n"
+            menu_text = f"Hostels in {Hostels.get_hostels_school_name(name=schl_name)}\n"
+            menu_text += f"{Hostels.get_hostels_school_name(name=schl_name)}"
             menu_text += "Re-enter school name to see more results\n"
             menu_text += f"{schl_name.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
-        
-        if 0 < Hostels.query.filter_by(school_name=schl_name).count() <= 2:
-            menu_text = f"{str(Hostels.query.filter_by(school_name=schl_name).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"Hostels in {Hostels.get_hostels_school_name(name=schl_name)}\n"
             return self.ussd_end(menu_text)
         
 
@@ -35,18 +28,15 @@ class HostelsQueryResults(HostelsQueryMenu):
     def hostels_query_results_by_constituency(self):
         const = self.user_response
         storing_user_records(self.phone_number, "renting", "Hostels")
+        
         if Hostels.query.filter_by(constituency=const).count() > 2:
             menu_text = f"Hostels in {const}\n"
-            menu_text += "Re-enter constituency name to see more results\n"
+            menu_text += f"{Hostels.get_const_hostels(const=const)}"
+            menu_text += "Re-enter school name to see more results\n"
             menu_text += f"{const.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
-
-        if 0 < Hostels.query.filter_by(constituency=const).count() <= 2:
-            menu_text = f"{str(Hostels.query.filter_by(constituency=const).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-        
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"Hostels in {const}\n"
             return self.ussd_end(menu_text)
         
         
@@ -55,20 +45,17 @@ class HostelsQueryResults(HostelsQueryMenu):
     def hostels_query_results_by_ward(self):
         ward = self.user_response
         storing_user_records(self.phone_number, "renting", "Hostels")
+        
         if Hostels.query.filter_by(ward=ward).count() > 2:
             menu_text = f"Hostels in {ward}\n"
-            menu_text += "Re-enter ward name to see more results\n"
+            menu_text += f"{Hostels.get_ward_hostels(ward=ward)}"
+            menu_text += "Re-enter school name to see more results\n"
             menu_text += f"{ward.title()} >> (next)\n"
             return self.ussd_continue(menu_text)
-        
-        if 0 < Hostels.query.filter_by(ward=ward).count() <= 2:
-            menu_text = f"{str(Hostels.query.filter_by(ward=ward).all())[1:-1]}"
-            return self.ussd_end(menu_text)
-        
         else:
-            menu_text = "No records\nKindly try again later\n"
+            menu_text = f"Hostels in {ward}\n"
             return self.ussd_end(menu_text)
-
+        
 
     def execute(self):
         level = self.session.get("level")

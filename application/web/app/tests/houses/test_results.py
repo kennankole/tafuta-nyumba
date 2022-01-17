@@ -1,4 +1,3 @@
-from sqlalchemy.sql.functions import mode
 from app.houses.results import HousesQueryResults
 from app import models
 from mixer.backend.flask import mixer

@@ -14,7 +14,7 @@ def test_creating_house(client):
         "county": 'Nairobi',
         "constituency": 'Ruaraka',
         "ward": 'Korogocho',
-        "name_of_estate_or_village":'Highridge',
+        "name_of_estate_or_village": 'Highridge',
         "type_of_house": 'Single room',
         "units": 4,
         "price": 1500,
@@ -23,7 +23,6 @@ def test_creating_house(client):
     }
     response = client.post("/houses/data", data=data, follow_redirects=True)
     assert response.status_code == 200
-
 
 
 

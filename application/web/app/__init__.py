@@ -39,9 +39,14 @@ def create_app(test_config=None):
     with app.app_context():
         from app.views import views
         from app.houses import routes
+        from app.hostels.routes import hostels
+        from app.business.routes import business
         
         app.register_blueprint(views)
         app.register_blueprint(routes.bp)
+        app.register_blueprint(hostels)
+        app.register_blueprint(business)
+        
         
         db.create_all()
         migrate.init_app(app, db, render_as_batch=True)

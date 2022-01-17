@@ -177,23 +177,7 @@ def home_page():
 
 
 
-@views.route("/hostels", methods=["POST", "GET"])
-def hostels_page():
-    hostels = models.Hostels.query.all()
-    return render_template("hostels.html", hostels=hostels)
 
-
-@views.route("/business", methods=["POST", "GET"])
-def business_premises_page():
-    business = models.BusinessPremises.query.all()
-    return render_template("business.html", business=business)
-
-
-     
-@views.route("/hostels/data", methods=["GET", "POST"])
-def hostels_create_view():
-    form = HostelRegistrationForm()
-    return render_template("create_hostels.html", form=form)
 
     
 

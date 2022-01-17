@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business premise</title>
+ {{ biz }}
+</head>
+<body>
+    <p>
+    <h3> {{biz.units}} units of {{ biz.type_of_biz }} are available in {{biz.name_of_estate_or_village}} estate</h3>
+    <h4>Ward: {{biz.ward}} <br>
+        Constituency: {{biz.constituency}} <br>
+        County: {{biz.county}} <br>
+    </h4>
+    </p>
+    <p>
+        @{{biz.price}} Shillings Per unit
+    </p>
+    <p>
+    Contact the owner:  {{biz.contacts}} / {{biz.alternate_contact}}
+    </p>
+    <p>
+        <a href="{{ url_for('business.business_update_view', id=biz.id) }}">Update</a>
+    </p>
+    <p>
+        <form action="{{ url_for('business.business_delete_view', id=biz.id) }}" method="post">
+            <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+        </form>
+    </p>
+</body>
+</html>

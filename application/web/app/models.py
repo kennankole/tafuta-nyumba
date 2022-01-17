@@ -69,6 +69,39 @@ class Hostels(db.Model):
         return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n 1: {self.contacts} 2: {self.alternate_contact}"
 
     
+    @staticmethod
+    def get_const_hostels(const):
+        if Hostels.query.filter_by(constituency=const).count() > 2:
+            return str(Hostels.query.filter_by(constituency=const).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < Hostels.query.filter_by(constituency=const).count() <= 2:
+            return str(Hostels.query.filter_by(constituency=const).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+        
+    @staticmethod
+    def get_hostels_school_name(name):
+        if Hostels.query.filter_by(school_name=name).count() > 2:
+            return str(Hostels.query.filter_by(school_name=name).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < Hostels.query.filter_by(school_name=name).count() <= 2:
+            return str(Hostels.query.filter_by(school_name=name).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+       
+       
+    @staticmethod
+    def get_ward_hostels(ward):
+        if Hostels.query.filter_by(ward=ward).count() > 2:
+            return str(Hostels.query.filter_by(ward=ward).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < Hostels.query.filter_by(ward=ward).count() <= 2:
+            return str(Hostels.query.filter_by(ward=ward).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
     
 class BusinessPremises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -89,6 +122,41 @@ class BusinessPremises(db.Model):
         return f"{self.units} unit(s) available @{self.price} each.\nOwner's contacts\n1: {self.contacts} 2: {self.alternate_contact}"
 
 
+    @staticmethod
+    def get_const_business(const, rent, hse_type):
+        if BusinessPremises.query.filter_by(constituency=const, for_rent=rent,  type_of_business_premise=hse_type).count() > 2:
+            return str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent,  type_of_business_premise=hse_type).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < BusinessPremises.query.filter_by(constituency=const, for_rent=rent,  type_of_business_premise=hse_type).count() <= 2:
+            return str(BusinessPremises.query.filter_by(constituency=const, for_rent=rent,  type_of_business_premise=hse_type).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+        
+        
+    @staticmethod
+    def get_ward_business(ward, rent, hse_type):
+        if BusinessPremises.query.filter_by(ward=ward, for_rent=rent,  type_of_business_premise=hse_type).count() > 2:
+            return str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent,  type_of_business_premise=hse_type).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < BusinessPremises.query.filter_by(ward=ward, for_rent=rent,  type_of_business_premise=hse_type).count() <= 2:
+            return str(BusinessPremises.query.filter_by(ward=ward, for_rent=rent,  type_of_business_premise=hse_type).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+       
+       
+    @staticmethod
+    def get_name_of_city_business(name, rent, hse_type):
+        if BusinessPremises.query.filter_by(name_of_city_or_town=name, for_rent=rent,  type_of_business_premise=hse_type).count() > 2:
+            return str(BusinessPremises.query.filter_by(name_of_city_or_town=name, for_rent=rent,  type_of_business_premise=hse_type).order_by(func.random()).limit(2).all())[1:-1]
+        
+        elif 0 < BusinessPremises.query.filter_by(name_of_city_or_town=name, for_rent=rent,  type_of_business_premise=hse_type).count() <= 2:
+            return str(BusinessPremises.query.filter_by(name_of_city_or_town=name, for_rent=rent,  type_of_business_premise=hse_type).all())[1:-1]
+        
+        else:
+            return "No records\nKindly try again later\n"
+        
 class Land(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     county = db.Column(db.String(64), index=True)

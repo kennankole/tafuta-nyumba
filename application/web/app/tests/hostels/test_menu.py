@@ -10,7 +10,6 @@ def test_search_hostels_by_school_name(client):
         assert hostels_query_menu.user_response == "1"
         assert hostels_query_menu.hostels_searching_menu()
 
-
 def test_search_hostels_by_constituency(client):
     with client.session_transaction() as session:
         hostels_query_menu = HostelsQueryMenu(
@@ -32,9 +31,9 @@ def test_search_hostels_by_ward(client):
 def test_invalid_input_hostels_search(client):
     with client.session_transaction() as session:
         hostels_query_menu = HostelsQueryMenu(
-            session=session, session_id="qwerty124", user_response=""
+            session=session, session_id="qwerty124", user_response="#$"
         )
-        assert hostels_query_menu.user_response == ""
+        assert hostels_query_menu.user_response == "#$"
         assert hostels_query_menu.hostels_searching_menu()
 
 
@@ -53,15 +52,6 @@ def test_decline_hostel_registeration(client):
             session=session, session_id="qwerty124", user_response="2"
         )
         assert hostels_query_menu.user_response == "2"
-        assert hostels_query_menu.hostels_registration_menu()
-
-
-def test_invalid_input_decline_hostel_registeration(client):
-    with client.session_transaction() as session:
-        hostels_query_menu = HostelsRegistrationMenu(
-            session=session, session_id="qwerty124", user_response=""
-        )
-        assert hostels_query_menu.user_response == ""
         assert hostels_query_menu.hostels_registration_menu()
 
 

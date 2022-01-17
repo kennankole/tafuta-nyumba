@@ -1,3 +1,4 @@
+from typing import AbstractSet
 from app.business.registration import BusinessPremisesRegistrationMenu
 
 
@@ -162,11 +163,15 @@ def test_save_rental_biz_premises(client):
             session=session, session_id="qwerty12345", user_response="078945780"
         )
         rental_biz_premises.session["rent_out_biz_premises"] = "2"
+        rental_biz_premises.session['units'] = 4
+        rental_biz_premises.session['price'] = 400
         rental_biz_premises.session["level"] = 400
         for_rent = True
         assert rental_biz_premises.session.get("rent_out_biz_premises") == "2"
         assert for_rent
         assert rental_biz_premises.session.get("level") == 400
+        assert rental_biz_premises.session.get("price") == 400 
+        assert rental_biz_premises.session.get("units") == 4
         assert rental_biz_premises.user_response == "078945780"
         # assert rental_biz_premises.save_data()
         assert rental_biz_premises.execute()
@@ -180,9 +185,12 @@ def test_save_biz_premises_for_sale(client):
         for_rent = False
         biz_premises_for_sale.session["sell_business"] = "4"
         biz_premises_for_sale.session["level"] = 400
+        biz_premises_for_sale.session['price'] = 300
+        biz_premises_for_sale.session['units'] = 5
         assert not for_rent
         assert biz_premises_for_sale.user_response == "078945780"
+        assert biz_premises_for_sale.session.get('price') == 300 
+        assert biz_premises_for_sale.session.get('units') == 5
         assert biz_premises_for_sale.session.get("level") == 400
         assert biz_premises_for_sale.session.get("sell_business") == "4"
-        # assert biz_premises_for_sale.save_data()
         assert biz_premises_for_sale.execute()

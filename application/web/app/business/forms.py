@@ -24,12 +24,14 @@ def validate_location(form, field):
         raise ValidationError(f"{field.data} is an invalid location")
     
 
-class HouseRegistrationForm(FlaskForm):
+class BusinessPremisesRegistrationForm(FlaskForm):
     county = StringField('County', [DataRequired(), validate_names, validate_location])
     constituency = StringField('Constituency', [DataRequired(), validate_names, validate_location])
     ward = StringField('Ward', [DataRequired(), validate_names, validate_location])
-    name_of_estate_or_village = StringField('Name of estate or village', [DataRequired(), validate_names])
-    type_of_house = StringField('Type of house', [DataRequired(), validate_names])
+    name_of_city_or_town = StringField('Name of estate or village', [DataRequired(), validate_names])
+    street_name = StringField('Street name', [DataRequired(), validate_names])
+    type_of_business_premise = StringField('Type of business premise', [DataRequired(), validate_names])
+    area = IntegerField('Floor area', [DataRequired(), validate_int_fields])
     units = IntegerField('Units', [DataRequired(), validate_int_fields])
     price = IntegerField('Price', [DataRequired(), validate_int_fields])
     alternate_contact = TelField('Mobile number', [DataRequired()])
@@ -37,7 +39,7 @@ class HouseRegistrationForm(FlaskForm):
     submit = SubmitField('Register')
         
     
-class UpdateHousesForm(FlaskForm):
+class BusinessPremisesUpdateForm(FlaskForm):
     units = IntegerField('Units', [DataRequired(), validate_int_fields])
     price = IntegerField('Price', [DataRequired(), validate_int_fields])
     alternate_contact = TelField('Mobile number', [DataRequired()])
@@ -45,5 +47,7 @@ class UpdateHousesForm(FlaskForm):
     submit = SubmitField('Update')
     
 
+    
+  
     
     

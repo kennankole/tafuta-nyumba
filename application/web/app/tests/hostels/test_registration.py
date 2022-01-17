@@ -109,5 +109,7 @@ def test_save_hostels(client):
             session=session, session_id="qwerty12945", user_response="0789456789"
         )
         rental_hostels.session["level"] = 98
+        rental_hostels.session['price'] = 50
+        rental_hostels.session['units'] = 5
         assert rental_hostels.session.get("level") == 98
         assert rental_hostels.execute()
