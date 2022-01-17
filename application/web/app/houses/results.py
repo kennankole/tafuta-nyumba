@@ -11,7 +11,7 @@ from app.utils import storing_user_records
 
 
 class HousesQueryResults(HousesQueryMenu):
-    @charge_users_decorator
+    # @charge_users_decorator
     @location_decorator(level=21, message="Enter Constituency")
     def houses_const_query_results(self):
         rent = bool
@@ -38,7 +38,7 @@ class HousesQueryResults(HousesQueryMenu):
             return self.ussd_end(menu_text)
 
         
-    @charge_users_decorator
+    # @charge_users_decorator
     @location_decorator(level=22, message="Enter Ward")
     def houses_ward_query_results(self):
         rent = bool
@@ -65,7 +65,7 @@ class HousesQueryResults(HousesQueryMenu):
     
         
 
-    @charge_users_decorator
+    # @charge_users_decorator
     @names_decorator(level=23, message="Enter Estate or village name")
     def houses_village_estate_query_results(self):
         rent = bool
