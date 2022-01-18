@@ -133,6 +133,7 @@ def ussd_callback():
         )
         return menu.execute()
 
+
     if level >= 30:
         menu = HousesRegistrationMenu(
             session_id=session_id,

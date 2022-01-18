@@ -65,14 +65,14 @@ class HostelsRegistrationMenu(Menu):
         self.session["units"] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @numeric_decorator(level=98, message="Enter the price")
+    @numeric_decorator(level=97, message="Enter the price")
     def get_alternate_contact(self):
         menu_text = "Enter alternate contact\n"
-        self.session["level"] = 99
+        self.session["level"] = 98
         self.session["price"] = self.user_response
         return self.ussd_continue(menu_text)
 
-    @phone_number_decorator(level=99, message="Enter alternate contact")
+    @phone_number_decorator(level=98, message="Enter alternate contact")
     def save_data(self):
         units = self.session.get("units")
         price = self.session.get("price")
