@@ -114,7 +114,7 @@ class BusinessPremisesRegistrationMenu(Menu):
     @phone_number_decorator(level=309, message="Enter alternate contact")
     def save_data(self):
         price = self.session.get("price")
-        units = self.session.get("units")
+        units = self.session.get("biz_premises_units")
         for_rent = False
         chargeable_amount = (0.05 * int(price)) * int(units)
         biz_premises = get_type_of_business_premises(
