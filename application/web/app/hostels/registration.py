@@ -89,7 +89,7 @@ class HostelsRegistrationMenu(Menu):
         )
         db.session.add(hostel)
         db.session.commit()
-        menu_text = f"To complete your registration, we are sending you an M-Pesa checkout of {chargeable_amount}\nPriced at 5% of each unit"
+        menu_text = f"To complete your registration, we are sending you an M-Pesa checkout of {chargeable_amount}\nPriced at 5% of each unit\n"
         menu_text += "Your hostel has been successfully registered\n"
         return self.ussd_end(menu_text)
 

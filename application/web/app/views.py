@@ -168,7 +168,8 @@ def ussd_callback():
             "END Ujuzi real estate is out of service\nKind check later"
         )
         response.headers["Content-Type"] = "text/plain"
-        return response
+    return response
+    
 
 
 @views.route("/home", methods=["POST", "GET"])
