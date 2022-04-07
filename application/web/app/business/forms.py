@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 from wtforms.fields.simple import BooleanField, TelField
 from wtforms.validators import DataRequired, Length, ValidationError
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 from app.location import location
 
@@ -36,6 +37,7 @@ class BusinessPremisesRegistrationForm(FlaskForm):
     price = IntegerField('Price', [DataRequired(), validate_int_fields])
     alternate_contact = TelField('Mobile number', [DataRequired()])
     for_rent = BooleanField('Are you selling this property?', [DataRequired()] )
+    photo = FileField('Photo', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Register')
         
     
@@ -43,7 +45,8 @@ class BusinessPremisesUpdateForm(FlaskForm):
     units = IntegerField('Units', [DataRequired(), validate_int_fields])
     price = IntegerField('Price', [DataRequired(), validate_int_fields])
     alternate_contact = TelField('Mobile number', [DataRequired()])
-    for_rent = BooleanField('Are you selling this property?', [DataRequired()] )
+    for_rent = BooleanField('Are you selling this property?', [DataRequired()])
+    photo = FileField('Photo', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update')
     
 

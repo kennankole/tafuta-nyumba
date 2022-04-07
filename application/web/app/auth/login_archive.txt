@@ -1,0 +1,67 @@
+
+def save_photo(picture):
+    random_no = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(picture.filename)
+    picture_name = random_no + f_ext
+    picture_path = os.path.join(app.root_path, 'static/photos', picture_name)
+    
+    output_size = (250, 250)
+    i = Image.open(picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    
+    return picture_name
+
+@login_required
+@auth.route('/account', methods=['GET', 'POST'])
+def account():
+    form = UpdateAccount()
+    if form.validate_on_submit():
+        if form.photo.data:
+            picture_file = save_photo(form.photo.data)
+            current_user.photo = picture_file
+        current_user.name = form.name.data
+        db.session.commit()
+        flash("Your profile has been updated successfully")
+        return redirect(url_for('auth.account'))
+    elif request.method == 'GET':
+        form.name.data = current_user.name
+    photo_file = url_for('static', filename='photos/' + current_user.photo)
+    return render_template('auth/account.html', form=form, photo_file=photo_file)
+
+
+
+@auth.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        existing_user = User.query.filter_by(email=form.email.data).first()
+        if existing_user is None:
+            user = User(
+                name=form.name.data,
+                email=form.email.data
+            )
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            return redirect(url_for('auth.dashboard'))
+        flash('A user already exists with that email address')
+    return render_template('auth/signup.html', form=form)
+
+
+
+@auth.route('/logins', methods=['POST', 'GET'])
+def loginn():
+    if current_user.is_authenticated:
+        return redirect(url_for('auth.dashboard'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and user.check_password(password=form.password.data):
+            login_user(user)
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('auth.dashboard'))
+        flash("Invalid username/password combination")
+        return redirect(url_for('auth.login'))
+    return render_template('auth/login.html', form=form)

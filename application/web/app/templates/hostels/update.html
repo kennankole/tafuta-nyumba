@@ -4,23 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.3.2/dist/geosearch.css"/>
+    <script src="https://unpkg.com/leaflet-geosearch@3.3.2/dist/geosearch.umd.js"></script>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
+
     <title>Document</title>
 </head>
 <body>
-    <h4>Update hostels</h4>
-    <form action="" method="post">
-        {{ form.csrf_token }}
-        <p> {{ form.units.label }}
-            {{ form.units(size=20, placeholder="4") }} <br>
-        </p>
-        
+<div>
+</div>
+    <h4>Update hostel Details</h4>
+    <form action="" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Update asset valuation details</legend>
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            <p> {{ form.units.label() }}
+                {{ form.units(size=20, placeholder="4") }} <br>
+            </p>
+            
+            <p>
+                {{ form.price.label() }}
+                {{ form.price(size=20, placeholder="100 Ksh.") }}</br>
+            </p>
+        </fieldset>
+       
+        <fieldset>
+            <legend>Update Contact Details</legend>
+            <p>
+                {{ form.alternate_contact.label() }}
+                {{ form.alternate_contact(size=20,  placeholder="07....")}} <br>
+            </p>
+            <p>
+                {{ form.contacts.label() }}
+                {{ form.contacts(size=20,  placeholder="07....")}} <br>
+            </p>
+        </fieldset>
         <p>
-            {{ form.price.label }}
-            {{ form.price(size=20, placeholder="100 Ksh.") }}</br>
-        </p>
-        <p>
-            {{ form.alternate_contact.label }}
-            {{ form.alternate_contact(size=20,  placeholder="07....")}} <br>
+            {{ form.photo.label() }}
+            {{ form.photo(size=20,  placeholder="Image.jpg")}} <br>
         </p>
         <p>
             {{ form.submit(size=5)}} <br>

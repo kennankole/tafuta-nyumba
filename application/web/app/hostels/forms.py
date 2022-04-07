@@ -1,11 +1,13 @@
+from ast import For
 import json
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField
-from wtforms.fields.simple import TelField
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms import StringField, SubmitField, IntegerField, FieldList, Form, SelectField, FormField
+from wtforms.validators import DataRequired, ValidationError
+from flask_wtf.file import FileField
+from werkzeug.utils import secure_filename
 from wtforms.validators import DataRequired
+from app.models import Hostels
 
-from app.houses import forms as form
 
 from app.location import location
 
@@ -25,21 +27,22 @@ def validate_location(form, field):
     counties = json.loads(location)
     if field.data not in counties.__str__():
         raise ValidationError(f"{field.data} is an invalid location")
-    
-class HostelRegistrationForm(FlaskForm):
-    county = StringField('County', [DataRequired(), validate_location])
-    constituency = StringField('Constituency', [DataRequired(), validate_location])
-    ward = StringField('Ward', [DataRequired(), form.validate_names, validate_location])
-    school_name = StringField('Name School', [DataRequired(), validate_names])
-    units = IntegerField('Units', [DataRequired(), validate_int_fields])
-    price = IntegerField('Price', [DataRequired(), validate_int_fields])
-    alternate_contact = TelField('Mobile number', [DataRequired()])
-    submit = SubmitField('Register')
-    
-    
+
+
+class ListingStatus(Form):
+    listing_status = SelectField(choices=[
+        ('rent out', 'Rent Out'),
+        ('sale', 'Sale')
+    ])
+ 
 class HostelUpdateForm(FlaskForm):
     units = IntegerField('Units', [DataRequired(), validate_int_fields])
     price = IntegerField('Price', [DataRequired(), validate_int_fields])
-    alternate_contact = TelField('Mobile number', [DataRequired()])
-    submit = SubmitField('Register')
+    contacts = StringField('Mobile number 1', [DataRequired()])
+    listing_status = FieldList(FormField(ListingStatus))
+    alternate_contact = StringField('Mobile number 2', [DataRequired()])
+    photo  = FileField('Picture')
+    submit = SubmitField('Update')
+    
+    
     

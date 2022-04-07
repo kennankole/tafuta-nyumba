@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div class="media">
+            {% for img in image %}
+            <img class="rounded-circle account-img" src="{{ url_for('static', filename='images/' + img) }}">
+            <div class="media-body">
+            {% endfor %}
+            </div>
+    </div>
+    
+        <h4>Add Property Photos</h4>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            <p> {{ form.image.label() }}
+                {{ form.image(size=20) }} <br>
+            </p>
+            {{ form.description.label()}}
+            {{ form.description(size=100)}}
+            <p>
+                {{ form.submit(size=5)}} <br>
+            </p>
+        </form>
+</body>
+</html>

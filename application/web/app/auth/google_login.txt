@@ -1,0 +1,70 @@
+source:https://realpython.com/flask-google-login/
+
+Why Use Google Login for Your Users?
+
+It helps in doing  the following;
+    1. To securely managed users passwords 
+    2. You will not have to implement any account-related functionality such as:
+        two-factor authentication 
+        password reset
+    3. You will not have to worry about malicious login attempts
+    4. Your users will not have to remember their usernames and passwords 
+
+
+    In  nutshell, your application will only wait for users to go through authentication
+    in Google and Google then notifys your application about that user, and then you can grant 
+    them access to your application. 
+
+    Google handles the security for you. 
+
+How Applications Use Google Login
+
+    There are two very popular and important specifications called;
+    OAuth 2 and OpenID Connect (OIDC). 
+    OIDC is built on top of OAuth 2, adding a few new ideas and concepts.
+
+    These specifications define how a third-party application can obtain information from another service. 
+    This usually involves obtaining consent from a user.
+
+    Flow process in a nutshell;
+        Registering your application as a client to Google. 
+        The Google Login button sends your users to Google.
+        Google makes sure that the user consents to pass along their email and other information to your application. 
+        If the user consents, Google sends back some information to your application.
+        If not! too bad!!!
+        You then store that information and can reference it later, effectively logging the user in.
+
+
+OpenID Connect Details
+    To request information on behalf of a user, 
+    you must become a client to the authentication server, 
+    also known as the provider.
+    Note:Your third-party application is called here the client 
+    The client needs info from the provider (Google) on the user's behalf. 
+    For this to take place, the following steps are followed; 
+        a. Register a third-party application as a client to the provider:
+            1. You receive unique client credentials from the provider.
+            2. You’ll use these client credentials to authenticate (prove who you are) 
+            to the provider later on.
+        b. The client sends a request to the provider’s authorization URL
+        c. The provider asks the user to authenticate (prove who they are)
+        d. The provider asks the user to consent to the client acting on their behalf:
+            1. Usually this includes limited access, and it’s made clear to the user what the client is asking for.
+            2. This is like when you have to approve an app on your phone to have access to location or contacts.
+        e. The provider sends the client a unique authorization code.
+        f. The client sends the authorization code back to the Provider’s token URL.
+        g. The provider sends the client tokens to use with other provider URLs on behalf of the user.
+
+A word about OpenID Connect (OIDC);
+    OpenID Connect (OIDC) is built on top of OAuth 2, adding a few additional features and requirements, 
+    mostly involving the process of authentication. 
+    Other than the authentication mentioned in the flow above, 
+    the important OIDC concepts for your application are the provider configuration and userinfo endpoint.
+
+    The provider configuration contains information about the provider, including the exact URLs you need to use for the OAuth 2 flow. 
+    There’s a standard URL on an OIDC provider you can use to get back a document with standardized fields.
+
+
+    The "userinfo endpoint" will return information about the user after you’ve gone through the OAuth 2 flow. 
+    This will include their email and some basic profile information you’ll use in your application. 
+    In order to obtain this user information, you’ll need a token from the provider, as described in the last step in the flow above.

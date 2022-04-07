@@ -9,7 +9,7 @@
 <body>
     <h1>Register houses</h1>
     <div class="container">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <p>
             {{ form.county.label }}
@@ -46,6 +46,10 @@
         <p>
             {{ form.for_rent.label}}<br>
             {{ form.for_rent(size=1)}}
+        </p>
+        <p>
+            {{ form.image.label}}<br>
+            {{ form.image(size=1)}}
         </p>
         <p>
             {{ form.submit(size=5)}} <br>

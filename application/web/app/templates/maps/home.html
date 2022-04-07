@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.3.2/dist/geosearch.css"/>
+    <script src="https://unpkg.com/leaflet-geosearch@3.3.2/dist/geosearch.umd.js"></script>
+
+
+   
+   <link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('hostels.create_hostels')}}">
+        <fieldset>
+            <legend style="text-align: center;">Location Information</legend>
+            <lablel for="county">County</lablel>
+            <input type="text" id="county" name="county">
+
+            <lablel>Constituency</lablel>
+            <input type="text" id="constituency" name="constituency">
+
+            <lablel>Ward</lablel>
+            <input type="text" id="ward" name="ward">
+
+            <fieldset>
+                <legend style="text-align: center;">Click the map to populate field</legend>
+                <label for="latitude">Latitude:</label>
+                <input id="latitude" type="text" name="latitude" />
+
+                <label for="longitude">Longitude:</label>
+                <input id="longitude" type="text" name="longitude" placeholder="" />
+            </fieldset>
+        </fieldset>
+
+        <fieldset>
+            <legend style="text-align: center;">Asset valuation</legend>
+            <lablel for="price">Price</lablel>
+            <input type="integer" id="price" name="price">
+
+            <lablel for="units">Units</lablel>
+            <input type="integer" id="units" name="units" >
+        </fieldset>
+        <fieldset>
+            <legend style="text-align: center;">Listing status</legend>
+            <label for="listing">Select type of listing</label>
+            <select name="listing" id="listing">
+                <option value="rent_out">Rent Out</option>
+                <option value="sale">Sale</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend style="text-align: center;">Contact Information</legend>
+            <label for="contacts_1">Contacts</label>
+            <input type="integer" id="contacts_1" name="contacts_1">
+
+            <label for="contacts_2">Alternate contact</label>
+            <input type="integer" id="contacts_2" name="contacts_2">
+
+            <fieldset>
+                <legend style="text-align: center;">Name of school</legend>
+                <label for="school_name">School name</label>
+                <input type="text" id="school_name" name="school_name">
+            </fieldset>
+        </fieldset>
+        <button type="submit" >Save location</button>
+    </form>
+    <p>Enter Your Ward On The Address Bar To Add Your Property On The Map By Clicking</p>
+    <!--Map-->
+    <div id="map"></div>
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+
+
+{% block javascript %}
+    <script>
+        // Adding marker on click 
+        var newMarker;
+        function onMapClick(e){
+            lat = e.latlng.lat;
+            lon = e.latlng.lng;
+
+            if(newMarker){
+                map.removeLayer(newMarker);
+            }
+            newMarker = L.marker([lat, lon],{draggable: true}).addTo(map);
+            console.log("You clicked at "+ lat + "and " + lon)
+            newMarker.bindTooltip("<b>My Property location</b> "+ e.latlng.lat, e.latlng.lng, {opacity: 0.5}).openTooltip();
+            var data = newMarker.toGeoJSON(5)
+
+            $.ajax({
+                type: 'POST',
+                url:"{{url_for('map.capture_location_data')}}",
+                data: JSON.stringify(data),
+                dataType: "json"
+                });
+
+
+            document.getElementById('latitude').setAttribute('value', lat);
+            document.getElementById('longitude').setAttribute('value', lon);
+        }
+        map.on('click', onMapClick);
+
+    // Leaflet geosearch 
+        var searchControl = new GeoSearch.SearchControl({
+            style: 'bar',
+            provider: new GeoSearch.OpenStreetMapProvider(),
+        });
+        map.addControl(searchControl);
+
+    </script>
+{% endblock %}
+{% else %}
+<p>Welcome to Ujuzi.io</p>
+    <!--Map-->
+    {% include 'maps/index.html' %}
+{% endif %}
+</body>
+</html>
+
+
+
+
+
+

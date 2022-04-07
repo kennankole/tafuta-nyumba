@@ -7,14 +7,12 @@
     <title>Ujuzi.io</title>
 </head>
 <body>
-    <h3>Available Hostels</h3>
     <div class="di">
-    {% for hostel in hostels %}     
+    {% for hostel in user.hostel_asset %}     
     <tr>
+        <p>Hostel in {{hostel.school_name}} </p>
         <p>
-         <a href="{{ url_for('hostel.hostel_detail_view', id=hostel.id) }}">   {{hostel.units}} units of {{hostel.type_of_hostel}} 
-            @{{hostel.price}} Shillings located in
-        </a>
+            <a href="{{ url_for('hostels.hostels_update_view', id=hostel.id) }}">+Hostel Detail</a>
         </p>
     </tr>
     {% endfor %}

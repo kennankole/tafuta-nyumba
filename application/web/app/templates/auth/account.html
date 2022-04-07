@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+</head>
+<body>
+    <div class="content-section">
+        <div class="media">
+          <img class="rounded-circle account-img" src="{{ current_user.profile_pic }}">
+          <div class="media-body">
+            <h2 class="account-heading">{{ current_user.name }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+            {{ current_user.id }}
+          </div>
+        </div>
+    <!--Property-->
+    <div class="content-section">
+        <li><a href="{{ url_for('auth.dashboard') }}">+Add Real Estate Assets</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">+Log out</a></li>
+</body>
+</html>

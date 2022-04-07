@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Plan</title>
+</head>
+<body>
+    <form action="{{ url_for('hostels.hostels_detail_view', id=hostel.id ) }}" method = "POST">
+        <p>
+            Payment Plan
+            <select name ='payment_plan'>
+                <option name="payment_plan" value="weekly">Weekly</option>
+                <option name="payment_plan" value="monthly">Monthly</option>
+                <option name="payment_plan" value="annually">Annualy</option>
+            </select>
+        </p>
+       
+        <p>Latitude <input type = "integer" name = "latitude"  value="{{ location.latitude }}"/></p>
+        <p>Longitude <input type = "integer" name = "longitude"  value="{{ location.longitude }}"/></p>
+        <p>Property Type <input type = "string" name = "property_type"  value="Hostel"/></p>
+        <p>Units <input type = "integer" name = "units"  value="{{ hostel.units }}"/></p>
+        <p>Price <input type = "integer" name = "price"  value="{{ hostel.price }}"/></p>
+        <p>Amount <input type = "integer" name = "amount"  value="{{ hostel.price }}"/></p>
+        <p><input type = "submit" value = "Submit" /></p>
+      </form>
+    
+
+</body>
+</html>

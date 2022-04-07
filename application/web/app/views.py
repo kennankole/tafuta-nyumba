@@ -2,13 +2,12 @@ import json
 import uuid
 
 import africastalking
-from flask import Blueprint, g, make_response, request, render_template, flash
-from flask.helpers import url_for
+from flask_login import login_required
+from flask import Blueprint, g, make_response, request, render_template, flash, url_for
 from sqlalchemy.sql.functions import mode
 from werkzeug.utils import redirect
 
 from app.houses.forms import HouseRegistrationForm, UpdateHousesForm
-from app.hostels.forms import HostelRegistrationForm
 
 from app import cache, db
 from app import models
@@ -24,16 +23,29 @@ from app.houses.registration import HousesRegistrationMenu
 from app.houses.results import HousesQueryResults
 from app.menu.menu import LowerLevelMenu
 
+from app.payment import Mobile, PaymentCheck
+
+
 
 
 views = Blueprint("views", __name__)
 
 @views.route("/payment", methods=["POST", "GET"])
 def payment_service():
-    status = request.values.get("status")
-    return status
+    pay = Mobile()
+    results = pay.checkout()
+    return results
 
-@views.route("/", methods=["POST", "GET"])
+@views.route('/payment/callback', methods=['GET'])
+def payment_callback_url():
+    data = request.json
+    return "Hello"
+
+
+    # status = request.values.get("status")
+    # return status
+
+@views.route("/tafuta-nyumba", methods=["POST", "GET"])
 def ussd_callback():
     session_id = request.values.get("sessionId") or str(uuid.uuid4())
     # service_code = request.values.get("serviceCode")
@@ -173,9 +185,14 @@ def ussd_callback():
     
 
 
-@views.route("/home", methods=["POST", "GET"])
+@views.route("/home-page", methods=["POST", "GET"])
 def home_page():
     return render_template("home.html")
+
+@views.route('/property')
+@login_required
+def property_page():
+    return render_template('property.html')
 
 
 

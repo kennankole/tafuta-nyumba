@@ -16,12 +16,12 @@ bp = Blueprint('houses', __name__)
 def create_houses():
     house = Houses()
     form = HouseRegistrationForm()
-    if request.method == 'POST' and form.validate_on_submit():
+    if form.validate_on_submit():
         form.populate_obj(house)
         db.session.add(house)
         db.session.commit()
         flash("Your property has been successfully registered")
-        return redirect(url_for('views.home_page'))
+        return redirect(url_for('houses.houses_list_view'))
     return render_template(
         'houses/create_houses.html',
         form=form

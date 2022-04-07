@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logins</title>
+</head>
+<body>
+    <div class="form-wrapper">
+        <div class="logo">
+            <img src="#" alt="logoa">
+        </div>
+    </div>
+    
+    <div class="profile_pic">
+        <img class="rounded-circle account-img" src="{{ current_user.profile_pic }}" alt="Profile pic">
+    </div>
+    {% if current_user.is_authenticated %}
+    <p>
+        Hello, {{ current_user.name}}!!
+        You are logged in with {{ current_user.email }}
+    </p>
+        <li><a href="{{ url_for('auth.dashboard') }}">+Add Real Estate Assets</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">+Log out</a></li>
+    {% else %}
+    <a href="{{ url_for('auth.login') }}" class="button">+Sign In With Google</a>
+    {% endif %}
+   
+</body>
+</html>

@@ -21,6 +21,16 @@ python-decouple = "*"
 Flask-And-Redis = "*"
 flask-redis = "*"
 flask-wtf = "*"
+python-dotenv = "*"
+flask-mpesa = "*"
+pillow = "*"
+flask-uploads = "*"
+geojson = "*"
+flask-login = "*"
+email-validator = "*"
+oauthlib = "*"
+requests = "*"
+pyopenssl = "*"
 
 [dev-packages]
 

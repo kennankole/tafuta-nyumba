@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostels Page</title>
+</head>
+<body>
+    {% if not current_user.hostel_asset  %}
+    <h3>You have not registered any hostels assets</h3>
+    <li><a href="{{ url_for('hostels.create_hostels') }}">+Create Hostels</a></li>
+    {% elif current_user.hostel_asset %}
+    <p>
+        <h4>List of hostel assets</h4>
+        {% for hostel in  current_user.hostel_asset %}
+        <a href="{{ url_for('hostels.hostels_detail_view', id=hostel.id) }}">{{ hostel.school_name}} {{ hostel.id }}</a> <br><br>
+        {% endfor %}
+    </p><li><a href="{{ url_for('map.home') }}">+Add Hostels</a></li>
+    {% endif %}
+
+</body>
+</html>

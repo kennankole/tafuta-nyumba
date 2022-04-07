@@ -5,15 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hostel premise</title>
- {{ hostel }}
 </head>
 <body>
     <p>
-    <h3> {{hostel.units}} units of {{ hostel.type_of_hostel }} are available in {{hostel.name_of_estate_or_village}} estate</h3>
+        {% if hostel.photo %}
+        <img src="{{ url_for('static', filename='photos/' + hostel.photo ) }}" alt="Photograph"><br>
+        {% else %}
+        <h3>Update asset profile to add photo</h3>
+        {% endif %}
+        <a href="{{ url_for('map.property_view', id=hostel.id) }}">View Your property on the map</a>
+    </p>
+    <p>
     <h4>Ward: {{hostel.ward}} <br>
         Constituency: {{hostel.constituency}} <br>
         County: {{hostel.county}} <br>
+        Latitude: {{ hostel.latitude }} <br>
+        Longitude: {{ hostel.longitude}}
     </h4>
+    <h4>School Name: {{hostel.school_name }} <br>
+    </h4>
+    </p>
+    <p>
+        Hostels for {{hostel.listing_status}}
     </p>
     <p>
         @{{hostel.price}} Shillings Per unit
@@ -22,12 +35,16 @@
     Contact the owner:  {{hostel.contacts}} / {{hostel.alternate_contact}}
     </p>
     <p>
-        <a href="{{ url_for('hostels.hostels_update_view', id=hostel.id) }}">Update</a>
+        <a href="{{ url_for('hostels.hostels_update_view', id=hostel.id) }}">Update</a>|
+    </p>
+    <p>
+        <a href="{{ url_for('plan.listing_property', id=hostel.id) }}">+List This property</a>
     </p>
     <p>
         <form action="{{ url_for('hostels.hostels_delete_view', id=hostel.id) }}" method="post">
             <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
         </form>
     </p>
+    
 </body>
 </html>
